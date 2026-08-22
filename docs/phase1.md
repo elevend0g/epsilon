@@ -1,0 +1,413 @@
+# Experimental Protocol — SSM-Driven Gated Cache with Latent Recursion
+
+**Status:** design, pre-code. v2 (END-sentinel notation).
+**Relationship to prior work:** fresh project. Does not reuse `elevend0g/beta` checkpoints, task, or eval sets. Reuses lessons only.
+**Scope claim:** a mechanism testbed on a synthetic symbolic task, using one small model class. It establishes whether specific signals exist and are readable. It does **not** license claims about language models. Every writeup must state this in the abstract.
+
+**This document is the preregistration.** Anything discussed elsewhere and not written here does not exist. Every threshold, formula, and arm definition must be in this file before the first training run.
+
+---
+
+## 0. What is being tested — stated narrowly
+
+Three questions in strict dependency order. Each phase gates the next.
+
+**Q1 (competence).** Can a small SSM-driver + external-cache model learn multi-hop symbolic lookup to high accuracy?
+*If no, nothing downstream is interpretable.* The prior project lacked this gate, and its absence made every subsequent null uninformative.
+
+**Q2 (dead-end representation).** After following a chain into a dead end, does the recurrent state represent the dead end **as a dead end** rather than as another step to take — and does that representation arise without being trained to report it?
+
+**Q3 (recursion).** Does latent iteration constrained to the causal subspace outperform unconstrained iteration, and does the integration gate exhibit the predicted chain-linked structure?
+
+### 0.1 What this task does and does not stress
+
+**It does not test SSM multi-step memory degradation.** Chain lengths here are short; a recurrent state at this scale holds an entire chain trivially. The saw-toothed decay of facts over many sequential hops is not exercised, and the motivation must not claim it is.
+
+**It does test one-shot content-addressable selection over a long shuffled context compressed into fixed state.** The hard step is absorbing ~1k shuffled entries *before* the query is known, then pulling the matching entry from compressed state. That is a genuine SSM weakness and the architecture is a clean answer to it.
+
+**Chain length earns its place for a different reason:** it creates the sequential dependency that makes gate interleaving testable at all. Not because it stresses memory decay.
+
+**Q2 is not broad epistemic uncertainty.** It is one specific, mechanistic species of "I can't derive this": chain exhaustion under a follow-until-END rule. Write it that way in the abstract. The overclaim-from-a-toy failure is the one the standing rules exist to prevent.
+
+**Explicitly not tested:** basin geometry as a halt criterion. Retired by preregistered stopping rule in the prior project. Do not reintroduce it in any form.
+
+---
+
+## 1. Task generator
+
+### 1.1 Structure — follow until END
+
+```
+[MEMORY]  <cache entries, shuffled>
+[QUERY]   <start_key>
+[ANSWER]  <key or ABSTAIN>
+```
+
+- **Keys** are 3-tuples over a discrete symbol alphabet `S`: `(s1, s2, s3)`.
+- **Values** are 3-tuples over the same alphabet, or the reserved symbol `END`.
+- A chain is `k1 -> k2`, `k2 -> k3`, ..., `kL -> END`.
+- **The query contains `start_key` only.** No depth token.
+- **Emit rule:** the state carries the current key. Integration advances it. On retrieving `END`, emit the current key.
+
+**Why depth is out of the query.** With depth in the query, the count penalty `(Σ g_t − ρ)²` is satisfiable by embedding the depth token and counting down — a label-copy that has nothing to do with detecting whether the state needs a fact, and which pre-loads the §6.2 result. With `END`, the model cannot read the target count; landing on it requires following the actual chain.
+
+**Why END also fixes the broken arm.** Without a terminator, a chain broken at hop *j* is structurally identical to a complete chain of length *j−1* — both end at a non-key value, with no marker that continuation was expected. With END, a complete chain terminates in a *present* END entry and a broken chain does not. The two are distinguishable by what the terminal lookup returns, never by a label.
+
+This also makes the recursion loop exact fixed-point iteration: state carries the current key, integration advances the pointer, END is the fixpoint.
+
+### 1.2 The core invariant
+
+**The query segment carries zero bits about intermediate keys or about terminal status.** Both must come from the cache.
+
+Enforced by:
+- **Per-item graph resampling.** The key→value mapping is redrawn for every example. Never a fixed global graph; that would move the task into weights and make the cache decorative.
+- **Capacity bounds** (§1.3).
+
+These conditions do the work jointly. Neither alone suffices. Verify empirically in §4.1 rather than asserting by construction.
+
+### 1.3 Capacity arithmetic — a generator assertion, not a paragraph
+
+The prior version of this document asserted that bulk-loading the cache into state was "blocked by counting bits" without doing the count. Do the count.
+
+```
+cache_bits  = n_entries × 6 × log2(|S|)
+state_bits  = d_model × d_state × bits_per_element      # conservative upper bound
+```
+
+At `n_entries=1024, |S|=64`: cache ≈ 36.9 kbit. At `d_model=256, d_state=16`, fp16: state ≈ 65.5 kbit — **larger than the entire cache.** The asymmetry does not exist at that config. At `d_model=128` it is roughly a coin flip.
+
+**Two bounds, both asserted in the generator's unit tests and both written into `PREREG.md` as computed integers:**
+
+- **Upper:** `cache_bits / state_bits ≥ 4`. The table must not fit in state.
+- **Lower:** `state_bits ≥ 16 × trajectory_bits`, where `trajectory_bits` is the information needed to carry the current key plus a handful of scalar trajectory features. The state must have ample room for more than a pointer (see §2.1).
+
+Raw element width overstates true recurrent capacity — effective capacity is far lower, as the prior project's participation ratios suggest. That cuts in favor of these bounds, not against them: if even the conservative bound says the table fits, the asymmetry cannot be claimed.
+
+### 1.4 Condition arms
+
+| Arm | Construction | Terminal event | Ground truth |
+|---|---|---|---|
+| **A — answerable** | complete chain, `kL -> END` | END retrieved | `kL` |
+| **B1 — missing key** | mid-chain entry replaced by a decoy entry | low margin at hop *j* | ABSTAIN |
+| **B2 — dead end** | `kj -> x`, where `x` is drawn like a key but has **no cache entry** | high margin at hop *j*, low margin at *j+1* | ABSTAIN |
+| **C — key absent** | `start_key` not in cache | low margin at hop 1 | ABSTAIN |
+| **D — length control** | answerable, cache padded to B/C token count | END retrieved | `kL` |
+
+**B2 is the thesis arm.** Its dead end arrives *after* a high-confidence retrieval, and the only dead-end cue is absence from the cache — `x` is distributionally identical to a key. This is where confident ignorance lives mechanistically, and no other arm produces it.
+
+**B1 is deletion-free.** Removing an entry changes token count and breaks twin identity, so B1 *replaces* the entry with a decoy. B2 needs no such patch: it changes one entry's value, leaving cache size and token count identical.
+
+**Twin identity is mandatory.** Each B item is generated from an A item and is identical in distractor count, Hamming distribution, cache size, token count, and entry ordering, differing only by the specified change.
+
+**Detection modality note.** B1 and B2 both terminate in a low-margin query — the "is `x` a key?" check *is* the next follow, not a separate lookup. B2's distinctiveness is therefore about the **gate's** behaviour, not about a different detection mechanism: the question is whether the gate opens on `x` and commits a dead end to state. Say this explicitly; do not imply B2 introduces a second query per hop.
+
+**Pin the probe against a length shortcut.** B1 and C differ mainly in hops-to-failure, which is a length feature. Any probe separating them must be shown not to be counting integrations.
+
+### 1.5 Difficulty axes, orthogonal by construction
+
+- **chain length** `L ∈ {1, 2, 3}` — sequential depth
+- **n_distractors** — input length
+- **n_hard** — retrieval difficulty
+
+Must vary independently. In the prior project difficulty and length were the same knob, which is why the halt head learned length. Assert orthogonality in generator unit tests.
+
+### 1.6 Hard negatives
+
+Proximity must be **generator-controlled**, not emergent from learned embeddings. Composite keys give the lever: shared components force shared embedding structure.
+
+- **Hard negative:** cache entry at Hamming distance 1 from the true query key.
+- **Easy negative:** Hamming distance 3.
+- `n_hard` is preregistered and swept.
+
+Requirements:
+
+1. **Generate hard negatives per hop.** Distractors clustered only around `start_key` leave later hops saturated — and those are the hops the design is about.
+2. **Reject any distance-1 distractor whose value continues the active chain** (alternate path through the distractor generator).
+3. **B1 decoys may not** map into the chain or collide with any hop query.
+4. **Terminals in B2 drawn from the key distribution** so cache-absence is the only dead-end cue.
+5. **Assert no duplicate keys with differing values** — the only condition that makes an item genuinely ambiguous.
+6. **Shuffle cache order**; verify no ordinal-position signal.
+7. **Verify follow-path uniqueness.** The followed path must be unique.
+8. **Minimum decoy END entries: ≥ 8 per item, drawn on keys not on the followed path.** Without this, if the chain terminus is the *only* entry mapping to `END`, the answer is retrievable in a single lookup — "find the END entry" — and the chain is never traversed at any `L`. This would silently invalidate ρ, §6.2, and both B arms. Assert the count in generator tests; it is not optional and "multiple ENDs are fine" is not a sufficient statement of it.
+
+---
+
+## 2. Model
+
+Small enough to train several seeds to convergence in hours on one GPU.
+
+### 2.1 Components — and what the state must be allowed to hold
+
+- **SSM driver.** Recurrent state, full `[batch, d_model, d_state]` exposed at every step. No pooling anywhere in the forward path an epistemic readout will consume.
+- **Cache.** Content-addressable store over the memory segment. Retrieval by similarity against a query projected from the causal state.
+- **Query projection.** Low-rank: causal state → key space. Rank is fixed **before the real runs** by the pilot measurement in §3.1.5. §3.3 verifies it after the fact; it does not produce it.
+- **Integration write — additive residual, stated explicitly:**
+  `state ← state + g_t · W_v(value)`
+  This is the only form under which the §4.2 equal-norm intervention is well-posed, and the only one under which displacement decomposes cleanly into a recursion component and a commitment component.
+
+**The pointer hazard, and the wrong fix.** Under follow-until-END, the state's minimum job is to carry the current key. If the architecture *constrains* it to that, dead-end status has no home in state — it lives only in the transient outcome of the next retrieval — and a null Q2 probe would be vacuous rather than informative.
+
+**The fix is capacity, not a status register.** A tempting response is to build an explicit register holding hop count, last margin, and value-validity, and point the probe at it. **Do not.** That decides Q2 by construction: a probe that finds coverage in a channel built to carry coverage has measured the architect, not the model. It would destroy Regime 1 (§2.4), whose entire point is whether the representation arises unbidden.
+
+Instead: **impose no pointer-only constraint, and enforce the §1.3 lower bound** so the state has ample room to retain trajectory features beyond the pointer. Whether it *does* retain them is then the measured question. If Q2 returns null under a state with 16× the room it needs for a pointer, that is an informative null — the model had the capacity and did not use it.
+
+### 2.2 Gating — query always, gate integration
+
+**Retrieval is unconditional at every step. Integration is gated.**
+
+This is the central design decision. Gating the *query* creates a counterfactual dead end: an unexecuted read yields no gradient about whether reading would have helped. Unconditional retrieval guarantees a gradient at every step. What is expensive is *committing* — writing a retrieved value into state changes the trajectory.
+
+**Scale caveat, mandatory in any restatement:** the look-is-cheap/commit-is-expensive asymmetry holds **at testbed cache size only**. Against a production-scale cache, unconditional lookup is O(N) key comparisons per step — attention's cost structure with the expensive half swapped. This is not an architectural argument about large models and must not be quoted as one.
+
+Two **measured** quantities drive control flow. Neither is a learned prediction about the model's own epistemic state — that is the failure mode the prior project documented.
+
+- **Retrieval margin** — top-1 similarity minus top-2.
+- **Causal displacement** — `‖Δh‖` within the causal subspace over the last step. *Not* basin width; requires no perturbation.
+
+**Both enter the gate as quantiles, not raw values.** Each is mapped through its empirical CDF, estimated once on a frozen calibration split and never updated. Raw margin scales with the similarity temperature and raw displacement with state norm, so a gate on raw values is a temperature artifact rather than a controller. Quantile inputs are scale-invariant by construction.
+
+| | high margin quantile | low margin quantile |
+|---|---|---|
+| **displacement high** | integrate | recurse |
+| **displacement low** | emit | **abstain / external call** |
+
+The bottom-right cell is the target phenomenon: state settled, nothing in memory supporting it. A stability-based halt would emit here. It is a **routing trigger on a measured condition**, not a deterministic hallucination catch — whether the condition covers the failure mode is the empirical question.
+
+Gate trained soft (sigmoid over quantile inputs), hardened at inference.
+
+### 2.3 Readout ablation — build both from day one
+
+Every epistemic readout in two variants, trained in parallel: **pooled** (channel-averaged state) and **subspace** (low-rank projection of the full state). On a competent model this comparison is meaningful; in the prior project both arms sat at chance, which made the null uninformative about the readout-bottleneck hypothesis.
+
+### 2.4 Supervision regimes — two models, and this is the experiment
+
+- **Regime 1 (unsupervised).** Trained on arms A and D only. Never sees an abstention target, and **never sees a terminal mid-follow.**
+- **Regime 2 (supervised abstention).** Trained on all arms; B1, B2, C map to ABSTAIN.
+
+Regime 2 tells you whether a trained abstention signal is real or a surface correlate. Regime 1 tells you whether dead-end representation emerges in a network never taught to report it. The contrast is the direct answer to "is ignorance acknowledgment trainable or architectural."
+
+**Regime 1 on B2 is a preregistered generalization test.** Its gate learned "open iff the retrieved value is a key, hold at END" from complete chains alone. At test time on B2, does it open on `x` — treating a dead end as another step? Higher gate confidence is *worse* here: an open gate commits the terminal to state, and the abstention decision must then fight its own committed garbage. Preregister the prediction and the direction.
+
+### 2.5 Integration count supervision
+
+Let **ρ = number of key-to-key hops** = chain length − 1 under END notation. The END retrieval **does not open the gate** (this is a design commitment, not an emergent property — state it).
+
+Per arm, where the break occurs at hop *j*:
+- **C:** ρ = 0.
+- **B1** (entry for `kj` replaced by a decoy): the follow reaches and commits `kj`, then the query on `kj` returns low margin. **ρ = j − 1.**
+- **B2** (`kj -> x`, `x` terminal): the follow commits `kj`, retrieves `x`, **commits `x`**, then the query on `x` returns low margin. **ρ = j.** B2 is one integration longer than B1 at the same break point, because a dead end can only be discovered by committing it and querying it.
+- **A and D:** ρ = `L − 1`.
+
+**The count penalty is applied on arm A only.** This is deliberate: it sidesteps the question of whether committing a dead end is "correct" behaviour, which is exactly what §2.4's generalization test is trying to observe rather than supervise.
+
+Penalty `(Σ g_t − ρ)²` on arm A. A gate that always integrates becomes attention and overshoots ρ; one that never integrates becomes a pure SSM and undershoots. No MoE-style load balancing needed.
+
+**No temporal regularizer.** Premature firing is not penalized because it is useless — the next key does not exist in any addressable form before the previous integration (§1.2). Ordering is enforced by the data distribution, not a tuned loss term.
+
+### 2.6 Seeds
+
+**Three seeds minimum per condition.** Every result in the prior project was a single-checkpoint result; that is its broadest quiet limitation and it is cheap to fix at this scale.
+
+---
+
+## 3. Phase 1 — Competence gate
+
+### 3.1 Training budget — set by pilots, then frozen
+
+**Optimizer schedule, fixed before this section's pilots run: Adam, cosine LR `3e-3 → 3e-5`, no warmup, decaying across the full pilot cap.** Not a free implementation detail — the first pilot run at constant `3e-3` never held §3.2 criterion at any checkpoint through 8,100 steps, oscillating 85-97% on a fixed validation set (so the model's own behavior, not sampling noise). A disconfirming test (`RECIPE_LOG.md`) continued a pilot's honest checkpoint with everything unchanged except a cosine decay to `3e-5`: oscillation amplitude went from 0.04-0.06 to 0.000, locked to perfect accuracy, tracking the LR cut rather than coinciding with it. Recipe bug, not architecture — but it means every pilot number measured under the constant-LR recipe is stale and is re-measured under this schedule before being trusted.
+
+**Anchoring rule: `S*` is the onset of stable competence, never the first touch.** The pilots demonstrated a transient spike — criterion met at step ~100, then a sustained multi-thousand-step regression to 0.55–0.70 before recovery. A first-pass anchor would have set a real-seed budget of ~300 steps and frozen every seed mid-collapse.
+
+A "N consecutive passes" window is the wrong fix: a spike can outlast any fixed N, and choosing N moves the problem rather than solving it. Define it without a window instead.
+
+1. Train **three pilot seeds** (discarded — never used downstream, never in any result, not among the three real seeds).
+2. **Train every pilot to a fixed cap regardless of when criterion is first met.** Cap = 30,000 steps, roughly 4× where the slowest pilot stabilized.
+3. Record `S*` per pilot = **the first step after which the §3.2 criterion holds at every subsequent evaluation**, or the cap if that never occurs. No window parameter; the transient spike is excluded by construction. **Report all three and the spread.**
+4. **Budget for all real runs = `4 × max(S*)`**, hard cap 200k steps. Write the integer into `PREREG.md` before the first real seed. The margin is 4× rather than 3× because the original 3× was calibrated against first-pass variance, which is now known to be the wrong scale; recovery-time variance is observed on only a handful of seeds.
+
+**No early stopping.** Removed deliberately, not omitted. On a procedural generator every held-out item is a fresh graph, so there is no finite-corpus overfitting for early stopping to protect against — its only function here is risk. Coupled to a short budget it is actively dangerous: a 20%-of-budget patience window under a first-pass anchor would have fired mid-collapse and frozen the model at its worst. Fixed budget, gate at the terminal checkpoint.
+
+Three pilots rather than one because a single fast pilot sets a tight ceiling that could fail a real seed on budget rather than on competence — a fundamentally different result.
+
+**Extension rule for parked pilots.** Pilots already trained past first pass are *continued*, never restarted: the only missing information — where a spiking seed re-clears and whether it holds — comes solely from continuing. Continue until the criterion holds on two checks ≥500 steps apart after the first re-clear, or +8,000 additional steps with no re-clear, whichever comes first. **If a pilot never re-clears within that, report it as a finding — spike-seeds do not recover within ~2× their valley length — not as a nuisance.** Verify the LR schedule under continuation matches what real seeds will run; a schedule that decayed for a short run makes the continued trajectory unrepresentative and `S*` untransferable.
+
+If no pilot reaches criterion within its cap, the honest report is that the architecture did not learn the task under this budget. State the budget; do not extend it.
+
+### 3.1.5 Query-projection rank — derived from the pilots, fixed before the real runs
+
+The rank cannot come from §3.3: that runs after training, and training needs a rank. The pilots break the circle, since they already exist and are already discarded.
+
+- **The rank is derived from QUERY PR, not causal PR.** These are different objects — the query projection bottlenecks the state→key-space map, while causal PR describes output sensitivity across the whole state — and pilot data showed them diverging in both magnitude and direction. Sizing a query bottleneck from causal PR silently clips the map it is meant to fit. This was the same conflation §3.3 was corrected for; it must not be reintroduced here.
+- **Pilots train with a full-rank query projection** — no bottleneck. A pilot trained at rank 16 cannot exhibit a participation ratio above 16, and would circularly confirm whatever guess was used.
+- **Measured at the pilot's terminal checkpoint**, never at first pass (§3.1, §3.3). Pre-transition query PR describes a solution the model subsequently abandons — pilot values of ~46–47 before the transition converged to ~33 after it, a difference of a third in the final rank.
+- **`rank = ceil(max over pilots of query PR)`, rounded up to the next multiple of 4.** Applied once, written to `PREREG.md` before the first real seed launches. The number falls out; it is not selected.
+- **No iteration.** If the rank later looks wrong, that is a finding to report, not a value to revise.
+
+**Known wrinkle, accepted and reported:** pilots train full-rank while real seeds train at reduced rank, so `S*` is measured under a slightly different model. The 4× multiplier in §3.1 is intended to absorb this. State it in `RESULTS.md` rather than correcting for it.
+
+### 3.1.6 Pilot-stage integrity checks — validate the generator before spending real runs
+
+The pilots are discarded, so running integrity checks on them contaminates nothing and costs almost nothing. Run these on pilot 0 **before** launching any real seed. They validate the *task*, not the model.
+
+- **§4.1 shuffled cache.** If a pilot retains accuracy with another item's cache, the generator leaks and no amount of real-seed training will fix it.
+- **Integration count vs. `L`.** Record `P(m | L)` on the pilot. If `L=3` items solve with one integration, the model found a shortcut and is not traversing the chain.
+- **Accuracy vs. `L` slope.** Perfectly flat accuracy across chain length is a warning sign, not a success. Genuine multi-hop traversal should cost something at `L=3` relative to `L=1`.
+- **END-entry census.** Count `END`-valued entries per item and confirm §1.6.8.
+
+Any failure here is a generator defect. Fix the generator and re-run the pilots; this is not a threshold move and does not consume the §4.4 calibration budget.
+
+### 3.2 The gate
+
+**≥95% exact-match accuracy on arm A, at every chain length 1–3, on held-out items, in all three real seeds.**
+
+**Judged at the terminal checkpoint, and at every evaluation in the final quartile of the budget.** Never at first pass, and no snapshotting of the first passing step. The checkpoint that Phases 2–4 instrument is the budget-exhaustion checkpoint, so that is the one whose competence must be stable. A seed that passes at step 100 and sits at 0.60 at step 300 **fails the gate**, and that is correct — instrumenting it would mean measuring a collapsing network.
+
+**All three must pass.** If 2 of 3 pass, that is the result. Drawing fresh seeds until three pass is seed-shopping and is prohibited.
+
+**A failing seed is reported as budget-limited or competence-limited, not merely as a failure.** Log its full accuracy trajectory and accuracy at budget exhaustion. Still climbing at 94% and plateaued at 60% are different facts. Neither justifies extending that run.
+
+### 3.3 Causal rank verification — one shot, mechanical, dedicated split
+
+Runs **immediately on gate pass**, before any Phase 2–4 work. This **verifies** the rank fixed in §3.1.5; it does not produce it.
+
+- **Checkpoint:** the **terminal** checkpoint only — the same one Phases 2–4 instrument. Never a first-pass checkpoint. Pilot data showed the participation ratios converging across all three seeds *while one was still at 0.88 accuracy*: representational geometry stabilizes before behaviour does, so PR agreement is not evidence of competence and must not be read as a substitute for the §3.2 gate.
+- **Data:** the **geometry split**, carved out at generation time, used for nothing else. Not validation (§3.1, §5.3), not calibration (§2.2, §4.4), not test.
+- **Quantity:** participation ratio of the gradient-derived causal subspace — unconditional logit Jacobian over the full output vocabulary, no label reference.
+- **Per seed:** computed independently on all three passing seeds. Report all three.
+- **Verification criterion:** real-seed **query** PR should not exceed the rank fixed in §3.1.5. If it does, the projection is clipping structure the model wanted — **report it as a finding and a bound on §6.1's claims. Do not retrain at a larger rank.**
+- **No iteration.** If the number looks wrong, that is a result, not a value to revise.
+
+**Report the seed spread as a standalone result.** If PR varies widely across seeds trained identically to the same accuracy, causal dimensionality is not a stable property of the task — which directly bounds what §6.1 is allowed to claim.
+
+---
+
+## 4. Phase 2 — Integrity checks
+
+All must pass before any coverage or recursion claim.
+
+### 4.1 Leakage — shuffled cache, not zeroed cache
+
+Pair each query with a **different item's** cache. Same distribution, same statistics, zero information about this item's chain.
+
+Do **not** zero the cache; an all-zeros cache is off-distribution and may fail for unrelated reasons, making the test vacuous.
+
+**Chance is computed over the key vocabulary, not `1/|S|³`.** Under END notation the answer is always a cache key, so the output space is the set of keys present in the item's cache. Compute chance accordingly and write the formula into `PREREG.md`.
+
+Above-chance accuracy under shuffled cache halts the run for state leakage.
+
+### 4.2 Counterfactual content flow — three arms, three predictions
+
+| Arm | Intervention | Prediction if the pathway carries content |
+|---|---|---|
+| **clean** | none | next step retrieves `k2`'s target |
+| **wrong-value** | integrate a **valid key** `k2'` that has its own cache entry, equal norm | next step retrieves **`k2'`'s target** — margin stays **high**, target **substitutes** |
+| **clamped** | force `g₁ = 0` | next step retrieves nothing coherent, margin collapses |
+
+The signature is **retrieval-target substitution**, not margin collapse.
+
+**The substituted value must itself be a key with an entry.** Substituting a terminal would predict "dead end detected" instead of substitution — a different arm, not a clean intervention.
+
+The clamped arm alone is confounded: it removes content *and* perturbs the trajectory. All three are required.
+
+### 4.3 Retrieval margin dynamic range — scale-free criterion
+
+Raw margin is **not** preregisterable: top-1 minus top-2 scales with the similarity temperature, so bounds on it can be manufactured by rescaling without any behavioural change.
+
+Preregister instead:
+- **margin AUROC for predicting top-1 retrieval correctness ≥ 0.70**
+- **top-1 retrieval accuracy within [0.60, 0.98]** on arm A
+
+Both scale-invariant. Collapse and saturation appear in these naturally.
+
+### 4.4 Calibration budget — bounded, logged
+
+If §4.3 fails: **at most 3 adjustments**, knobs `n_hard` and `|S|` **only** (not embedding dimension — an architecture change makes attempts incomparable), evaluated on a **calibration split** separate from validation, geometry, and test. **Every attempt logged and reported, including failures.**
+
+Without a budget this is hyperparameter search wearing a preregistration's clothes, and each pass is a peek.
+
+---
+
+## 5. Phase 3 — Dead-end representation (Q2)
+
+### 5.1 Probe positions — two, answering different questions
+
+B2 makes the timing matter. Preregister both:
+
+- **P1 — after integrating `kj`, before the next lookup resolves.** High margin, content committed, dead end not yet proved. Does the state encode that the committed value is not itself a key?
+- **P2 — after the next lookup returns low margin.** Dead end proved. Does the state encode terminal status rather than merely reflecting the raw margin?
+
+P2 must be shown to carry information **beyond** the current margin value — regress it out and re-probe. Otherwise the probe has rediscovered the retrieval statistic.
+
+### 5.2 Probe protocol
+
+Linear probe on frozen state, predicting answerable vs. not.
+
+- **Split by generated graph, not by item.** A probe that memorizes graphs is not a coverage probe.
+- **Report cross-condition transfer as the headline**: train on `L=2`, test on `L=3`; train on one `n_distractors` band, test on another.
+- **Layer sweep.** Where the information peaks is itself a finding.
+- **Arm D is the discriminating test.** A probe that fires on the length control learned length, and the length-matched arms cannot reveal this.
+- **B1-vs-C separation must be shown not to be hops-to-failure** (§1.4).
+
+### 5.3 Abstention threshold
+
+Displacement enters as a quantile (§2.2), so τ is a percentile of the frozen calibration distribution, fixed on **validation before any test evaluation**.
+
+**Target: 5 percentage points above a measured floor, not a flat 5%.** The floor is the model's structural false-abstention rate on arm A with no τ involved — the `m=0` "declined to start" rate, which pilots showed at 6.6–7.2%. A flat 5% target is unreachable when the floor already exceeds it, and no threshold choice fixes a gate that declines to open on the first hop. **If the floor dominates the budget, report the floor itself as the finding** rather than presenting a calibrated τ that was never the binding constraint.
+
+**Re-examine displacement distributions under END notation before applying one τ across arms.** Pointer advances are discrete jumps, so "settled" may confound with "stopped" — and a chain that ends and a chain that stalls can both show low displacement. Verify the distributions are on comparable scales across arms and report the check. If they are not, a single τ is not defensible and that must be stated.
+
+### 5.4 Falsification
+
+Q2 fails if cross-condition transfer AUROC for arm A vs. arm B2 at position P2 is below 0.65 in Regime 1.
+
+**A null here is a positive finding**, provided the §1.3 lower bound held: if the state had 16× the capacity it needed for a pointer and still did not retain dead-end status, that is the argument that coverage must be architected in rather than trained for.
+
+**The secondary Q2 result is the gate, not the probe.** If the model abstains off count shortfall alone, with no difference in gate behaviour at the terminal step (§2.4), then the abstention signal is a counter rather than a status. Report that explicitly either way.
+
+---
+
+## 6. Phase 4 — Recursion (Q3)
+
+Only after Phases 1–3.
+
+### 6.1 Constrained vs. free latent iteration
+
+**Step budget: `max_steps = 4 × (L_max − 1)` = 8 at `L_max = 3`.** A formula, not a magic number: it allows every required integration plus three recurse-without-integrate steps per hop. Fixed in `PREREG.md`. If a condition systematically exhausts the budget, report the exhaustion rate rather than raising it.
+
+Fixed step budget, no learned halt. Compare recursion updates **constrained to the per-item causal subspace** against unconstrained updates.
+
+Motivation: in the prior project, causal-subspace perturbation preserved ~98% of trajectories where isotropic perturbation destroyed ~38%, suggesting the causal subspace behaves like a tangent space to the manifold of valid computations. Drift into degeneracy is the known failure of latent-reasoning approaches.
+
+**This is an untested hypothesis, not a finding.** Report it as such regardless of outcome, and bound the claim by the §3.3 seed spread.
+
+### 6.2 Integration count distribution
+
+Record `P(m integrations | generator chain length L)` — **conditioned on the generator's `L`, not on any depth label**, which no longer exists in the input.
+
+This is a **prediction about a learned gate, not an architectural axiom.** **Preregistered expectation:** mode at ρ, with **P(m = ρ) ≥ 0.80 on held-out arm A**. Below that, the gate did not learn the follow-until-END rule and §6.2 reports a gate failure rather than a count finding.
+
+Deviations mean different things and are reported separately:
+- **m > ρ** — the gate over-fires; it is drifting toward always-integrate (attention).
+- **m < ρ** — the gate skipped a hop. Either the model synthesized it internally, or it shortcut using chain fragments held in state. **These are not distinguishable from the count alone**; the §1.3 arithmetic and a §4.1 shuffled-cache check on those specific items must both be brought to bear before the synthesis interpretation is claimed. If `L=3` chains consistently solve in two integrations, the model may have synthesized a hop internally — but that interpretation must be restated against the §1.3 arithmetic before it is claimed, since a state large enough to hold chain fragments could shortcut without any synthesis. Findings of `m ≠ ρ` are logged, never filtered.
+
+---
+
+## 7. Deliverables
+
+1. `PREREG.md` — every threshold, formula, and computed integer in this document, fixed before the first training run. Never edited.
+2. `generator_tests/` — asserting: axis orthogonality, twin identity, follow-path uniqueness, no duplicate keys, no ordinal signal, per-hop hard negatives, B1 decoy legality, B2 terminal distribution, **and both §1.3 capacity bounds**.
+3. `run_manifest.json` — seeds, config, git SHA, environment, per run.
+4. `raw/*.jsonl` — per-item, per-step raw records. Analysis re-runnable without re-running models.
+5. `CALIBRATION_LOG.md` — every §4.4 adjustment, including failures.
+6. `RESULTS.md` — verdict against each preregistered condition, written **before** interpretation.
+
+---
+
+## 8. Standing rules
+
+- Report nulls as results. The prior project's most useful output was a preregistered null.
+- Nothing in a summary or abstract that was not measured. Distinguish findings from hypotheses by sentence.
+- No metric introduced after seeing data. No threshold moved after seeing test data.
+- Where a design decision is ambiguous, implement the simplest version, log it in the manifest, flag it in `RESULTS.md`.
+- The document is the preregistration. Chat agreements are not protocol until they are prose here.
+- One small symbolic model class. Say so every time.
