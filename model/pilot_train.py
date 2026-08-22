@@ -118,7 +118,12 @@ def _save_resume_checkpoint(path: str, step: int, model, opt, history: list, ran
 def run_pilot(
     pilot_idx: int, device, val_batches: dict, geom_batch: dict, log,
     n_workers: int = N_WORKERS, rank: int | None = None, checkpoint_name: str | None = None,
+    arms: tuple[str, ...] = ("A",),
 ) -> dict:
+    """arms: which arms to train on. ("A",) matches every pilot to date.
+    ("A","D") is §2.4 Regime 1. The §3.2 competence gate stays arm-A-only
+    regardless (val_batches is always built on arm A) — arms here only
+    controls the training stream."""
     torch.manual_seed(1000 + pilot_idx)
     model = GatedCacheModel(ALPHABET_SIZE, SYMBOL_DIM, D_MODEL, D_STATE, rank=rank).to(device)
     opt = torch.optim.Adam(model.parameters(), lr=START_LR)
@@ -145,7 +150,7 @@ def run_pilot(
         alphabet_size=ALPHABET_SIZE, n_distractors=N_DISTRACTORS, n_hard=N_HARD,
         batch_size=BATCH_SIZE, chain_lengths=CHAIN_LENGTHS,
         seed_stream_start=TRAIN_SEED_BASE + pilot_idx * 10_000_000 + start_step,
-        n_workers=n_workers, depth=PREFETCH_DEPTH,
+        n_workers=n_workers, depth=PREFETCH_DEPTH, arms=arms,
     )
     try:
         for step in range(start_step, STEP_CAP):

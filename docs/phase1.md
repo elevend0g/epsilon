@@ -212,7 +212,11 @@ Penalty `(Σ g_t − ρ)²` on arm A. A gate that always integrates becomes atte
 
 **Affordability, updated after fixing the generator (not the pool) instead of accepting the number.** The original ~70-hour estimate was measured against a generator later found to be reducible: bulk numpy generation, one `.tolist()` conversion instead of per-element access, reusing the item's own distractor pool for arm C instead of rebuilding one, and (caught in the same pass) a buffered-RNG bug that briefly made things worse by thrashing between two different alphabet sizes on one shared buffer. Clean, uncontended measurement after all four: **4.4× faster** (311ms/batch vs. 1,370ms baseline). Revised six-run estimate: **~16 hours**, not ~70 — same aggregate CPU budget, no 10-hour pool build, no 54GB artifact.
 
-**`102,400` is provisional on §3.1.7's throwaway pilot.** It was derived from full-rank pilots; the six real runs train at the bottleneck. If the rank-bottleneck pilot's `S*` exceeds the full-rank pilots', the budget is re-derived from it before this six-run commitment is spent, not discovered as insufficient partway through.
+**`102,400` is confirmed, not provisional.** §3.1.7's throwaway pilot resolved this: `S*=15,900`, under the full-rank pilots' 25,600, so no re-derivation triggers. Competence survives the bottleneck.
+
+**Launch order: one full-budget run first, then the remaining five interleaved by regime.** `S*=15,900` came from a 30,000-step pilot; real runs go to 102,400 — nearly 7× further, and nothing in this project has trained that long. Disk growth, resume behavior across ~100 checkpoints instead of ~30, and terminal-checkpoint evaluation at full length are all untested at that scale. One run costs under three hours at the fixed generator's throughput; a defect found in run one instead of run six is the difference between losing one run's compute and most of the six-run budget.
+
+**Once the canary clears: alternate regimes, don't block them.** `Regime1-seed0, Regime2-seed0, Regime1-seed1, Regime2-seed1, Regime1-seed2, Regime2-seed2` — not three of one regime followed by three of the other. If launched as a block and something interrupts the sequence partway, a block ordering leaves three seeds of one regime and none of the other — the least useful possible partial result, since §2.4's entire comparison needs both regimes represented. Alternating means any prefix of the sequence — one run, three runs, five — is a balanced (if seed-thin) version of the same comparison.
 
 ---
 

@@ -27,14 +27,19 @@ def make_batch_cpu(
     n_hard: int,
     batch_size: int,
     seed: int | None = None,
+    arm: str = "A",
 ) -> dict:
+    """arm: "A" (default, matches every pilot to date) or "D" — Regime 1
+    (§2.4) trains on both. D shares A's exact walk structure (answerable,
+    same L retrieval steps, same rho=L-1), so forward_train needs no
+    change at all for D batches; only which arm gets generated differs."""
     gen = TaskGenerator(
         GeneratorConfig(
             alphabet_size=alphabet_size, chain_length=chain_length,
             n_distractors=n_distractors, n_hard=n_hard, seed=seed,
         )
     )
-    items = [gen.generate_family().A for _ in range(batch_size)]
+    items = [getattr(gen.generate_family(), arm) for _ in range(batch_size)]
     N = len(items[0].memory)
     L = chain_length
 
@@ -86,10 +91,10 @@ def to_device(batch: dict, device: torch.device) -> dict:
 
 def make_batch(
     alphabet_size: int, chain_length: int, n_distractors: int, n_hard: int,
-    batch_size: int, device: torch.device, seed: int | None = None,
+    batch_size: int, device: torch.device, seed: int | None = None, arm: str = "A",
 ) -> dict:
     return to_device(
-        make_batch_cpu(alphabet_size, chain_length, n_distractors, n_hard, batch_size, seed),
+        make_batch_cpu(alphabet_size, chain_length, n_distractors, n_hard, batch_size, seed, arm),
         device,
     )
 
@@ -102,12 +107,17 @@ class BatchPrefetcher:
     def __init__(
         self, alphabet_size: int, n_distractors: int, n_hard: int, batch_size: int,
         chain_lengths: tuple[int, ...], seed_stream_start: int, n_workers: int = 10, depth: int = 20,
+        arms: tuple[str, ...] = ("A",),
     ):
         self.alphabet_size = alphabet_size
         self.n_distractors = n_distractors
         self.n_hard = n_hard
         self.batch_size = batch_size
         self.chain_lengths = chain_lengths
+        # Cartesian product, not zipped: every (L, arm) combination gets
+        # equal representation, cycled in a fixed round-robin. Regime 1
+        # (§2.4) is arms=("A","D"); pilots keep the default arms=("A",).
+        self.combos = [(L, a) for L in chain_lengths for a in arms]
         self.depth = depth
         self._next_seed = seed_stream_start
         self._step = 0
@@ -125,13 +135,13 @@ class BatchPrefetcher:
             self._submit()
 
     def _submit(self) -> None:
-        L = self.chain_lengths[self._step % len(self.chain_lengths)]
+        L, arm = self.combos[self._step % len(self.combos)]
         seed = self._next_seed
         self._next_seed += 1
         self._step += 1
         fut = self.pool.submit(
             make_batch_cpu, self.alphabet_size, L, self.n_distractors, self.n_hard,
-            self.batch_size, seed,
+            self.batch_size, seed, arm,
         )
         self.pending.append(fut)
 

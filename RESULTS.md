@@ -56,6 +56,8 @@ Integrating it back into the full pipeline surfaced a second bug the isolated be
 
 Three consecutive "should be faster" changes, one net regression caught and reverted, one net regression caught and fixed in place, before landing on a real 4.4x. Worth its own line for the same reason finding 4 was: an isolated benchmark reading "faster" does not mean the change is faster where it actually runs.
 
+**This is the fifth instance of the pattern finding 5 named, and the clearest one yet.** The `_flip_positions` fix was verified correct on its own — the isolated microbenchmark for bulk-generate-plus-`.tolist()` genuinely showed ~3.7x. It was the *integrated* path, two call sites sharing one buffer keyed to a single alphabet size, that did something the component-level test had no way to show. Same shape as the gate-hardening bug (finding 1): a piece verified correct in isolation while the assembled system quietly did something else. The general lesson, stated plainly so it doesn't need re-deriving next time: **never accept a component-level speedup — or any component-level result — without re-measuring the whole pipeline it feeds.** A clean microbenchmark is evidence about the microbenchmark, not about the system.
+
 ---
 
 ## Verdict against preregistered conditions
