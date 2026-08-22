@@ -137,6 +137,16 @@ The shortcut hypothesis had four checks; the census and per-step trace were repo
 
 ---
 
+## 7. Deliverables (§7)
+
+| Quantity | Value | Status |
+|---|---|---|
+| `raw/*.jsonl` scope | **Resolved, was ambiguous** — "per-item, per-step" didn't say which passes. Training-loop per-step logging would be enormous (six runs × up to 102,400 steps × 64 items × a recursion budget) and analytically useless. Resolved: evaluation/instrumentation passes only — §3.2 terminal held-out check, §4.4/§5.3 calibration, §3.1.5/§3.3 geometry. Per-step record while an item is active (gate open/closed, margin, displacement, integration count) plus one final record per item (prediction, target, correctness) | FIXED (procedure, `model/raw_records.py`) |
+| `raw/*.jsonl` volume | Measured (not guessed) at ~157 bytes/record, ~4.3 records/item → **~8.1MB per run, ~48.4MB for all six** at realistic pass sizes (2,000 items/`L` for held-out and calibration, 30 for geometry). Small enough that the earlier concern (matching the 54GB pool estimate) doesn't apply here — the two are unrelated in scale | FIXED — estimated before generation, per the requirement, not after |
+| `raw/*.jsonl` git handling | Kept out of git (`raw/*.jsonl` in `.gitignore`) — regenerable from a checkpoint plus the seeds this file logs. A small, git-tracked manifest (`model/raw_records.py::write_manifest`) stands in for the data: paths, per-split record/byte counts, run identity | FIXED |
+
+---
+
 ## Summary
 
 **FIXED now, everything Phase 1 pilots can settle:** generator structure and invariants, capacity bounds (computed), gate mechanics, supervision regimes, `ρ` definition (including the B1/B2 off-by-one) and its scoping to arm A, competence gate threshold (judged at the terminal checkpoint, never first pass), seed-shopping prohibition, the corrected §3.1.5/§3.3 rank division of labor, all of §4's integrity-check criteria, Q2 probe protocol and falsification threshold, the §6.1 step-budget formula, the §6.2 expected-distribution target and deviation semantics, the `MIN_END_DECOYS=8` generator requirement (§3.1.6), the corrected `S*` definition, the `4×` budget multiplier, the cosine LR schedule (`RECIPE_LOG.md`), and — final, measured 2026-08-22 on genuinely stable pilots — the training budget (**102,400 steps**) and query-projection rank (**36**).

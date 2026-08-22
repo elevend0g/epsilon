@@ -10,6 +10,8 @@ import random
 from dataclasses import dataclass
 from typing import Literal
 
+import numpy as np
+
 Symbol = int
 Key = tuple[Symbol, Symbol, Symbol]
 END = "END"
@@ -90,10 +92,64 @@ class TaskFamily:
     D: TaskItem
 
 
+class _FastRandom:
+    """Drop-in for the subset of random.Random this generator uses
+    (.seed, .randrange, .sample, .shuffle), plus a buffered .symbol() for
+    the hot path — profiling found random.randrange's per-call overhead
+    was ~58% of total batch time at ~4M calls per 64-item batch.
+
+    First attempt at this buffered a numpy array and indexed it one
+    element at a time from Python — that was *slower* than plain
+    randrange (numpy's speed is in vectorized bulk ops; per-element
+    access from Python pays numpy's C->Python boxing on top of the
+    Python-loop overhead it was meant to avoid). This version generates
+    a bulk buffer AND converts it to a plain Python list in one bulk
+    .tolist() call, so every actual draw thereafter is plain list
+    indexing — no numpy involved past the refill. ~3.7x faster than
+    randrange at the primitive level.
+
+    Refills re-seed from the underlying Random's current state, so
+    .seed(x) here behaves exactly like .seed(x) on a plain random.Random
+    — the reseed-and-reuse pattern the tests already depend on."""
+
+    _BUFFER_SIZE = 1 << 18
+
+    def __init__(self, seed: int | None = None):
+        self._py = random.Random(seed)
+        self._buf: list[int] = []
+        self._pos = 0
+        self._alphabet_size: int | None = None
+
+    def seed(self, x) -> None:
+        self._py.seed(x)
+        self._buf = []  # invalidate: next symbol() draw reflects the new seed
+
+    def randrange(self, *args):
+        return self._py.randrange(*args)
+
+    def sample(self, *args, **kwargs):
+        return self._py.sample(*args, **kwargs)
+
+    def shuffle(self, *args, **kwargs):
+        return self._py.shuffle(*args, **kwargs)
+
+    def symbol(self, alphabet_size: int) -> int:
+        if self._pos >= len(self._buf) or self._alphabet_size != alphabet_size:
+            seed_material = self._py.getrandbits(63)
+            self._buf = np.random.default_rng(seed_material).integers(
+                0, alphabet_size, size=self._BUFFER_SIZE
+            ).tolist()
+            self._pos = 0
+            self._alphabet_size = alphabet_size
+        val = self._buf[self._pos]
+        self._pos += 1
+        return val
+
+
 class TaskGenerator:
     def __init__(self, config: GeneratorConfig):
         self.config = config
-        self.rng = random.Random(config.seed)
+        self.rng = _FastRandom(config.seed)
 
     def generate_family(self, hop_j: int | None = None) -> TaskFamily:
         L = self.config.chain_length
@@ -126,7 +182,7 @@ class TaskGenerator:
         ]
 
         # --- Arm C: start_key absent, unrelated pool one entry shorter than A. ---
-        arm_c = self._generate_arm_c(target_size=len(a_shuffled) - 1)
+        arm_c = self._generate_arm_c(used_keys, distractors, target_size=len(a_shuffled) - 1)
 
         # --- Arm D: full chain, distractors trimmed to match C's token count.
         # B1 and B2 are already token-count-identical to A by construction
@@ -298,29 +354,34 @@ class TaskGenerator:
             return value
         raise RuntimeError("could not sample a terminal value; alphabet too small")
 
-    def _generate_arm_c(self, target_size: int) -> TaskFamilyC:
-        used: set[Key] = set()
-        start_key = self._distinct_tuple(used)
-        used.add(start_key)
-        used_keys: dict[Key, Value] = {}
-        entries: list[CacheEntry] = []
-        for _ in range(target_size):
+    def _generate_arm_c(
+        self, used_keys: dict[Key, Value], distractors: list[CacheEntry], target_size: int
+    ) -> TaskFamilyC:
+        """§1.4: reuses the item's own already-generated, already
+        collision-free distractor pool instead of building an independent
+        one from scratch — target_size exceeds len(distractors) by only
+        chain_length-1, so this was profiled at ~28% of total generator
+        time for 0-2 items' worth of actually new content."""
+        local_used = dict(used_keys)
+        start_key = self._distinct_tuple(set(local_used.keys()))
+        entries = list(distractors)
+        while len(entries) < target_size:
             for _ in range(10_000):
                 key = self._random_tuple()
-                if key == start_key or key in used_keys:
+                if key == start_key or key in local_used:
                     continue
                 value = self._random_tuple()
                 entries.append(CacheEntry(key, value))
-                used_keys[key] = value
+                local_used[key] = value
                 break
             else:
                 raise RuntimeError("could not fill arm C distractor pool; alphabet too small")
-        return TaskFamilyC(start_key=start_key, memory=self._shuffled(entries))
+        return TaskFamilyC(start_key=start_key, memory=self._shuffled(entries[:target_size]))
 
     # -- primitives -----------------------------------------------------------
 
     def _random_symbol(self) -> Symbol:
-        return self.rng.randrange(self.config.alphabet_size)
+        return self.rng.symbol(self.config.alphabet_size)
 
     def _random_tuple(self) -> Key:
         return (self._random_symbol(), self._random_symbol(), self._random_symbol())

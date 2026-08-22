@@ -3,3 +3,10 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .claude/
+
+# Per-item, per-step raw records from evaluation/instrumentation passes
+# (§7, model/raw_records.py). Regenerable from a checkpoint + its seeds;
+# kept out of git even though volume is modest (~8MB/run) — the run's
+# checkpoint plus PREREG.md's logged seeds fully determine them. The
+# manifest (small, summary only) stays tracked.
+raw/*.jsonl
