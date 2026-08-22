@@ -357,10 +357,11 @@ P2 must be shown to carry information **beyond** the current margin value — re
 Linear probe on frozen state, predicting answerable vs. not.
 
 - **Split by generated graph, not by item.** A probe that memorizes graphs is not a coverage probe.
-- **Report cross-condition transfer as the headline**: train on `L=2`, test on `L=3`; train on one `n_distractors` band, test on another.
-- **Layer sweep.** Where the information peaks is itself a finding.
+- **Report cross-condition transfer as the headline, exactly two combos, pinned:** train `L=2` → test `L=3`; train `n_distractors=1021` (the target scale) → test `n_distractors=256` (the pinned low band — comfortably above the `n_hard·L + MIN_END_DECOYS` floor at current settings, meaningfully shorter than the target). Not a sweep over bands or `L`-pairs; these two, decided now rather than however many "a few more configurations" turns into later.
+- **Layer sweep = every one of the 8 fixed recursion steps (§6.1's `max_steps`), not a separately swept width.** Probed from the same per-step trace a single rollout already produces (`model/raw_records.py`) — this reads existing per-step records at different step indices, it does not require additional rollout passes. Same for §5.1's P1/P2: two positions within one already-logged trace, not two passes. Neither multiplies `raw/*.jsonl` volume; only new arms or new data configs (below) do.
 - **Arm D is the discriminating test.** A probe that fires on the length control learned length, and the length-matched arms cannot reveal this.
 - **B1-vs-C separation must be shown not to be hops-to-failure** (§1.4).
+- **Pass accounting for `raw/*.jsonl` (§7), corrected:** Phase 1 logged arm A only (§3.2's gate is defined on arm A alone). Phase 3 needs all five arms, at all 3 chain lengths, at both `n_distractors` bands — `5 × 3 × 2 = 30` arm/`L`/band combinations, of which 3 (arm A, both existing `L`s... all 3 `L`s, at `n_distractors=1021`) are already logged by Phase 1 and reused. **27 new passes, ~2,000 items each (matching Phase 1's own convention) ≈ 36.5MB new data per run.** Phase 4: 2 arms (constrained/free) × 3 chain lengths = 6 combinations, step budget fixed at 8 per §6.1 — **not** swept, no additional multiplier — ≈ 8.1MB per run. **Corrected total: ≈ 52.7MB per run, ≈ 317MB for all six** — the earlier ~2.8GB projection over-counted by treating the layer sweep and P1/P2 as separate rollout passes rather than reads of data already logged once.
 
 ### 5.3 Abstention threshold
 
@@ -386,7 +387,7 @@ Only after Phases 1–3.
 
 ### 6.1 Constrained vs. free latent iteration
 
-**Step budget: `max_steps = 4 × (L_max − 1)` = 8 at `L_max = 3`.** A formula, not a magic number: it allows every required integration plus three recurse-without-integrate steps per hop. Fixed in `PREREG.md`. If a condition systematically exhausts the budget, report the exhaustion rate rather than raising it.
+**Step budget: `max_steps = 4 × (L_max − 1)` = 8 at `L_max = 3`.** A formula, not a magic number: it allows every required integration plus three recurse-without-integrate steps per hop. Fixed in `PREREG.md`. If a condition systematically exhausts the budget, report the exhaustion rate rather than raising it. **One value, not a sweep** — §5.2's volume accounting assumes this explicitly; a later temptation to compare a few step-budget values would both move a preregistered threshold and multiply `raw/*.jsonl` volume beyond what's estimated.
 
 Fixed step budget, no learned halt. Compare recursion updates **constrained to the per-item causal subspace** against unconstrained updates.
 
