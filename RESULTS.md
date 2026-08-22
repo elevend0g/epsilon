@@ -58,8 +58,16 @@ Three consecutive "should be faster" changes, one net regression caught and reve
 
 **This is the fifth instance of the pattern finding 5 named, and the clearest one yet.** The `_flip_positions` fix was verified correct on its own — the isolated microbenchmark for bulk-generate-plus-`.tolist()` genuinely showed ~3.7x. It was the *integrated* path, two call sites sharing one buffer keyed to a single alphabet size, that did something the component-level test had no way to show. Same shape as the gate-hardening bug (finding 1): a piece verified correct in isolation while the assembled system quietly did something else. The general lesson, stated plainly so it doesn't need re-deriving next time: **never accept a component-level speedup — or any component-level result — without re-measuring the whole pipeline it feeds.** A clean microbenchmark is evidence about the microbenchmark, not about the system.
 
+### 7. Canary run clears, but S* came in 50% higher than the throwaway pilot predicted (2026-08-22)
+
+The first real seed (Regime 1, arms A+D, rank=36, full 102,400-step budget) is the first genuinely apples-to-apples test of `S*=15,900` from §3.1.7's throwaway pilot — same rank, same criterion, but a real seed instead of a discarded one, and 7x the step budget available to reach it. It landed at **`S*=23,800`**, not near 15,900.
+
+This is not a repeat of findings 1-6 — nothing was measured wrong. Both numbers are honest onset-of-stable-competence reads on their own runs; they just disagree, by about 50%, on a single seed each. The gap is worth naming rather than letting `15,900` stand unqualified as "the" number, because it's exactly the kind of single-seed variance §2.6's move to 3 seeds per regime exists to characterize. `S*` still leaves more than 3x headroom before the 102,400 cap either way, so nothing about the budget itself is threatened — but treat `15,900` as what it always was, a single discarded pilot's number, not a prediction of where real seeds will land.
+
+Query PR came in closer: `26.99` against the pilot's `27.99`, both comfortably below `rank=36` — the bottleneck-headroom finding replicated even though `S*` didn't.
+
 ---
 
 ## Verdict against preregistered conditions
 
-Not yet — no real seed has trained.
+Not yet — one real seed (real_seed_r1_0, Regime 1) has trained and passed its canary check. The five-run remainder of the matrix has not launched.

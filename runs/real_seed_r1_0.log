@@ -1,0 +1,1030 @@
+[real_seed0] === real seed 0, Regime 1 (arms=('A', 'D')), rank=36, budget=102400 steps ===
+[real_seed0] === pilot 0 start, rank=36, params=67112, cosine LR 0.003->3e-05 over 102400 steps, no early stopping ===
+[real_seed0] pilot 0 step      0  lr=3.00e-03  loss=7.3425  val_acc={1: 0.094, 2: 0.0, 3: 0.0}  elapsed=3s  
+[real_seed0] pilot 0 step    100  lr=3.00e-03  loss=2.9489  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=9s  PASS
+[real_seed0] pilot 0 step    200  lr=3.00e-03  loss=1.3662  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=16s  PASS
+[real_seed0] pilot 0 step    300  lr=3.00e-03  loss=0.8555  val_acc={1: 1.0, 2: 0.984, 3: 0.969}  elapsed=22s  PASS
+[real_seed0] pilot 0 step    400  lr=3.00e-03  loss=1.8152  val_acc={1: 1.0, 2: 0.82, 3: 0.797}  elapsed=29s  
+[real_seed0] pilot 0 step    500  lr=3.00e-03  loss=1.0803  val_acc={1: 1.0, 2: 0.758, 3: 0.719}  elapsed=36s  
+[real_seed0] pilot 0 step    600  lr=3.00e-03  loss=0.8078  val_acc={1: 1.0, 2: 0.664, 3: 0.734}  elapsed=42s  
+[real_seed0] pilot 0 step    700  lr=3.00e-03  loss=1.4064  val_acc={1: 1.0, 2: 0.633, 3: 0.57}  elapsed=50s  
+[real_seed0] pilot 0 step    800  lr=3.00e-03  loss=0.9651  val_acc={1: 1.0, 2: 0.625, 3: 0.523}  elapsed=57s  
+[real_seed0] pilot 0 step    900  lr=3.00e-03  loss=0.7673  val_acc={1: 1.0, 2: 0.594, 3: 0.516}  elapsed=65s  
+[real_seed0] pilot 0 step   1000  lr=3.00e-03  loss=1.1873  val_acc={1: 1.0, 2: 0.625, 3: 0.586}  elapsed=72s  
+[real_seed0] pilot 0 step   1100  lr=3.00e-03  loss=0.9087  val_acc={1: 1.0, 2: 0.594, 3: 0.57}  elapsed=80s  
+[real_seed0] pilot 0 step   1200  lr=3.00e-03  loss=0.7506  val_acc={1: 1.0, 2: 0.602, 3: 0.633}  elapsed=87s  
+[real_seed0] pilot 0 step   1300  lr=3.00e-03  loss=1.0658  val_acc={1: 1.0, 2: 0.672, 3: 0.602}  elapsed=94s  
+[real_seed0] pilot 0 step   1400  lr=3.00e-03  loss=0.8959  val_acc={1: 1.0, 2: 0.602, 3: 0.602}  elapsed=102s  
+[real_seed0] pilot 0 step   1500  lr=3.00e-03  loss=0.7555  val_acc={1: 1.0, 2: 0.656, 3: 0.625}  elapsed=109s  
+[real_seed0] pilot 0 step   1600  lr=3.00e-03  loss=0.9960  val_acc={1: 1.0, 2: 0.617, 3: 0.516}  elapsed=116s  
+[real_seed0] pilot 0 step   1700  lr=3.00e-03  loss=0.8684  val_acc={1: 1.0, 2: 0.609, 3: 0.445}  elapsed=123s  
+[real_seed0] pilot 0 step   1800  lr=3.00e-03  loss=0.7415  val_acc={1: 1.0, 2: 0.664, 3: 0.5}  elapsed=130s  
+[real_seed0] pilot 0 step   1900  lr=3.00e-03  loss=0.9612  val_acc={1: 1.0, 2: 0.617, 3: 0.508}  elapsed=137s  
+[real_seed0] pilot 0 step   2000  lr=3.00e-03  loss=0.8559  val_acc={1: 1.0, 2: 0.602, 3: 0.461}  elapsed=144s  
+[real_seed0] pilot 0 step   2100  lr=3.00e-03  loss=0.7465  val_acc={1: 1.0, 2: 0.625, 3: 0.469}  elapsed=153s  
+[real_seed0] pilot 0 step   2200  lr=3.00e-03  loss=0.9306  val_acc={1: 1.0, 2: 0.609, 3: 0.477}  elapsed=160s  
+[real_seed0] pilot 0 step   2300  lr=3.00e-03  loss=0.8466  val_acc={1: 1.0, 2: 0.664, 3: 0.562}  elapsed=167s  
+[real_seed0] pilot 0 step   2400  lr=3.00e-03  loss=0.7522  val_acc={1: 1.0, 2: 0.617, 3: 0.516}  elapsed=174s  
+[real_seed0] pilot 0 step   2500  lr=3.00e-03  loss=0.9180  val_acc={1: 1.0, 2: 0.672, 3: 0.484}  elapsed=181s  
+[real_seed0] pilot 0 step   2600  lr=3.00e-03  loss=0.8353  val_acc={1: 1.0, 2: 0.664, 3: 0.508}  elapsed=189s  
+[real_seed0] pilot 0 step   2700  lr=2.99e-03  loss=0.7359  val_acc={1: 1.0, 2: 0.672, 3: 0.461}  elapsed=196s  
+[real_seed0] pilot 0 step   2800  lr=2.99e-03  loss=0.8968  val_acc={1: 1.0, 2: 0.664, 3: 0.453}  elapsed=203s  
+[real_seed0] pilot 0 step   2900  lr=2.99e-03  loss=0.8360  val_acc={1: 1.0, 2: 0.695, 3: 0.531}  elapsed=210s  
+[real_seed0] pilot 0 step   3000  lr=2.99e-03  loss=0.7338  val_acc={1: 1.0, 2: 0.688, 3: 0.547}  elapsed=218s  
+[real_seed0] pilot 0 step   3100  lr=2.99e-03  loss=0.9062  val_acc={1: 1.0, 2: 0.688, 3: 0.484}  elapsed=226s  
+[real_seed0] pilot 0 step   3200  lr=2.99e-03  loss=0.8427  val_acc={1: 1.0, 2: 0.656, 3: 0.5}  elapsed=232s  
+[real_seed0] pilot 0 step   3300  lr=2.99e-03  loss=0.7290  val_acc={1: 1.0, 2: 0.703, 3: 0.547}  elapsed=241s  
+[real_seed0] pilot 0 step   3400  lr=2.99e-03  loss=0.8920  val_acc={1: 1.0, 2: 0.695, 3: 0.539}  elapsed=248s  
+[real_seed0] pilot 0 step   3500  lr=2.99e-03  loss=0.8328  val_acc={1: 1.0, 2: 0.695, 3: 0.516}  elapsed=255s  
+[real_seed0] pilot 0 step   3600  lr=2.99e-03  loss=0.7400  val_acc={1: 1.0, 2: 0.688, 3: 0.484}  elapsed=263s  
+[real_seed0] pilot 0 step   3700  lr=2.99e-03  loss=0.8812  val_acc={1: 1.0, 2: 0.664, 3: 0.531}  elapsed=270s  
+[real_seed0] pilot 0 step   3800  lr=2.99e-03  loss=0.8314  val_acc={1: 1.0, 2: 0.766, 3: 0.594}  elapsed=278s  
+[real_seed0] pilot 0 step   3900  lr=2.99e-03  loss=0.7479  val_acc={1: 1.0, 2: 0.688, 3: 0.562}  elapsed=285s  
+[real_seed0] pilot 0 step   4000  lr=2.99e-03  loss=0.8749  val_acc={1: 1.0, 2: 0.758, 3: 0.484}  elapsed=292s  
+[real_seed0] pilot 0 step   4100  lr=2.99e-03  loss=0.8269  val_acc={1: 1.0, 2: 0.695, 3: 0.531}  elapsed=299s  
+[real_seed0] pilot 0 step   4200  lr=2.99e-03  loss=0.7453  val_acc={1: 1.0, 2: 0.711, 3: 0.539}  elapsed=306s  
+[real_seed0] pilot 0 step   4300  lr=2.99e-03  loss=0.8718  val_acc={1: 1.0, 2: 0.719, 3: 0.547}  elapsed=314s  
+[real_seed0] pilot 0 step   4400  lr=2.99e-03  loss=0.8169  val_acc={1: 1.0, 2: 0.711, 3: 0.578}  elapsed=321s  
+[real_seed0] pilot 0 step   4500  lr=2.99e-03  loss=0.7431  val_acc={1: 1.0, 2: 0.711, 3: 0.594}  elapsed=329s  
+[real_seed0] pilot 0 step   4600  lr=2.99e-03  loss=0.8720  val_acc={1: 1.0, 2: 0.711, 3: 0.586}  elapsed=335s  
+[real_seed0] pilot 0 step   4700  lr=2.98e-03  loss=0.8359  val_acc={1: 1.0, 2: 0.789, 3: 0.617}  elapsed=343s  
+[real_seed0] pilot 0 step   4800  lr=2.98e-03  loss=0.7512  val_acc={1: 1.0, 2: 0.758, 3: 0.578}  elapsed=350s  
+[real_seed0] pilot 0 step   4900  lr=2.98e-03  loss=0.8583  val_acc={1: 1.0, 2: 0.758, 3: 0.609}  elapsed=359s  
+[real_seed0] pilot 0 step   5000  lr=2.98e-03  loss=0.8330  val_acc={1: 1.0, 2: 0.789, 3: 0.609}  elapsed=365s  
+[real_seed0] pilot 0 step   5100  lr=2.98e-03  loss=0.7366  val_acc={1: 1.0, 2: 0.828, 3: 0.68}  elapsed=373s  
+[real_seed0] pilot 0 step   5200  lr=2.98e-03  loss=0.8557  val_acc={1: 1.0, 2: 0.797, 3: 0.672}  elapsed=380s  
+[real_seed0] pilot 0 step   5300  lr=2.98e-03  loss=0.8316  val_acc={1: 1.0, 2: 0.828, 3: 0.656}  elapsed=387s  
+[real_seed0] pilot 0 step   5400  lr=2.98e-03  loss=0.7310  val_acc={1: 1.0, 2: 0.805, 3: 0.703}  elapsed=395s  
+[real_seed0] pilot 0 step   5500  lr=2.98e-03  loss=0.8633  val_acc={1: 1.0, 2: 0.781, 3: 0.703}  elapsed=402s  
+[real_seed0] pilot 0 step   5600  lr=2.98e-03  loss=0.8462  val_acc={1: 1.0, 2: 0.812, 3: 0.727}  elapsed=409s  
+[real_seed0] pilot 0 step   5700  lr=2.98e-03  loss=0.7371  val_acc={1: 1.0, 2: 0.758, 3: 0.719}  elapsed=416s  
+[real_seed0] pilot 0 step   5800  lr=2.98e-03  loss=0.8612  val_acc={1: 1.0, 2: 0.797, 3: 0.773}  elapsed=423s  
+[real_seed0] pilot 0 step   5900  lr=2.98e-03  loss=0.8228  val_acc={1: 1.0, 2: 0.844, 3: 0.797}  elapsed=431s  
+[real_seed0] pilot 0 step   6000  lr=2.97e-03  loss=0.7365  val_acc={1: 1.0, 2: 0.766, 3: 0.68}  elapsed=438s  
+[real_seed0] pilot 0 step   6100  lr=2.97e-03  loss=0.8594  val_acc={1: 1.0, 2: 0.789, 3: 0.766}  elapsed=447s  
+[real_seed0] pilot 0 step   6200  lr=2.97e-03  loss=0.8231  val_acc={1: 1.0, 2: 0.844, 3: 0.742}  elapsed=453s  
+[real_seed0] pilot 0 step   6300  lr=2.97e-03  loss=0.7324  val_acc={1: 1.0, 2: 0.82, 3: 0.688}  elapsed=461s  
+[real_seed0] pilot 0 step   6400  lr=2.97e-03  loss=0.8741  val_acc={1: 1.0, 2: 0.781, 3: 0.758}  elapsed=468s  
+[real_seed0] pilot 0 step   6500  lr=2.97e-03  loss=0.8316  val_acc={1: 1.0, 2: 0.875, 3: 0.734}  elapsed=475s  
+[real_seed0] pilot 0 step   6600  lr=2.97e-03  loss=0.7309  val_acc={1: 1.0, 2: 0.875, 3: 0.82}  elapsed=483s  
+[real_seed0] pilot 0 step   6700  lr=2.97e-03  loss=0.8571  val_acc={1: 1.0, 2: 0.82, 3: 0.766}  elapsed=490s  
+[real_seed0] pilot 0 step   6800  lr=2.97e-03  loss=0.8131  val_acc={1: 1.0, 2: 0.906, 3: 0.883}  elapsed=497s  
+[real_seed0] pilot 0 step   6900  lr=2.97e-03  loss=0.7271  val_acc={1: 1.0, 2: 0.906, 3: 0.805}  elapsed=504s  
+[real_seed0] pilot 0 step   7000  lr=2.97e-03  loss=0.8546  val_acc={1: 1.0, 2: 0.883, 3: 0.898}  elapsed=511s  
+[real_seed0] pilot 0 step   7100  lr=2.96e-03  loss=0.8232  val_acc={1: 1.0, 2: 0.93, 3: 0.914}  elapsed=519s  
+[real_seed0] pilot 0 step   7200  lr=2.96e-03  loss=0.7371  val_acc={1: 1.0, 2: 0.82, 3: 0.805}  elapsed=525s  
+[real_seed0] pilot 0 step   7300  lr=2.96e-03  loss=0.8501  val_acc={1: 1.0, 2: 0.852, 3: 0.844}  elapsed=533s  
+[real_seed0] pilot 0 step   7400  lr=2.96e-03  loss=0.8233  val_acc={1: 1.0, 2: 0.93, 3: 0.875}  elapsed=540s  
+[real_seed0] pilot 0 step   7500  lr=2.96e-03  loss=0.7317  val_acc={1: 1.0, 2: 0.898, 3: 0.922}  elapsed=548s  
+[real_seed0] pilot 0 step   7600  lr=2.96e-03  loss=0.8512  val_acc={1: 1.0, 2: 0.898, 3: 0.898}  elapsed=555s  
+[real_seed0] pilot 0 step   7700  lr=2.96e-03  loss=0.8280  val_acc={1: 1.0, 2: 0.883, 3: 0.891}  elapsed=561s  
+[real_seed0] pilot 0 step   7800  lr=2.96e-03  loss=0.7307  val_acc={1: 1.0, 2: 0.914, 3: 0.922}  elapsed=569s  
+[real_seed0] pilot 0 step   7900  lr=2.96e-03  loss=0.8544  val_acc={1: 1.0, 2: 0.875, 3: 0.867}  elapsed=576s  
+[real_seed0] pilot 0 step   8000  lr=2.96e-03  loss=0.8136  val_acc={1: 1.0, 2: 0.953, 3: 0.922}  elapsed=584s  
+[real_seed0] pilot 0 step   8100  lr=2.95e-03  loss=0.7404  val_acc={1: 1.0, 2: 0.914, 3: 0.93}  elapsed=590s  
+[real_seed0] pilot 0 step   8200  lr=2.95e-03  loss=0.8523  val_acc={1: 1.0, 2: 0.898, 3: 0.914}  elapsed=598s  
+[real_seed0] pilot 0 step   8300  lr=2.95e-03  loss=0.8186  val_acc={1: 1.0, 2: 0.961, 3: 0.938}  elapsed=605s  
+[real_seed0] pilot 0 step   8400  lr=2.95e-03  loss=0.7418  val_acc={1: 1.0, 2: 0.945, 3: 0.938}  elapsed=612s  
+[real_seed0] pilot 0 step   8500  lr=2.95e-03  loss=0.8474  val_acc={1: 1.0, 2: 0.906, 3: 0.93}  elapsed=620s  
+[real_seed0] pilot 0 step   8600  lr=2.95e-03  loss=0.8196  val_acc={1: 1.0, 2: 0.945, 3: 0.969}  elapsed=626s  
+[real_seed0] pilot 0 step   8700  lr=2.95e-03  loss=0.7357  val_acc={1: 1.0, 2: 0.953, 3: 0.969}  elapsed=633s  PASS
+[real_seed0] pilot 0 step   8800  lr=2.95e-03  loss=0.8546  val_acc={1: 1.0, 2: 0.93, 3: 0.938}  elapsed=641s  
+[real_seed0] pilot 0 step   8900  lr=2.94e-03  loss=0.8217  val_acc={1: 1.0, 2: 0.977, 3: 0.977}  elapsed=648s  PASS
+[real_seed0] pilot 0 step   9000  lr=2.94e-03  loss=0.7282  val_acc={1: 1.0, 2: 0.93, 3: 0.922}  elapsed=655s  
+[real_seed0] pilot 0 step   9100  lr=2.94e-03  loss=0.8572  val_acc={1: 1.0, 2: 0.914, 3: 0.977}  elapsed=663s  
+[real_seed0] pilot 0 step   9200  lr=2.94e-03  loss=0.8191  val_acc={1: 1.0, 2: 0.969, 3: 0.984}  elapsed=669s  PASS
+[real_seed0] pilot 0 step   9300  lr=2.94e-03  loss=0.7346  val_acc={1: 1.0, 2: 0.945, 3: 0.938}  elapsed=676s  
+[real_seed0] pilot 0 step   9400  lr=2.94e-03  loss=0.8500  val_acc={1: 1.0, 2: 0.961, 3: 0.969}  elapsed=683s  PASS
+[real_seed0] pilot 0 step   9500  lr=2.94e-03  loss=0.8189  val_acc={1: 1.0, 2: 0.992, 3: 0.961}  elapsed=691s  PASS
+[real_seed0] pilot 0 step   9600  lr=2.94e-03  loss=0.7311  val_acc={1: 1.0, 2: 0.945, 3: 0.969}  elapsed=698s  
+[real_seed0] pilot 0 step   9700  lr=2.93e-03  loss=0.8515  val_acc={1: 1.0, 2: 0.953, 3: 0.977}  elapsed=705s  PASS
+[real_seed0] pilot 0 step   9800  lr=2.93e-03  loss=0.8258  val_acc={1: 1.0, 2: 0.984, 3: 0.992}  elapsed=713s  PASS
+[real_seed0] pilot 0 step   9900  lr=2.93e-03  loss=0.7323  val_acc={1: 1.0, 2: 0.984, 3: 0.961}  elapsed=719s  PASS
+[real_seed0] pilot 0 step  10000  lr=2.93e-03  loss=0.8505  val_acc={1: 1.0, 2: 0.977, 3: 0.961}  elapsed=727s  PASS
+[real_seed0] pilot 0 step  10100  lr=2.93e-03  loss=0.8219  val_acc={1: 1.0, 2: 0.953, 3: 0.953}  elapsed=734s  PASS
+[real_seed0] pilot 0 step  10200  lr=2.93e-03  loss=0.7337  val_acc={1: 1.0, 2: 0.938, 3: 0.969}  elapsed=741s  
+[real_seed0] pilot 0 step  10300  lr=2.93e-03  loss=0.8540  val_acc={1: 1.0, 2: 0.984, 3: 0.977}  elapsed=749s  PASS
+[real_seed0] pilot 0 step  10400  lr=2.93e-03  loss=0.8349  val_acc={1: 1.0, 2: 0.977, 3: 0.969}  elapsed=756s  PASS
+[real_seed0] pilot 0 step  10500  lr=2.92e-03  loss=0.7279  val_acc={1: 1.0, 2: 0.984, 3: 0.961}  elapsed=762s  PASS
+[real_seed0] pilot 0 step  10600  lr=2.92e-03  loss=0.8579  val_acc={1: 1.0, 2: 0.984, 3: 0.969}  elapsed=770s  PASS
+[real_seed0] pilot 0 step  10700  lr=2.92e-03  loss=0.8219  val_acc={1: 1.0, 2: 0.984, 3: 0.977}  elapsed=777s  PASS
+[real_seed0] pilot 0 step  10800  lr=2.92e-03  loss=0.7330  val_acc={1: 1.0, 2: 0.984, 3: 0.969}  elapsed=785s  PASS
+[real_seed0] pilot 0 step  10900  lr=2.92e-03  loss=0.8410  val_acc={1: 1.0, 2: 0.914, 3: 0.953}  elapsed=791s  
+[real_seed0] pilot 0 step  11000  lr=2.92e-03  loss=0.8172  val_acc={1: 1.0, 2: 0.969, 3: 0.945}  elapsed=799s  
+[real_seed0] pilot 0 step  11100  lr=2.91e-03  loss=0.7399  val_acc={1: 1.0, 2: 0.945, 3: 0.914}  elapsed=806s  
+[real_seed0] pilot 0 step  11200  lr=2.91e-03  loss=0.8536  val_acc={1: 1.0, 2: 0.883, 3: 0.898}  elapsed=813s  
+[real_seed0] pilot 0 step  11300  lr=2.91e-03  loss=0.8264  val_acc={1: 1.0, 2: 0.977, 3: 0.977}  elapsed=820s  PASS
+[real_seed0] pilot 0 step  11400  lr=2.91e-03  loss=0.7276  val_acc={1: 1.0, 2: 0.938, 3: 0.93}  elapsed=827s  
+[real_seed0] pilot 0 step  11500  lr=2.91e-03  loss=0.8467  val_acc={1: 1.0, 2: 0.977, 3: 0.953}  elapsed=834s  PASS
+[real_seed0] pilot 0 step  11600  lr=2.91e-03  loss=0.8108  val_acc={1: 1.0, 2: 0.953, 3: 0.938}  elapsed=842s  
+[real_seed0] pilot 0 step  11700  lr=2.91e-03  loss=0.7281  val_acc={1: 1.0, 2: 0.914, 3: 0.898}  elapsed=849s  
+[real_seed0] pilot 0 step  11800  lr=2.90e-03  loss=0.8404  val_acc={1: 1.0, 2: 0.891, 3: 0.914}  elapsed=856s  
+[real_seed0] pilot 0 step  11900  lr=2.90e-03  loss=0.8205  val_acc={1: 1.0, 2: 0.945, 3: 0.953}  elapsed=864s  
+[real_seed0] pilot 0 step  12000  lr=2.90e-03  loss=0.7314  val_acc={1: 1.0, 2: 0.891, 3: 0.914}  elapsed=871s  
+[real_seed0] pilot 0 step  12100  lr=2.90e-03  loss=0.8442  val_acc={1: 1.0, 2: 0.945, 3: 0.977}  elapsed=878s  
+[real_seed0] pilot 0 step  12200  lr=2.90e-03  loss=0.8199  val_acc={1: 1.0, 2: 0.961, 3: 0.961}  elapsed=886s  PASS
+[real_seed0] pilot 0 step  12300  lr=2.90e-03  loss=0.7272  val_acc={1: 1.0, 2: 0.922, 3: 0.922}  elapsed=893s  
+[real_seed0] pilot 0 step  12400  lr=2.89e-03  loss=0.8546  val_acc={1: 1.0, 2: 0.953, 3: 0.938}  elapsed=900s  
+[real_seed0] pilot 0 step  12500  lr=2.89e-03  loss=0.8135  val_acc={1: 1.0, 2: 0.961, 3: 0.953}  elapsed=907s  PASS
+[real_seed0] pilot 0 step  12600  lr=2.89e-03  loss=0.7395  val_acc={1: 1.0, 2: 0.938, 3: 0.953}  elapsed=914s  
+[real_seed0] pilot 0 step  12700  lr=2.89e-03  loss=0.8421  val_acc={1: 1.0, 2: 0.883, 3: 0.906}  elapsed=921s  
+[real_seed0] pilot 0 step  12800  lr=2.89e-03  loss=0.8199  val_acc={1: 1.0, 2: 0.938, 3: 0.938}  elapsed=928s  
+[real_seed0] pilot 0 step  12900  lr=2.89e-03  loss=0.7232  val_acc={1: 1.0, 2: 0.938, 3: 0.969}  elapsed=935s  
+[real_seed0] pilot 0 step  13000  lr=2.88e-03  loss=0.8630  val_acc={1: 1.0, 2: 0.969, 3: 0.969}  elapsed=943s  PASS
+[real_seed0] pilot 0 step  13100  lr=2.88e-03  loss=0.8114  val_acc={1: 1.0, 2: 0.953, 3: 0.961}  elapsed=950s  PASS
+[real_seed0] pilot 0 step  13200  lr=2.88e-03  loss=0.7405  val_acc={1: 1.0, 2: 0.945, 3: 0.945}  elapsed=957s  
+[real_seed0] pilot 0 step  13300  lr=2.88e-03  loss=0.8426  val_acc={1: 1.0, 2: 0.914, 3: 0.906}  elapsed=965s  
+[real_seed0] pilot 0 step  13400  lr=2.88e-03  loss=0.8235  val_acc={1: 1.0, 2: 0.914, 3: 0.914}  elapsed=972s  
+[real_seed0] pilot 0 step  13500  lr=2.87e-03  loss=0.7290  val_acc={1: 1.0, 2: 0.875, 3: 0.914}  elapsed=979s  
+[real_seed0] pilot 0 step  13600  lr=2.87e-03  loss=0.8562  val_acc={1: 1.0, 2: 0.945, 3: 0.93}  elapsed=986s  
+[real_seed0] pilot 0 step  13700  lr=2.87e-03  loss=0.8268  val_acc={1: 1.0, 2: 0.906, 3: 0.961}  elapsed=993s  
+[real_seed0] pilot 0 step  13800  lr=2.87e-03  loss=0.7282  val_acc={1: 1.0, 2: 0.93, 3: 0.93}  elapsed=1000s  
+[real_seed0] pilot 0 step  13900  lr=2.87e-03  loss=0.8547  val_acc={1: 1.0, 2: 0.875, 3: 0.938}  elapsed=1007s  
+[real_seed0] pilot 0 step  14000  lr=2.87e-03  loss=0.8248  val_acc={1: 1.0, 2: 0.961, 3: 0.93}  elapsed=1015s  
+[real_seed0] pilot 0 step  14100  lr=2.86e-03  loss=0.7380  val_acc={1: 1.0, 2: 0.969, 3: 0.961}  elapsed=1022s  PASS
+[real_seed0] pilot 0 step  14200  lr=2.86e-03  loss=0.8528  val_acc={1: 1.0, 2: 0.844, 3: 0.859}  elapsed=1029s  
+[real_seed0] pilot 0 step  14300  lr=2.86e-03  loss=0.8260  val_acc={1: 1.0, 2: 0.922, 3: 0.938}  elapsed=1036s  
+[real_seed0] pilot 0 step  14400  lr=2.86e-03  loss=0.7343  val_acc={1: 1.0, 2: 0.945, 3: 0.961}  elapsed=1044s  
+[real_seed0] pilot 0 step  14500  lr=2.86e-03  loss=0.8459  val_acc={1: 1.0, 2: 0.867, 3: 0.883}  elapsed=1051s  
+[real_seed0] pilot 0 step  14600  lr=2.85e-03  loss=0.8209  val_acc={1: 1.0, 2: 0.93, 3: 0.945}  elapsed=1058s  
+[real_seed0] pilot 0 step  14700  lr=2.85e-03  loss=0.7302  val_acc={1: 1.0, 2: 0.914, 3: 0.867}  elapsed=1065s  
+[real_seed0] pilot 0 step  14800  lr=2.85e-03  loss=0.8569  val_acc={1: 1.0, 2: 0.891, 3: 0.914}  elapsed=1072s  
+[real_seed0] pilot 0 step  14900  lr=2.85e-03  loss=0.8153  val_acc={1: 1.0, 2: 0.906, 3: 0.914}  elapsed=1079s  
+[real_seed0] pilot 0 step  15000  lr=2.85e-03  loss=0.7345  val_acc={1: 1.0, 2: 0.938, 3: 0.906}  elapsed=1086s  
+[real_seed0] pilot 0 step  15100  lr=2.84e-03  loss=0.8509  val_acc={1: 1.0, 2: 0.898, 3: 0.938}  elapsed=1093s  
+[real_seed0] pilot 0 step  15200  lr=2.84e-03  loss=0.8146  val_acc={1: 1.0, 2: 0.945, 3: 0.953}  elapsed=1101s  
+[real_seed0] pilot 0 step  15300  lr=2.84e-03  loss=0.7331  val_acc={1: 1.0, 2: 0.906, 3: 0.898}  elapsed=1108s  
+[real_seed0] pilot 0 step  15400  lr=2.84e-03  loss=0.8471  val_acc={1: 1.0, 2: 0.93, 3: 0.922}  elapsed=1115s  
+[real_seed0] pilot 0 step  15500  lr=2.84e-03  loss=0.8255  val_acc={1: 1.0, 2: 0.914, 3: 0.938}  elapsed=1122s  
+[real_seed0] pilot 0 step  15600  lr=2.83e-03  loss=0.7370  val_acc={1: 1.0, 2: 0.891, 3: 0.922}  elapsed=1130s  
+[real_seed0] pilot 0 step  15700  lr=2.83e-03  loss=0.8514  val_acc={1: 1.0, 2: 0.914, 3: 0.906}  elapsed=1137s  
+[real_seed0] pilot 0 step  15800  lr=2.83e-03  loss=0.8105  val_acc={1: 1.0, 2: 0.883, 3: 0.922}  elapsed=1144s  
+[real_seed0] pilot 0 step  15900  lr=2.83e-03  loss=0.7273  val_acc={1: 1.0, 2: 0.898, 3: 0.914}  elapsed=1151s  
+[real_seed0] pilot 0 step  16000  lr=2.82e-03  loss=0.8497  val_acc={1: 1.0, 2: 0.875, 3: 0.914}  elapsed=1158s  
+[real_seed0] pilot 0 step  16100  lr=2.82e-03  loss=0.8089  val_acc={1: 1.0, 2: 0.914, 3: 0.891}  elapsed=1165s  
+[real_seed0] pilot 0 step  16200  lr=2.82e-03  loss=0.7438  val_acc={1: 1.0, 2: 0.93, 3: 0.906}  elapsed=1172s  
+[real_seed0] pilot 0 step  16300  lr=2.82e-03  loss=0.8465  val_acc={1: 1.0, 2: 0.914, 3: 0.906}  elapsed=1180s  
+[real_seed0] pilot 0 step  16400  lr=2.82e-03  loss=0.8182  val_acc={1: 1.0, 2: 0.891, 3: 0.906}  elapsed=1186s  
+[real_seed0] pilot 0 step  16500  lr=2.81e-03  loss=0.7217  val_acc={1: 1.0, 2: 0.906, 3: 0.891}  elapsed=1194s  
+[real_seed0] pilot 0 step  16600  lr=2.81e-03  loss=0.8411  val_acc={1: 1.0, 2: 0.906, 3: 0.914}  elapsed=1200s  
+[real_seed0] pilot 0 step  16700  lr=2.81e-03  loss=0.8302  val_acc={1: 1.0, 2: 0.914, 3: 0.906}  elapsed=1207s  
+[real_seed0] pilot 0 step  16800  lr=2.81e-03  loss=0.7322  val_acc={1: 1.0, 2: 0.93, 3: 0.945}  elapsed=1215s  
+[real_seed0] pilot 0 step  16900  lr=2.80e-03  loss=0.8446  val_acc={1: 1.0, 2: 0.938, 3: 0.914}  elapsed=1222s  
+[real_seed0] pilot 0 step  17000  lr=2.80e-03  loss=0.8149  val_acc={1: 1.0, 2: 0.93, 3: 0.906}  elapsed=1229s  
+[real_seed0] pilot 0 step  17100  lr=2.80e-03  loss=0.7303  val_acc={1: 1.0, 2: 0.891, 3: 0.914}  elapsed=1237s  
+[real_seed0] pilot 0 step  17200  lr=2.80e-03  loss=0.8492  val_acc={1: 1.0, 2: 0.906, 3: 0.891}  elapsed=1244s  
+[real_seed0] pilot 0 step  17300  lr=2.80e-03  loss=0.8212  val_acc={1: 1.0, 2: 0.93, 3: 0.93}  elapsed=1251s  
+[real_seed0] pilot 0 step  17400  lr=2.79e-03  loss=0.7362  val_acc={1: 1.0, 2: 0.914, 3: 0.898}  elapsed=1258s  
+[real_seed0] pilot 0 step  17500  lr=2.79e-03  loss=0.8480  val_acc={1: 1.0, 2: 0.938, 3: 0.93}  elapsed=1265s  
+[real_seed0] pilot 0 step  17600  lr=2.79e-03  loss=0.8110  val_acc={1: 1.0, 2: 0.906, 3: 0.922}  elapsed=1272s  
+[real_seed0] pilot 0 step  17700  lr=2.79e-03  loss=0.7256  val_acc={1: 1.0, 2: 0.93, 3: 0.922}  elapsed=1279s  
+[real_seed0] pilot 0 step  17800  lr=2.78e-03  loss=0.8398  val_acc={1: 1.0, 2: 0.93, 3: 0.938}  elapsed=1286s  
+[real_seed0] pilot 0 step  17900  lr=2.78e-03  loss=0.8205  val_acc={1: 1.0, 2: 0.93, 3: 0.945}  elapsed=1294s  
+[real_seed0] pilot 0 step  18000  lr=2.78e-03  loss=0.7332  val_acc={1: 1.0, 2: 0.938, 3: 0.969}  elapsed=1300s  
+[real_seed0] pilot 0 step  18100  lr=2.78e-03  loss=0.8471  val_acc={1: 1.0, 2: 0.93, 3: 0.953}  elapsed=1308s  
+[real_seed0] pilot 0 step  18200  lr=2.77e-03  loss=0.8169  val_acc={1: 1.0, 2: 0.906, 3: 0.922}  elapsed=1315s  
+[real_seed0] pilot 0 step  18300  lr=2.77e-03  loss=0.7276  val_acc={1: 1.0, 2: 0.945, 3: 0.93}  elapsed=1322s  
+[real_seed0] pilot 0 step  18400  lr=2.77e-03  loss=0.8461  val_acc={1: 1.0, 2: 0.914, 3: 0.914}  elapsed=1330s  
+[real_seed0] pilot 0 step  18500  lr=2.77e-03  loss=0.8215  val_acc={1: 1.0, 2: 0.914, 3: 0.922}  elapsed=1336s  
+[real_seed0] pilot 0 step  18600  lr=2.76e-03  loss=0.7232  val_acc={1: 1.0, 2: 0.93, 3: 0.93}  elapsed=1343s  
+[real_seed0] pilot 0 step  18700  lr=2.76e-03  loss=0.8471  val_acc={1: 1.0, 2: 0.906, 3: 0.93}  elapsed=1350s  
+[real_seed0] pilot 0 step  18800  lr=2.76e-03  loss=0.8197  val_acc={1: 1.0, 2: 0.938, 3: 0.945}  elapsed=1358s  
+[real_seed0] pilot 0 step  18900  lr=2.76e-03  loss=0.7327  val_acc={1: 1.0, 2: 0.969, 3: 0.953}  elapsed=1365s  PASS
+[real_seed0] pilot 0 step  19000  lr=2.75e-03  loss=0.8450  val_acc={1: 1.0, 2: 0.891, 3: 0.938}  elapsed=1372s  
+[real_seed0] pilot 0 step  19100  lr=2.75e-03  loss=0.8217  val_acc={1: 1.0, 2: 0.922, 3: 0.953}  elapsed=1380s  
+[real_seed0] pilot 0 step  19200  lr=2.75e-03  loss=0.7347  val_acc={1: 1.0, 2: 0.945, 3: 0.922}  elapsed=1387s  
+[real_seed0] pilot 0 step  19300  lr=2.75e-03  loss=0.8493  val_acc={1: 1.0, 2: 0.945, 3: 0.945}  elapsed=1394s  
+[real_seed0] pilot 0 step  19400  lr=2.74e-03  loss=0.8184  val_acc={1: 1.0, 2: 0.961, 3: 0.945}  elapsed=1400s  
+[real_seed0] pilot 0 step  19500  lr=2.74e-03  loss=0.7221  val_acc={1: 1.0, 2: 0.945, 3: 0.93}  elapsed=1408s  
+[real_seed0] pilot 0 step  19600  lr=2.74e-03  loss=0.8393  val_acc={1: 1.0, 2: 0.938, 3: 0.914}  elapsed=1415s  
+[real_seed0] pilot 0 step  19700  lr=2.74e-03  loss=0.8111  val_acc={1: 1.0, 2: 0.961, 3: 0.945}  elapsed=1422s  
+[real_seed0] pilot 0 step  19800  lr=2.73e-03  loss=0.7356  val_acc={1: 1.0, 2: 0.938, 3: 0.938}  elapsed=1429s  
+[real_seed0] pilot 0 step  19900  lr=2.73e-03  loss=0.8424  val_acc={1: 1.0, 2: 0.922, 3: 0.922}  elapsed=1436s  
+[real_seed0] pilot 0 step  20000  lr=2.73e-03  loss=0.8212  val_acc={1: 1.0, 2: 0.938, 3: 0.906}  elapsed=1444s  
+[real_seed0] pilot 0 step  20100  lr=2.73e-03  loss=0.7407  val_acc={1: 1.0, 2: 0.945, 3: 0.938}  elapsed=1451s  
+[real_seed0] pilot 0 step  20200  lr=2.72e-03  loss=0.8505  val_acc={1: 1.0, 2: 0.961, 3: 0.945}  elapsed=1458s  
+[real_seed0] pilot 0 step  20300  lr=2.72e-03  loss=0.8200  val_acc={1: 1.0, 2: 0.961, 3: 0.961}  elapsed=1465s  PASS
+[real_seed0] pilot 0 step  20400  lr=2.72e-03  loss=0.7238  val_acc={1: 1.0, 2: 0.953, 3: 0.961}  elapsed=1472s  PASS
+[real_seed0] pilot 0 step  20500  lr=2.72e-03  loss=0.8401  val_acc={1: 1.0, 2: 0.938, 3: 0.938}  elapsed=1479s  
+[real_seed0] pilot 0 step  20600  lr=2.71e-03  loss=0.8076  val_acc={1: 1.0, 2: 0.945, 3: 0.938}  elapsed=1486s  
+[real_seed0] pilot 0 step  20700  lr=2.71e-03  loss=0.7361  val_acc={1: 1.0, 2: 0.938, 3: 0.961}  elapsed=1494s  
+[real_seed0] pilot 0 step  20800  lr=2.71e-03  loss=0.8491  val_acc={1: 1.0, 2: 0.969, 3: 0.922}  elapsed=1501s  
+[real_seed0] pilot 0 step  20900  lr=2.71e-03  loss=0.8191  val_acc={1: 1.0, 2: 0.938, 3: 0.891}  elapsed=1508s  
+[real_seed0] pilot 0 step  21000  lr=2.70e-03  loss=0.7236  val_acc={1: 1.0, 2: 0.945, 3: 0.945}  elapsed=1515s  
+[real_seed0] pilot 0 step  21100  lr=2.70e-03  loss=0.8424  val_acc={1: 1.0, 2: 0.977, 3: 0.938}  elapsed=1523s  
+[real_seed0] pilot 0 step  21200  lr=2.70e-03  loss=0.8213  val_acc={1: 1.0, 2: 0.953, 3: 0.938}  elapsed=1530s  
+[real_seed0] pilot 0 step  21300  lr=2.69e-03  loss=0.7246  val_acc={1: 1.0, 2: 0.961, 3: 0.938}  elapsed=1537s  
+[real_seed0] pilot 0 step  21400  lr=2.69e-03  loss=0.8402  val_acc={1: 1.0, 2: 0.969, 3: 0.93}  elapsed=1545s  
+[real_seed0] pilot 0 step  21500  lr=2.69e-03  loss=0.8200  val_acc={1: 1.0, 2: 0.977, 3: 0.938}  elapsed=1552s  
+[real_seed0] pilot 0 step  21600  lr=2.69e-03  loss=0.7305  val_acc={1: 1.0, 2: 0.961, 3: 0.961}  elapsed=1559s  PASS
+[real_seed0] pilot 0 step  21700  lr=2.68e-03  loss=0.8443  val_acc={1: 1.0, 2: 0.945, 3: 0.914}  elapsed=1567s  
+[real_seed0] pilot 0 step  21800  lr=2.68e-03  loss=0.8187  val_acc={1: 1.0, 2: 0.961, 3: 0.945}  elapsed=1574s  
+[real_seed0] pilot 0 step  21900  lr=2.68e-03  loss=0.7166  val_acc={1: 1.0, 2: 0.922, 3: 0.93}  elapsed=1581s  
+[real_seed0] pilot 0 step  22000  lr=2.67e-03  loss=0.8491  val_acc={1: 1.0, 2: 0.961, 3: 0.953}  elapsed=1588s  PASS
+[real_seed0] pilot 0 step  22100  lr=2.67e-03  loss=0.8186  val_acc={1: 1.0, 2: 0.969, 3: 0.953}  elapsed=1595s  PASS
+[real_seed0] pilot 0 step  22200  lr=2.67e-03  loss=0.7244  val_acc={1: 1.0, 2: 0.953, 3: 0.953}  elapsed=1603s  PASS
+[real_seed0] pilot 0 step  22300  lr=2.67e-03  loss=0.8466  val_acc={1: 1.0, 2: 0.969, 3: 0.953}  elapsed=1609s  PASS
+[real_seed0] pilot 0 step  22400  lr=2.66e-03  loss=0.8225  val_acc={1: 1.0, 2: 0.961, 3: 0.938}  elapsed=1617s  
+[real_seed0] pilot 0 step  22500  lr=2.66e-03  loss=0.7309  val_acc={1: 1.0, 2: 0.945, 3: 0.93}  elapsed=1624s  
+[real_seed0] pilot 0 step  22600  lr=2.66e-03  loss=0.8467  val_acc={1: 1.0, 2: 0.953, 3: 0.945}  elapsed=1631s  
+[real_seed0] pilot 0 step  22700  lr=2.65e-03  loss=0.8104  val_acc={1: 1.0, 2: 0.984, 3: 1.0}  elapsed=1638s  PASS
+[real_seed0] pilot 0 step  22800  lr=2.65e-03  loss=0.7304  val_acc={1: 1.0, 2: 0.977, 3: 0.961}  elapsed=1647s  PASS
+[real_seed0] pilot 0 step  22900  lr=2.65e-03  loss=0.8535  val_acc={1: 1.0, 2: 0.992, 3: 0.984}  elapsed=1653s  PASS
+[real_seed0] pilot 0 step  23000  lr=2.65e-03  loss=0.8291  val_acc={1: 1.0, 2: 0.984, 3: 0.961}  elapsed=1660s  PASS
+[real_seed0] pilot 0 step  23100  lr=2.64e-03  loss=0.7258  val_acc={1: 1.0, 2: 0.953, 3: 0.969}  elapsed=1667s  PASS
+[real_seed0] pilot 0 step  23200  lr=2.64e-03  loss=0.8422  val_acc={1: 1.0, 2: 0.977, 3: 0.977}  elapsed=1675s  PASS
+[real_seed0] pilot 0 step  23300  lr=2.64e-03  loss=0.8109  val_acc={1: 1.0, 2: 0.961, 3: 0.992}  elapsed=1681s  PASS
+[real_seed0] pilot 0 step  23400  lr=2.63e-03  loss=0.7420  val_acc={1: 1.0, 2: 0.953, 3: 0.969}  elapsed=1688s  PASS
+[real_seed0] pilot 0 step  23500  lr=2.63e-03  loss=0.8424  val_acc={1: 1.0, 2: 0.961, 3: 0.969}  elapsed=1695s  PASS
+[real_seed0] pilot 0 step  23600  lr=2.63e-03  loss=0.8181  val_acc={1: 1.0, 2: 0.953, 3: 0.977}  elapsed=1702s  PASS
+[real_seed0] pilot 0 step  23700  lr=2.62e-03  loss=0.7286  val_acc={1: 1.0, 2: 0.953, 3: 0.945}  elapsed=1710s  
+[real_seed0] pilot 0 step  23800  lr=2.62e-03  loss=0.8494  val_acc={1: 1.0, 2: 0.969, 3: 0.984}  elapsed=1717s  PASS
+[real_seed0] pilot 0 step  23900  lr=2.62e-03  loss=0.8155  val_acc={1: 1.0, 2: 0.977, 3: 0.961}  elapsed=1724s  PASS
+[real_seed0] pilot 0 step  24000  lr=2.62e-03  loss=0.7322  val_acc={1: 1.0, 2: 0.984, 3: 0.977}  elapsed=1732s  PASS
+[real_seed0] pilot 0 step  24100  lr=2.61e-03  loss=0.8502  val_acc={1: 1.0, 2: 0.977, 3: 0.961}  elapsed=1739s  PASS
+[real_seed0] pilot 0 step  24200  lr=2.61e-03  loss=0.8128  val_acc={1: 1.0, 2: 0.984, 3: 0.984}  elapsed=1746s  PASS
+[real_seed0] pilot 0 step  24300  lr=2.61e-03  loss=0.7328  val_acc={1: 1.0, 2: 0.977, 3: 0.984}  elapsed=1752s  PASS
+[real_seed0] pilot 0 step  24400  lr=2.60e-03  loss=0.8498  val_acc={1: 1.0, 2: 0.969, 3: 0.977}  elapsed=1760s  PASS
+[real_seed0] pilot 0 step  24500  lr=2.60e-03  loss=0.8146  val_acc={1: 1.0, 2: 0.977, 3: 0.984}  elapsed=1767s  PASS
+[real_seed0] pilot 0 step  24600  lr=2.60e-03  loss=0.7268  val_acc={1: 1.0, 2: 0.953, 3: 0.969}  elapsed=1774s  PASS
+[real_seed0] pilot 0 step  24700  lr=2.59e-03  loss=0.8393  val_acc={1: 1.0, 2: 0.969, 3: 0.969}  elapsed=1781s  PASS
+[real_seed0] pilot 0 step  24800  lr=2.59e-03  loss=0.8174  val_acc={1: 1.0, 2: 0.984, 3: 0.977}  elapsed=1788s  PASS
+[real_seed0] pilot 0 step  24900  lr=2.59e-03  loss=0.7243  val_acc={1: 1.0, 2: 0.969, 3: 0.969}  elapsed=1796s  PASS
+[real_seed0] pilot 0 step  25000  lr=2.58e-03  loss=0.8484  val_acc={1: 1.0, 2: 0.992, 3: 0.969}  elapsed=1802s  PASS
+[real_seed0] pilot 0 step  25100  lr=2.58e-03  loss=0.8234  val_acc={1: 1.0, 2: 0.984, 3: 0.969}  elapsed=1810s  PASS
+[real_seed0] pilot 0 step  25200  lr=2.58e-03  loss=0.7378  val_acc={1: 1.0, 2: 0.977, 3: 0.992}  elapsed=1817s  PASS
+[real_seed0] pilot 0 step  25300  lr=2.57e-03  loss=0.8498  val_acc={1: 1.0, 2: 0.984, 3: 0.984}  elapsed=1824s  PASS
+[real_seed0] pilot 0 step  25400  lr=2.57e-03  loss=0.8130  val_acc={1: 1.0, 2: 0.984, 3: 0.992}  elapsed=1831s  PASS
+[real_seed0] pilot 0 step  25500  lr=2.57e-03  loss=0.7367  val_acc={1: 1.0, 2: 0.977, 3: 0.977}  elapsed=1838s  PASS
+[real_seed0] pilot 0 step  25600  lr=2.57e-03  loss=0.8466  val_acc={1: 1.0, 2: 0.992, 3: 0.969}  elapsed=1845s  PASS
+[real_seed0] pilot 0 step  25700  lr=2.56e-03  loss=0.8124  val_acc={1: 1.0, 2: 0.984, 3: 0.992}  elapsed=1853s  PASS
+[real_seed0] pilot 0 step  25800  lr=2.56e-03  loss=0.7346  val_acc={1: 1.0, 2: 0.969, 3: 0.977}  elapsed=1860s  PASS
+[real_seed0] pilot 0 step  25900  lr=2.56e-03  loss=0.8390  val_acc={1: 1.0, 2: 0.977, 3: 0.977}  elapsed=1867s  PASS
+[real_seed0] pilot 0 step  26000  lr=2.55e-03  loss=0.8126  val_acc={1: 1.0, 2: 0.984, 3: 0.961}  elapsed=1874s  PASS
+[real_seed0] pilot 0 step  26100  lr=2.55e-03  loss=0.7303  val_acc={1: 1.0, 2: 0.977, 3: 0.969}  elapsed=1881s  PASS
+[real_seed0] pilot 0 step  26200  lr=2.55e-03  loss=0.8460  val_acc={1: 1.0, 2: 0.992, 3: 0.977}  elapsed=1888s  PASS
+[real_seed0] pilot 0 step  26300  lr=2.54e-03  loss=0.8216  val_acc={1: 1.0, 2: 0.977, 3: 0.977}  elapsed=1895s  PASS
+[real_seed0] pilot 0 step  26400  lr=2.54e-03  loss=0.7357  val_acc={1: 1.0, 2: 0.969, 3: 0.953}  elapsed=1903s  PASS
+[real_seed0] pilot 0 step  26500  lr=2.54e-03  loss=0.8541  val_acc={1: 1.0, 2: 0.969, 3: 0.977}  elapsed=1911s  PASS
+[real_seed0] pilot 0 step  26600  lr=2.53e-03  loss=0.8167  val_acc={1: 1.0, 2: 0.984, 3: 0.984}  elapsed=1917s  PASS
+[real_seed0] pilot 0 step  26700  lr=2.53e-03  loss=0.7375  val_acc={1: 1.0, 2: 0.984, 3: 0.992}  elapsed=1925s  PASS
+[real_seed0] pilot 0 step  26800  lr=2.53e-03  loss=0.8428  val_acc={1: 1.0, 2: 0.984, 3: 0.984}  elapsed=1934s  PASS
+[real_seed0] pilot 0 step  26900  lr=2.52e-03  loss=0.8189  val_acc={1: 1.0, 2: 0.984, 3: 0.984}  elapsed=1940s  PASS
+[real_seed0] pilot 0 step  27000  lr=2.52e-03  loss=0.7263  val_acc={1: 1.0, 2: 0.992, 3: 0.984}  elapsed=1947s  PASS
+[real_seed0] pilot 0 step  27100  lr=2.52e-03  loss=0.8499  val_acc={1: 1.0, 2: 0.992, 3: 0.992}  elapsed=1955s  PASS
+[real_seed0] pilot 0 step  27200  lr=2.51e-03  loss=0.8267  val_acc={1: 1.0, 2: 0.984, 3: 0.992}  elapsed=1962s  PASS
+[real_seed0] pilot 0 step  27300  lr=2.51e-03  loss=0.7274  val_acc={1: 1.0, 2: 0.984, 3: 0.977}  elapsed=1970s  PASS
+[real_seed0] pilot 0 step  27400  lr=2.51e-03  loss=0.8522  val_acc={1: 1.0, 2: 0.969, 3: 0.984}  elapsed=1976s  PASS
+[real_seed0] pilot 0 step  27500  lr=2.50e-03  loss=0.8185  val_acc={1: 1.0, 2: 0.969, 3: 0.977}  elapsed=1984s  PASS
+[real_seed0] pilot 0 step  27600  lr=2.50e-03  loss=0.7262  val_acc={1: 1.0, 2: 0.977, 3: 0.977}  elapsed=1991s  PASS
+[real_seed0] pilot 0 step  27700  lr=2.50e-03  loss=0.8380  val_acc={1: 1.0, 2: 0.977, 3: 0.992}  elapsed=1999s  PASS
+[real_seed0] pilot 0 step  27800  lr=2.49e-03  loss=0.8249  val_acc={1: 1.0, 2: 0.977, 3: 0.984}  elapsed=2005s  PASS
+[real_seed0] pilot 0 step  27900  lr=2.49e-03  loss=0.7282  val_acc={1: 1.0, 2: 0.953, 3: 0.977}  elapsed=2013s  PASS
+[real_seed0] pilot 0 step  28000  lr=2.48e-03  loss=0.8411  val_acc={1: 1.0, 2: 1.0, 3: 0.992}  elapsed=2020s  PASS
+[real_seed0] pilot 0 step  28100  lr=2.48e-03  loss=0.8231  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2027s  PASS
+[real_seed0] pilot 0 step  28200  lr=2.48e-03  loss=0.7230  val_acc={1: 1.0, 2: 0.969, 3: 1.0}  elapsed=2034s  PASS
+[real_seed0] pilot 0 step  28300  lr=2.47e-03  loss=0.8481  val_acc={1: 1.0, 2: 0.984, 3: 0.992}  elapsed=2041s  PASS
+[real_seed0] pilot 0 step  28400  lr=2.47e-03  loss=0.8200  val_acc={1: 1.0, 2: 0.984, 3: 1.0}  elapsed=2048s  PASS
+[real_seed0] pilot 0 step  28500  lr=2.47e-03  loss=0.7356  val_acc={1: 1.0, 2: 0.977, 3: 0.992}  elapsed=2056s  PASS
+[real_seed0] pilot 0 step  28600  lr=2.46e-03  loss=0.8511  val_acc={1: 1.0, 2: 0.992, 3: 0.984}  elapsed=2064s  PASS
+[real_seed0] pilot 0 step  28700  lr=2.46e-03  loss=0.8165  val_acc={1: 1.0, 2: 0.977, 3: 1.0}  elapsed=2070s  PASS
+[real_seed0] pilot 0 step  28800  lr=2.46e-03  loss=0.7251  val_acc={1: 1.0, 2: 0.984, 3: 0.969}  elapsed=2078s  PASS
+[real_seed0] pilot 0 step  28900  lr=2.45e-03  loss=0.8355  val_acc={1: 1.0, 2: 0.969, 3: 0.977}  elapsed=2085s  PASS
+[real_seed0] pilot 0 step  29000  lr=2.45e-03  loss=0.8198  val_acc={1: 1.0, 2: 0.984, 3: 0.992}  elapsed=2092s  PASS
+[real_seed0] pilot 0 step  29100  lr=2.45e-03  loss=0.7321  val_acc={1: 1.0, 2: 0.977, 3: 0.977}  elapsed=2099s  PASS
+[real_seed0] pilot 0 step  29200  lr=2.44e-03  loss=0.8445  val_acc={1: 1.0, 2: 0.977, 3: 0.984}  elapsed=2106s  PASS
+[real_seed0] pilot 0 step  29300  lr=2.44e-03  loss=0.8160  val_acc={1: 1.0, 2: 0.984, 3: 0.977}  elapsed=2114s  PASS
+[real_seed0] pilot 0 step  29400  lr=2.44e-03  loss=0.7270  val_acc={1: 1.0, 2: 0.984, 3: 0.961}  elapsed=2121s  PASS
+[real_seed0] pilot 0 step  29500  lr=2.43e-03  loss=0.8520  val_acc={1: 1.0, 2: 0.984, 3: 0.977}  elapsed=2128s  PASS
+[real_seed0] pilot 0 step  29600  lr=2.43e-03  loss=0.8074  val_acc={1: 1.0, 2: 0.977, 3: 0.984}  elapsed=2135s  PASS
+[real_seed0] pilot 0 step  29700  lr=2.43e-03  loss=0.7193  val_acc={1: 1.0, 2: 0.984, 3: 0.984}  elapsed=2142s  PASS
+[real_seed0] pilot 0 step  29800  lr=2.42e-03  loss=0.8480  val_acc={1: 1.0, 2: 0.969, 3: 0.977}  elapsed=2150s  PASS
+[real_seed0] pilot 0 step  29900  lr=2.42e-03  loss=0.8181  val_acc={1: 1.0, 2: 0.977, 3: 0.992}  elapsed=2156s  PASS
+[real_seed0] pilot 0 step  30000  lr=2.41e-03  loss=0.7145  val_acc={1: 1.0, 2: 0.977, 3: 0.992}  elapsed=2163s  PASS
+[real_seed0] pilot 0 step  30100  lr=2.41e-03  loss=0.8516  val_acc={1: 1.0, 2: 0.984, 3: 0.969}  elapsed=2171s  PASS
+[real_seed0] pilot 0 step  30200  lr=2.41e-03  loss=0.8168  val_acc={1: 1.0, 2: 0.977, 3: 0.984}  elapsed=2178s  PASS
+[real_seed0] pilot 0 step  30300  lr=2.40e-03  loss=0.7239  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2185s  PASS
+[real_seed0] pilot 0 step  30400  lr=2.40e-03  loss=0.8414  val_acc={1: 1.0, 2: 0.984, 3: 0.961}  elapsed=2192s  PASS
+[real_seed0] pilot 0 step  30500  lr=2.40e-03  loss=0.8138  val_acc={1: 1.0, 2: 1.0, 3: 0.992}  elapsed=2199s  PASS
+[real_seed0] pilot 0 step  30600  lr=2.39e-03  loss=0.7254  val_acc={1: 1.0, 2: 0.984, 3: 0.992}  elapsed=2206s  PASS
+[real_seed0] pilot 0 step  30700  lr=2.39e-03  loss=0.8426  val_acc={1: 1.0, 2: 0.992, 3: 0.992}  elapsed=2213s  PASS
+[real_seed0] pilot 0 step  30800  lr=2.38e-03  loss=0.8228  val_acc={1: 1.0, 2: 0.992, 3: 0.992}  elapsed=2221s  PASS
+[real_seed0] pilot 0 step  30900  lr=2.38e-03  loss=0.7374  val_acc={1: 1.0, 2: 0.977, 3: 0.992}  elapsed=2229s  PASS
+[real_seed0] pilot 0 step  31000  lr=2.38e-03  loss=0.8468  val_acc={1: 1.0, 2: 0.984, 3: 0.969}  elapsed=2236s  PASS
+[real_seed0] pilot 0 step  31100  lr=2.37e-03  loss=0.8084  val_acc={1: 1.0, 2: 0.984, 3: 0.961}  elapsed=2244s  PASS
+[real_seed0] pilot 0 step  31200  lr=2.37e-03  loss=0.7235  val_acc={1: 1.0, 2: 0.984, 3: 0.984}  elapsed=2252s  PASS
+[real_seed0] pilot 0 step  31300  lr=2.37e-03  loss=0.8419  val_acc={1: 1.0, 2: 0.977, 3: 0.977}  elapsed=2258s  PASS
+[real_seed0] pilot 0 step  31400  lr=2.36e-03  loss=0.8184  val_acc={1: 1.0, 2: 0.961, 3: 0.984}  elapsed=2266s  PASS
+[real_seed0] pilot 0 step  31500  lr=2.36e-03  loss=0.7228  val_acc={1: 1.0, 2: 0.977, 3: 0.984}  elapsed=2273s  PASS
+[real_seed0] pilot 0 step  31600  lr=2.36e-03  loss=0.8443  val_acc={1: 1.0, 2: 0.984, 3: 0.984}  elapsed=2280s  PASS
+[real_seed0] pilot 0 step  31700  lr=2.35e-03  loss=0.8233  val_acc={1: 1.0, 2: 0.969, 3: 0.961}  elapsed=2287s  PASS
+[real_seed0] pilot 0 step  31800  lr=2.35e-03  loss=0.7244  val_acc={1: 1.0, 2: 0.992, 3: 1.0}  elapsed=2294s  PASS
+[real_seed0] pilot 0 step  31900  lr=2.34e-03  loss=0.8442  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2301s  PASS
+[real_seed0] pilot 0 step  32000  lr=2.34e-03  loss=0.8154  val_acc={1: 1.0, 2: 0.984, 3: 1.0}  elapsed=2308s  PASS
+[real_seed0] pilot 0 step  32100  lr=2.34e-03  loss=0.7337  val_acc={1: 1.0, 2: 0.992, 3: 1.0}  elapsed=2315s  PASS
+[real_seed0] pilot 0 step  32200  lr=2.33e-03  loss=0.8417  val_acc={1: 1.0, 2: 0.992, 3: 1.0}  elapsed=2323s  PASS
+[real_seed0] pilot 0 step  32300  lr=2.33e-03  loss=0.8095  val_acc={1: 1.0, 2: 0.992, 3: 1.0}  elapsed=2330s  PASS
+[real_seed0] pilot 0 step  32400  lr=2.32e-03  loss=0.7300  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2337s  PASS
+[real_seed0] pilot 0 step  32500  lr=2.32e-03  loss=0.8518  val_acc={1: 1.0, 2: 0.992, 3: 1.0}  elapsed=2344s  PASS
+[real_seed0] pilot 0 step  32600  lr=2.32e-03  loss=0.8150  val_acc={1: 1.0, 2: 1.0, 3: 0.992}  elapsed=2352s  PASS
+[real_seed0] pilot 0 step  32700  lr=2.31e-03  loss=0.7165  val_acc={1: 1.0, 2: 0.992, 3: 0.992}  elapsed=2359s  PASS
+[real_seed0] pilot 0 step  32800  lr=2.31e-03  loss=0.8385  val_acc={1: 1.0, 2: 1.0, 3: 0.984}  elapsed=2366s  PASS
+[real_seed0] pilot 0 step  32900  lr=2.31e-03  loss=0.8273  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2373s  PASS
+[real_seed0] pilot 0 step  33000  lr=2.30e-03  loss=0.7228  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2380s  PASS
+[real_seed0] pilot 0 step  33100  lr=2.30e-03  loss=0.8471  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2387s  PASS
+[real_seed0] pilot 0 step  33200  lr=2.29e-03  loss=0.8156  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2394s  PASS
+[real_seed0] pilot 0 step  33300  lr=2.29e-03  loss=0.7291  val_acc={1: 1.0, 2: 0.992, 3: 1.0}  elapsed=2401s  PASS
+[real_seed0] pilot 0 step  33400  lr=2.29e-03  loss=0.8423  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2408s  PASS
+[real_seed0] pilot 0 step  33500  lr=2.28e-03  loss=0.8149  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2416s  PASS
+[real_seed0] pilot 0 step  33600  lr=2.28e-03  loss=0.7284  val_acc={1: 1.0, 2: 1.0, 3: 0.992}  elapsed=2423s  PASS
+[real_seed0] pilot 0 step  33700  lr=2.27e-03  loss=0.8385  val_acc={1: 1.0, 2: 1.0, 3: 0.992}  elapsed=2430s  PASS
+[real_seed0] pilot 0 step  33800  lr=2.27e-03  loss=0.8230  val_acc={1: 1.0, 2: 0.992, 3: 1.0}  elapsed=2437s  PASS
+[real_seed0] pilot 0 step  33900  lr=2.27e-03  loss=0.7270  val_acc={1: 1.0, 2: 0.992, 3: 1.0}  elapsed=2445s  PASS
+[real_seed0] pilot 0 step  34000  lr=2.26e-03  loss=0.8373  val_acc={1: 1.0, 2: 0.992, 3: 1.0}  elapsed=2452s  PASS
+[real_seed0] pilot 0 step  34100  lr=2.26e-03  loss=0.8179  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2459s  PASS
+[real_seed0] pilot 0 step  34200  lr=2.25e-03  loss=0.7248  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2466s  PASS
+[real_seed0] pilot 0 step  34300  lr=2.25e-03  loss=0.8482  val_acc={1: 1.0, 2: 0.984, 3: 1.0}  elapsed=2473s  PASS
+[real_seed0] pilot 0 step  34400  lr=2.25e-03  loss=0.8186  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2480s  PASS
+[real_seed0] pilot 0 step  34500  lr=2.24e-03  loss=0.7153  val_acc={1: 1.0, 2: 0.992, 3: 0.992}  elapsed=2487s  PASS
+[real_seed0] pilot 0 step  34600  lr=2.24e-03  loss=0.8393  val_acc={1: 1.0, 2: 0.992, 3: 1.0}  elapsed=2495s  PASS
+[real_seed0] pilot 0 step  34700  lr=2.24e-03  loss=0.8095  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2502s  PASS
+[real_seed0] pilot 0 step  34800  lr=2.23e-03  loss=0.7288  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2509s  PASS
+[real_seed0] pilot 0 step  34900  lr=2.23e-03  loss=0.8371  val_acc={1: 1.0, 2: 0.992, 3: 1.0}  elapsed=2516s  PASS
+[real_seed0] pilot 0 step  35000  lr=2.22e-03  loss=0.8120  val_acc={1: 1.0, 2: 0.984, 3: 1.0}  elapsed=2523s  PASS
+[real_seed0] pilot 0 step  35100  lr=2.22e-03  loss=0.7139  val_acc={1: 1.0, 2: 0.992, 3: 1.0}  elapsed=2531s  PASS
+[real_seed0] pilot 0 step  35200  lr=2.22e-03  loss=0.8406  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2538s  PASS
+[real_seed0] pilot 0 step  35300  lr=2.21e-03  loss=0.8214  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2545s  PASS
+[real_seed0] pilot 0 step  35400  lr=2.21e-03  loss=0.7211  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2552s  PASS
+[real_seed0] pilot 0 step  35500  lr=2.20e-03  loss=0.8419  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2559s  PASS
+[real_seed0] pilot 0 step  35600  lr=2.20e-03  loss=0.8049  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2567s  PASS
+[real_seed0] pilot 0 step  35700  lr=2.19e-03  loss=0.7272  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2574s  PASS
+[real_seed0] pilot 0 step  35800  lr=2.19e-03  loss=0.8424  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2581s  PASS
+[real_seed0] pilot 0 step  35900  lr=2.19e-03  loss=0.8148  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2588s  PASS
+[real_seed0] pilot 0 step  36000  lr=2.18e-03  loss=0.7248  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2595s  PASS
+[real_seed0] pilot 0 step  36100  lr=2.18e-03  loss=0.8369  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2602s  PASS
+[real_seed0] pilot 0 step  36200  lr=2.17e-03  loss=0.8160  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2609s  PASS
+[real_seed0] pilot 0 step  36300  lr=2.17e-03  loss=0.7182  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2616s  PASS
+[real_seed0] pilot 0 step  36400  lr=2.17e-03  loss=0.8388  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2623s  PASS
+[real_seed0] pilot 0 step  36500  lr=2.16e-03  loss=0.8132  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2632s  PASS
+[real_seed0] pilot 0 step  36600  lr=2.16e-03  loss=0.7353  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2639s  PASS
+[real_seed0] pilot 0 step  36700  lr=2.15e-03  loss=0.8388  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2646s  PASS
+[real_seed0] pilot 0 step  36800  lr=2.15e-03  loss=0.8106  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2653s  PASS
+[real_seed0] pilot 0 step  36900  lr=2.15e-03  loss=0.7377  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2660s  PASS
+[real_seed0] pilot 0 step  37000  lr=2.14e-03  loss=0.8513  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2667s  PASS
+[real_seed0] pilot 0 step  37100  lr=2.14e-03  loss=0.8141  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2675s  PASS
+[real_seed0] pilot 0 step  37200  lr=2.13e-03  loss=0.7323  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2682s  PASS
+[real_seed0] pilot 0 step  37300  lr=2.13e-03  loss=0.8500  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2689s  PASS
+[real_seed0] pilot 0 step  37400  lr=2.13e-03  loss=0.8172  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2695s  PASS
+[real_seed0] pilot 0 step  37500  lr=2.12e-03  loss=0.7309  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2703s  PASS
+[real_seed0] pilot 0 step  37600  lr=2.12e-03  loss=0.8504  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2711s  PASS
+[real_seed0] pilot 0 step  37700  lr=2.11e-03  loss=0.8068  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2718s  PASS
+[real_seed0] pilot 0 step  37800  lr=2.11e-03  loss=0.7264  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2725s  PASS
+[real_seed0] pilot 0 step  37900  lr=2.10e-03  loss=0.8431  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2732s  PASS
+[real_seed0] pilot 0 step  38000  lr=2.10e-03  loss=0.8139  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2739s  PASS
+[real_seed0] pilot 0 step  38100  lr=2.10e-03  loss=0.7307  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2747s  PASS
+[real_seed0] pilot 0 step  38200  lr=2.09e-03  loss=0.8404  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2754s  PASS
+[real_seed0] pilot 0 step  38300  lr=2.09e-03  loss=0.8083  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2761s  PASS
+[real_seed0] pilot 0 step  38400  lr=2.08e-03  loss=0.7260  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2768s  PASS
+[real_seed0] pilot 0 step  38500  lr=2.08e-03  loss=0.8463  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2774s  PASS
+[real_seed0] pilot 0 step  38600  lr=2.07e-03  loss=0.8151  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2782s  PASS
+[real_seed0] pilot 0 step  38700  lr=2.07e-03  loss=0.7222  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2789s  PASS
+[real_seed0] pilot 0 step  38800  lr=2.07e-03  loss=0.8471  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2796s  PASS
+[real_seed0] pilot 0 step  38900  lr=2.06e-03  loss=0.8068  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2804s  PASS
+[real_seed0] pilot 0 step  39000  lr=2.06e-03  loss=0.7276  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2811s  PASS
+[real_seed0] pilot 0 step  39100  lr=2.05e-03  loss=0.8530  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2818s  PASS
+[real_seed0] pilot 0 step  39200  lr=2.05e-03  loss=0.8174  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2825s  PASS
+[real_seed0] pilot 0 step  39300  lr=2.05e-03  loss=0.7322  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2832s  PASS
+[real_seed0] pilot 0 step  39400  lr=2.04e-03  loss=0.8461  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2839s  PASS
+[real_seed0] pilot 0 step  39500  lr=2.04e-03  loss=0.8201  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2847s  PASS
+[real_seed0] pilot 0 step  39600  lr=2.03e-03  loss=0.7292  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2854s  PASS
+[real_seed0] pilot 0 step  39700  lr=2.03e-03  loss=0.8428  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2861s  PASS
+[real_seed0] pilot 0 step  39800  lr=2.02e-03  loss=0.8156  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2868s  PASS
+[real_seed0] pilot 0 step  39900  lr=2.02e-03  loss=0.7214  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2875s  PASS
+[real_seed0] pilot 0 step  40000  lr=2.02e-03  loss=0.8406  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2882s  PASS
+[real_seed0] pilot 0 step  40100  lr=2.01e-03  loss=0.8186  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2889s  PASS
+[real_seed0] pilot 0 step  40200  lr=2.01e-03  loss=0.7345  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2897s  PASS
+[real_seed0] pilot 0 step  40300  lr=2.00e-03  loss=0.8396  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2904s  PASS
+[real_seed0] pilot 0 step  40400  lr=2.00e-03  loss=0.8185  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2911s  PASS
+[real_seed0] pilot 0 step  40500  lr=1.99e-03  loss=0.7338  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2918s  PASS
+[real_seed0] pilot 0 step  40600  lr=1.99e-03  loss=0.8364  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2925s  PASS
+[real_seed0] pilot 0 step  40700  lr=1.99e-03  loss=0.8201  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2933s  PASS
+[real_seed0] pilot 0 step  40800  lr=1.98e-03  loss=0.7283  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2940s  PASS
+[real_seed0] pilot 0 step  40900  lr=1.98e-03  loss=0.8445  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2947s  PASS
+[real_seed0] pilot 0 step  41000  lr=1.97e-03  loss=0.8102  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2954s  PASS
+[real_seed0] pilot 0 step  41100  lr=1.97e-03  loss=0.7291  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2962s  PASS
+[real_seed0] pilot 0 step  41200  lr=1.96e-03  loss=0.8363  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2969s  PASS
+[real_seed0] pilot 0 step  41300  lr=1.96e-03  loss=0.8182  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2976s  PASS
+[real_seed0] pilot 0 step  41400  lr=1.95e-03  loss=0.7289  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2984s  PASS
+[real_seed0] pilot 0 step  41500  lr=1.95e-03  loss=0.8436  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=2991s  PASS
+[real_seed0] pilot 0 step  41600  lr=1.95e-03  loss=0.8189  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3001s  PASS
+[real_seed0] pilot 0 step  41700  lr=1.94e-03  loss=0.7159  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3007s  PASS
+[real_seed0] pilot 0 step  41800  lr=1.94e-03  loss=0.8392  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3015s  PASS
+[real_seed0] pilot 0 step  41900  lr=1.93e-03  loss=0.8176  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3022s  PASS
+[real_seed0] pilot 0 step  42000  lr=1.93e-03  loss=0.7199  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3029s  PASS
+[real_seed0] pilot 0 step  42100  lr=1.92e-03  loss=0.8491  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3036s  PASS
+[real_seed0] pilot 0 step  42200  lr=1.92e-03  loss=0.8114  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3043s  PASS
+[real_seed0] pilot 0 step  42300  lr=1.92e-03  loss=0.7252  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3050s  PASS
+[real_seed0] pilot 0 step  42400  lr=1.91e-03  loss=0.8360  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3057s  PASS
+[real_seed0] pilot 0 step  42500  lr=1.91e-03  loss=0.8199  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3065s  PASS
+[real_seed0] pilot 0 step  42600  lr=1.90e-03  loss=0.7316  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3072s  PASS
+[real_seed0] pilot 0 step  42700  lr=1.90e-03  loss=0.8521  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3079s  PASS
+[real_seed0] pilot 0 step  42800  lr=1.89e-03  loss=0.8234  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3086s  PASS
+[real_seed0] pilot 0 step  42900  lr=1.89e-03  loss=0.7186  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3093s  PASS
+[real_seed0] pilot 0 step  43000  lr=1.88e-03  loss=0.8368  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3100s  PASS
+[real_seed0] pilot 0 step  43100  lr=1.88e-03  loss=0.8154  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3108s  PASS
+[real_seed0] pilot 0 step  43200  lr=1.88e-03  loss=0.7243  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3115s  PASS
+[real_seed0] pilot 0 step  43300  lr=1.87e-03  loss=0.8463  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3122s  PASS
+[real_seed0] pilot 0 step  43400  lr=1.87e-03  loss=0.8213  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3129s  PASS
+[real_seed0] pilot 0 step  43500  lr=1.86e-03  loss=0.7196  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3136s  PASS
+[real_seed0] pilot 0 step  43600  lr=1.86e-03  loss=0.8421  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3144s  PASS
+[real_seed0] pilot 0 step  43700  lr=1.85e-03  loss=0.8217  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3151s  PASS
+[real_seed0] pilot 0 step  43800  lr=1.85e-03  loss=0.7297  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3158s  PASS
+[real_seed0] pilot 0 step  43900  lr=1.84e-03  loss=0.8462  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3165s  PASS
+[real_seed0] pilot 0 step  44000  lr=1.84e-03  loss=0.8115  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3172s  PASS
+[real_seed0] pilot 0 step  44100  lr=1.84e-03  loss=0.7204  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3179s  PASS
+[real_seed0] pilot 0 step  44200  lr=1.83e-03  loss=0.8389  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3187s  PASS
+[real_seed0] pilot 0 step  44300  lr=1.83e-03  loss=0.8084  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3194s  PASS
+[real_seed0] pilot 0 step  44400  lr=1.82e-03  loss=0.7245  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3201s  PASS
+[real_seed0] pilot 0 step  44500  lr=1.82e-03  loss=0.8445  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3208s  PASS
+[real_seed0] pilot 0 step  44600  lr=1.81e-03  loss=0.8124  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3215s  PASS
+[real_seed0] pilot 0 step  44700  lr=1.81e-03  loss=0.7052  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3222s  PASS
+[real_seed0] pilot 0 step  44800  lr=1.80e-03  loss=0.8434  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3229s  PASS
+[real_seed0] pilot 0 step  44900  lr=1.80e-03  loss=0.8144  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3237s  PASS
+[real_seed0] pilot 0 step  45000  lr=1.80e-03  loss=0.7276  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3243s  PASS
+[real_seed0] pilot 0 step  45100  lr=1.79e-03  loss=0.8454  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3251s  PASS
+[real_seed0] pilot 0 step  45200  lr=1.79e-03  loss=0.8126  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3258s  PASS
+[real_seed0] pilot 0 step  45300  lr=1.78e-03  loss=0.7353  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3265s  PASS
+[real_seed0] pilot 0 step  45400  lr=1.78e-03  loss=0.8529  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3272s  PASS
+[real_seed0] pilot 0 step  45500  lr=1.77e-03  loss=0.8191  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3280s  PASS
+[real_seed0] pilot 0 step  45600  lr=1.77e-03  loss=0.7300  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3287s  PASS
+[real_seed0] pilot 0 step  45700  lr=1.76e-03  loss=0.8363  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3294s  PASS
+[real_seed0] pilot 0 step  45800  lr=1.76e-03  loss=0.8121  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3301s  PASS
+[real_seed0] pilot 0 step  45900  lr=1.76e-03  loss=0.7403  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3308s  PASS
+[real_seed0] pilot 0 step  46000  lr=1.75e-03  loss=0.8432  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3315s  PASS
+[real_seed0] pilot 0 step  46100  lr=1.75e-03  loss=0.8030  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3323s  PASS
+[real_seed0] pilot 0 step  46200  lr=1.74e-03  loss=0.7166  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3330s  PASS
+[real_seed0] pilot 0 step  46300  lr=1.74e-03  loss=0.8499  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3337s  PASS
+[real_seed0] pilot 0 step  46400  lr=1.73e-03  loss=0.8065  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3344s  PASS
+[real_seed0] pilot 0 step  46500  lr=1.73e-03  loss=0.7240  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3352s  PASS
+[real_seed0] pilot 0 step  46600  lr=1.72e-03  loss=0.8421  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3360s  PASS
+[real_seed0] pilot 0 step  46700  lr=1.72e-03  loss=0.8211  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3367s  PASS
+[real_seed0] pilot 0 step  46800  lr=1.71e-03  loss=0.7198  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3374s  PASS
+[real_seed0] pilot 0 step  46900  lr=1.71e-03  loss=0.8407  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3381s  PASS
+[real_seed0] pilot 0 step  47000  lr=1.71e-03  loss=0.8084  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3388s  PASS
+[real_seed0] pilot 0 step  47100  lr=1.70e-03  loss=0.7278  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3395s  PASS
+[real_seed0] pilot 0 step  47200  lr=1.70e-03  loss=0.8431  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3403s  PASS
+[real_seed0] pilot 0 step  47300  lr=1.69e-03  loss=0.8195  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3410s  PASS
+[real_seed0] pilot 0 step  47400  lr=1.69e-03  loss=0.7317  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3416s  PASS
+[real_seed0] pilot 0 step  47500  lr=1.68e-03  loss=0.8495  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3424s  PASS
+[real_seed0] pilot 0 step  47600  lr=1.68e-03  loss=0.8171  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3431s  PASS
+[real_seed0] pilot 0 step  47700  lr=1.67e-03  loss=0.7316  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3438s  PASS
+[real_seed0] pilot 0 step  47800  lr=1.67e-03  loss=0.8365  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3445s  PASS
+[real_seed0] pilot 0 step  47900  lr=1.67e-03  loss=0.8123  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3452s  PASS
+[real_seed0] pilot 0 step  48000  lr=1.66e-03  loss=0.7237  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3459s  PASS
+[real_seed0] pilot 0 step  48100  lr=1.66e-03  loss=0.8420  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3467s  PASS
+[real_seed0] pilot 0 step  48200  lr=1.65e-03  loss=0.8108  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3474s  PASS
+[real_seed0] pilot 0 step  48300  lr=1.65e-03  loss=0.7241  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3481s  PASS
+[real_seed0] pilot 0 step  48400  lr=1.64e-03  loss=0.8418  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3488s  PASS
+[real_seed0] pilot 0 step  48500  lr=1.64e-03  loss=0.8133  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3495s  PASS
+[real_seed0] pilot 0 step  48600  lr=1.63e-03  loss=0.7171  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3503s  PASS
+[real_seed0] pilot 0 step  48700  lr=1.63e-03  loss=0.8362  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3509s  PASS
+[real_seed0] pilot 0 step  48800  lr=1.62e-03  loss=0.8188  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3516s  PASS
+[real_seed0] pilot 0 step  48900  lr=1.62e-03  loss=0.7310  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3524s  PASS
+[real_seed0] pilot 0 step  49000  lr=1.62e-03  loss=0.8362  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3531s  PASS
+[real_seed0] pilot 0 step  49100  lr=1.61e-03  loss=0.8187  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3538s  PASS
+[real_seed0] pilot 0 step  49200  lr=1.61e-03  loss=0.7308  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3545s  PASS
+[real_seed0] pilot 0 step  49300  lr=1.60e-03  loss=0.8454  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3552s  PASS
+[real_seed0] pilot 0 step  49400  lr=1.60e-03  loss=0.8204  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3559s  PASS
+[real_seed0] pilot 0 step  49500  lr=1.59e-03  loss=0.7316  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3566s  PASS
+[real_seed0] pilot 0 step  49600  lr=1.59e-03  loss=0.8419  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3574s  PASS
+[real_seed0] pilot 0 step  49700  lr=1.58e-03  loss=0.8111  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3581s  PASS
+[real_seed0] pilot 0 step  49800  lr=1.58e-03  loss=0.7149  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3588s  PASS
+[real_seed0] pilot 0 step  49900  lr=1.57e-03  loss=0.8405  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3595s  PASS
+[real_seed0] pilot 0 step  50000  lr=1.57e-03  loss=0.8247  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3603s  PASS
+[real_seed0] pilot 0 step  50100  lr=1.57e-03  loss=0.7326  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3610s  PASS
+[real_seed0] pilot 0 step  50200  lr=1.56e-03  loss=0.8415  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3617s  PASS
+[real_seed0] pilot 0 step  50300  lr=1.56e-03  loss=0.8122  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3624s  PASS
+[real_seed0] pilot 0 step  50400  lr=1.55e-03  loss=0.7303  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3631s  PASS
+[real_seed0] pilot 0 step  50500  lr=1.55e-03  loss=0.8352  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3639s  PASS
+[real_seed0] pilot 0 step  50600  lr=1.54e-03  loss=0.8133  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3646s  PASS
+[real_seed0] pilot 0 step  50700  lr=1.54e-03  loss=0.7243  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3653s  PASS
+[real_seed0] pilot 0 step  50800  lr=1.53e-03  loss=0.8434  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3660s  PASS
+[real_seed0] pilot 0 step  50900  lr=1.53e-03  loss=0.8241  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3668s  PASS
+[real_seed0] pilot 0 step  51000  lr=1.52e-03  loss=0.7295  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3675s  PASS
+[real_seed0] pilot 0 step  51100  lr=1.52e-03  loss=0.8501  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3682s  PASS
+[real_seed0] pilot 0 step  51200  lr=1.52e-03  loss=0.8071  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3688s  PASS
+[real_seed0] pilot 0 step  51300  lr=1.51e-03  loss=0.7185  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3695s  PASS
+[real_seed0] pilot 0 step  51400  lr=1.51e-03  loss=0.8387  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3703s  PASS
+[real_seed0] pilot 0 step  51500  lr=1.50e-03  loss=0.8217  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3710s  PASS
+[real_seed0] pilot 0 step  51600  lr=1.50e-03  loss=0.7149  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3717s  PASS
+[real_seed0] pilot 0 step  51700  lr=1.49e-03  loss=0.8439  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3724s  PASS
+[real_seed0] pilot 0 step  51800  lr=1.49e-03  loss=0.8056  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3731s  PASS
+[real_seed0] pilot 0 step  51900  lr=1.48e-03  loss=0.7311  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3739s  PASS
+[real_seed0] pilot 0 step  52000  lr=1.48e-03  loss=0.8415  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3747s  PASS
+[real_seed0] pilot 0 step  52100  lr=1.47e-03  loss=0.8137  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3754s  PASS
+[real_seed0] pilot 0 step  52200  lr=1.47e-03  loss=0.7345  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3761s  PASS
+[real_seed0] pilot 0 step  52300  lr=1.46e-03  loss=0.8439  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3768s  PASS
+[real_seed0] pilot 0 step  52400  lr=1.46e-03  loss=0.8116  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3775s  PASS
+[real_seed0] pilot 0 step  52500  lr=1.46e-03  loss=0.7216  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3782s  PASS
+[real_seed0] pilot 0 step  52600  lr=1.45e-03  loss=0.8424  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3789s  PASS
+[real_seed0] pilot 0 step  52700  lr=1.45e-03  loss=0.8163  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3796s  PASS
+[real_seed0] pilot 0 step  52800  lr=1.44e-03  loss=0.7275  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3803s  PASS
+[real_seed0] pilot 0 step  52900  lr=1.44e-03  loss=0.8407  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3810s  PASS
+[real_seed0] pilot 0 step  53000  lr=1.43e-03  loss=0.8082  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3818s  PASS
+[real_seed0] pilot 0 step  53100  lr=1.43e-03  loss=0.7292  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3826s  PASS
+[real_seed0] pilot 0 step  53200  lr=1.42e-03  loss=0.8505  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3833s  PASS
+[real_seed0] pilot 0 step  53300  lr=1.42e-03  loss=0.8241  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3840s  PASS
+[real_seed0] pilot 0 step  53400  lr=1.41e-03  loss=0.7276  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3847s  PASS
+[real_seed0] pilot 0 step  53500  lr=1.41e-03  loss=0.8373  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3854s  PASS
+[real_seed0] pilot 0 step  53600  lr=1.41e-03  loss=0.8184  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3861s  PASS
+[real_seed0] pilot 0 step  53700  lr=1.40e-03  loss=0.7325  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3869s  PASS
+[real_seed0] pilot 0 step  53800  lr=1.40e-03  loss=0.8480  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3876s  PASS
+[real_seed0] pilot 0 step  53900  lr=1.39e-03  loss=0.8187  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3884s  PASS
+[real_seed0] pilot 0 step  54000  lr=1.39e-03  loss=0.7295  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3891s  PASS
+[real_seed0] pilot 0 step  54100  lr=1.38e-03  loss=0.8390  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3897s  PASS
+[real_seed0] pilot 0 step  54200  lr=1.38e-03  loss=0.8084  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3905s  PASS
+[real_seed0] pilot 0 step  54300  lr=1.37e-03  loss=0.7203  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3912s  PASS
+[real_seed0] pilot 0 step  54400  lr=1.37e-03  loss=0.8480  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3919s  PASS
+[real_seed0] pilot 0 step  54500  lr=1.36e-03  loss=0.8108  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3926s  PASS
+[real_seed0] pilot 0 step  54600  lr=1.36e-03  loss=0.7261  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3933s  PASS
+[real_seed0] pilot 0 step  54700  lr=1.36e-03  loss=0.8374  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3940s  PASS
+[real_seed0] pilot 0 step  54800  lr=1.35e-03  loss=0.8174  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3947s  PASS
+[real_seed0] pilot 0 step  54900  lr=1.35e-03  loss=0.7240  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3955s  PASS
+[real_seed0] pilot 0 step  55000  lr=1.34e-03  loss=0.8437  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3962s  PASS
+[real_seed0] pilot 0 step  55100  lr=1.34e-03  loss=0.8119  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3969s  PASS
+[real_seed0] pilot 0 step  55200  lr=1.33e-03  loss=0.7223  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3976s  PASS
+[real_seed0] pilot 0 step  55300  lr=1.33e-03  loss=0.8360  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3983s  PASS
+[real_seed0] pilot 0 step  55400  lr=1.32e-03  loss=0.8048  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3990s  PASS
+[real_seed0] pilot 0 step  55500  lr=1.32e-03  loss=0.7365  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=3997s  PASS
+[real_seed0] pilot 0 step  55600  lr=1.32e-03  loss=0.8450  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4005s  PASS
+[real_seed0] pilot 0 step  55700  lr=1.31e-03  loss=0.8200  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4012s  PASS
+[real_seed0] pilot 0 step  55800  lr=1.31e-03  loss=0.7348  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4019s  PASS
+[real_seed0] pilot 0 step  55900  lr=1.30e-03  loss=0.8478  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4026s  PASS
+[real_seed0] pilot 0 step  56000  lr=1.30e-03  loss=0.8082  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4033s  PASS
+[real_seed0] pilot 0 step  56100  lr=1.29e-03  loss=0.7247  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4040s  PASS
+[real_seed0] pilot 0 step  56200  lr=1.29e-03  loss=0.8438  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4047s  PASS
+[real_seed0] pilot 0 step  56300  lr=1.28e-03  loss=0.8198  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4054s  PASS
+[real_seed0] pilot 0 step  56400  lr=1.28e-03  loss=0.7257  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4061s  PASS
+[real_seed0] pilot 0 step  56500  lr=1.27e-03  loss=0.8451  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4069s  PASS
+[real_seed0] pilot 0 step  56600  lr=1.27e-03  loss=0.8206  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4075s  PASS
+[real_seed0] pilot 0 step  56700  lr=1.27e-03  loss=0.7310  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4083s  PASS
+[real_seed0] pilot 0 step  56800  lr=1.26e-03  loss=0.8444  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4089s  PASS
+[real_seed0] pilot 0 step  56900  lr=1.26e-03  loss=0.8076  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4097s  PASS
+[real_seed0] pilot 0 step  57000  lr=1.25e-03  loss=0.7278  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4104s  PASS
+[real_seed0] pilot 0 step  57100  lr=1.25e-03  loss=0.8347  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4112s  PASS
+[real_seed0] pilot 0 step  57200  lr=1.24e-03  loss=0.8151  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4119s  PASS
+[real_seed0] pilot 0 step  57300  lr=1.24e-03  loss=0.7140  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4126s  PASS
+[real_seed0] pilot 0 step  57400  lr=1.23e-03  loss=0.8355  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4133s  PASS
+[real_seed0] pilot 0 step  57500  lr=1.23e-03  loss=0.8138  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4140s  PASS
+[real_seed0] pilot 0 step  57600  lr=1.23e-03  loss=0.7262  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4147s  PASS
+[real_seed0] pilot 0 step  57700  lr=1.22e-03  loss=0.8357  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4155s  PASS
+[real_seed0] pilot 0 step  57800  lr=1.22e-03  loss=0.8087  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4162s  PASS
+[real_seed0] pilot 0 step  57900  lr=1.21e-03  loss=0.7359  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4169s  PASS
+[real_seed0] pilot 0 step  58000  lr=1.21e-03  loss=0.8363  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4176s  PASS
+[real_seed0] pilot 0 step  58100  lr=1.20e-03  loss=0.8094  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4183s  PASS
+[real_seed0] pilot 0 step  58200  lr=1.20e-03  loss=0.7216  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4191s  PASS
+[real_seed0] pilot 0 step  58300  lr=1.19e-03  loss=0.8374  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4197s  PASS
+[real_seed0] pilot 0 step  58400  lr=1.19e-03  loss=0.8102  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4205s  PASS
+[real_seed0] pilot 0 step  58500  lr=1.19e-03  loss=0.7288  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4212s  PASS
+[real_seed0] pilot 0 step  58600  lr=1.18e-03  loss=0.8418  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4219s  PASS
+[real_seed0] pilot 0 step  58700  lr=1.18e-03  loss=0.8165  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4226s  PASS
+[real_seed0] pilot 0 step  58800  lr=1.17e-03  loss=0.7323  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4233s  PASS
+[real_seed0] pilot 0 step  58900  lr=1.17e-03  loss=0.8363  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4241s  PASS
+[real_seed0] pilot 0 step  59000  lr=1.16e-03  loss=0.8190  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4248s  PASS
+[real_seed0] pilot 0 step  59100  lr=1.16e-03  loss=0.7161  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4255s  PASS
+[real_seed0] pilot 0 step  59200  lr=1.15e-03  loss=0.8383  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4262s  PASS
+[real_seed0] pilot 0 step  59300  lr=1.15e-03  loss=0.8085  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4269s  PASS
+[real_seed0] pilot 0 step  59400  lr=1.15e-03  loss=0.7243  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4277s  PASS
+[real_seed0] pilot 0 step  59500  lr=1.14e-03  loss=0.8435  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4284s  PASS
+[real_seed0] pilot 0 step  59600  lr=1.14e-03  loss=0.8116  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4290s  PASS
+[real_seed0] pilot 0 step  59700  lr=1.13e-03  loss=0.7313  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4298s  PASS
+[real_seed0] pilot 0 step  59800  lr=1.13e-03  loss=0.8459  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4305s  PASS
+[real_seed0] pilot 0 step  59900  lr=1.12e-03  loss=0.8282  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4313s  PASS
+[real_seed0] pilot 0 step  60000  lr=1.12e-03  loss=0.7278  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4319s  PASS
+[real_seed0] pilot 0 step  60100  lr=1.11e-03  loss=0.8356  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4327s  PASS
+[real_seed0] pilot 0 step  60200  lr=1.11e-03  loss=0.8193  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4335s  PASS
+[real_seed0] pilot 0 step  60300  lr=1.11e-03  loss=0.7333  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4341s  PASS
+[real_seed0] pilot 0 step  60400  lr=1.10e-03  loss=0.8400  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4349s  PASS
+[real_seed0] pilot 0 step  60500  lr=1.10e-03  loss=0.8155  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4357s  PASS
+[real_seed0] pilot 0 step  60600  lr=1.09e-03  loss=0.7284  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4364s  PASS
+[real_seed0] pilot 0 step  60700  lr=1.09e-03  loss=0.8440  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4371s  PASS
+[real_seed0] pilot 0 step  60800  lr=1.08e-03  loss=0.8085  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4379s  PASS
+[real_seed0] pilot 0 step  60900  lr=1.08e-03  loss=0.7313  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4386s  PASS
+[real_seed0] pilot 0 step  61000  lr=1.08e-03  loss=0.8353  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4393s  PASS
+[real_seed0] pilot 0 step  61100  lr=1.07e-03  loss=0.8245  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4400s  PASS
+[real_seed0] pilot 0 step  61200  lr=1.07e-03  loss=0.7221  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4407s  PASS
+[real_seed0] pilot 0 step  61300  lr=1.06e-03  loss=0.8480  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4415s  PASS
+[real_seed0] pilot 0 step  61400  lr=1.06e-03  loss=0.8160  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4421s  PASS
+[real_seed0] pilot 0 step  61500  lr=1.05e-03  loss=0.7214  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4429s  PASS
+[real_seed0] pilot 0 step  61600  lr=1.05e-03  loss=0.8311  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4438s  PASS
+[real_seed0] pilot 0 step  61700  lr=1.04e-03  loss=0.8033  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4445s  PASS
+[real_seed0] pilot 0 step  61800  lr=1.04e-03  loss=0.7199  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4453s  PASS
+[real_seed0] pilot 0 step  61900  lr=1.04e-03  loss=0.8315  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4460s  PASS
+[real_seed0] pilot 0 step  62000  lr=1.03e-03  loss=0.8150  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4467s  PASS
+[real_seed0] pilot 0 step  62100  lr=1.03e-03  loss=0.7376  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4474s  PASS
+[real_seed0] pilot 0 step  62200  lr=1.02e-03  loss=0.8478  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4481s  PASS
+[real_seed0] pilot 0 step  62300  lr=1.02e-03  loss=0.8116  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4489s  PASS
+[real_seed0] pilot 0 step  62400  lr=1.01e-03  loss=0.7311  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4495s  PASS
+[real_seed0] pilot 0 step  62500  lr=1.01e-03  loss=0.8442  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4503s  PASS
+[real_seed0] pilot 0 step  62600  lr=1.01e-03  loss=0.8105  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4510s  PASS
+[real_seed0] pilot 0 step  62700  lr=1.00e-03  loss=0.7267  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4517s  PASS
+[real_seed0] pilot 0 step  62800  lr=9.98e-04  loss=0.8438  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4525s  PASS
+[real_seed0] pilot 0 step  62900  lr=9.93e-04  loss=0.8138  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4531s  PASS
+[real_seed0] pilot 0 step  63000  lr=9.89e-04  loss=0.7228  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4539s  PASS
+[real_seed0] pilot 0 step  63100  lr=9.85e-04  loss=0.8398  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4546s  PASS
+[real_seed0] pilot 0 step  63200  lr=9.81e-04  loss=0.8122  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4553s  PASS
+[real_seed0] pilot 0 step  63300  lr=9.76e-04  loss=0.7326  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4560s  PASS
+[real_seed0] pilot 0 step  63400  lr=9.72e-04  loss=0.8468  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4567s  PASS
+[real_seed0] pilot 0 step  63500  lr=9.68e-04  loss=0.8070  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4575s  PASS
+[real_seed0] pilot 0 step  63600  lr=9.64e-04  loss=0.7209  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4582s  PASS
+[real_seed0] pilot 0 step  63700  lr=9.59e-04  loss=0.8461  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4589s  PASS
+[real_seed0] pilot 0 step  63800  lr=9.55e-04  loss=0.8183  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4596s  PASS
+[real_seed0] pilot 0 step  63900  lr=9.51e-04  loss=0.7295  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4603s  PASS
+[real_seed0] pilot 0 step  64000  lr=9.47e-04  loss=0.8403  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4610s  PASS
+[real_seed0] pilot 0 step  64100  lr=9.43e-04  loss=0.8161  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4617s  PASS
+[real_seed0] pilot 0 step  64200  lr=9.38e-04  loss=0.7209  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4624s  PASS
+[real_seed0] pilot 0 step  64300  lr=9.34e-04  loss=0.8363  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4631s  PASS
+[real_seed0] pilot 0 step  64400  lr=9.30e-04  loss=0.8145  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4639s  PASS
+[real_seed0] pilot 0 step  64500  lr=9.26e-04  loss=0.7261  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4646s  PASS
+[real_seed0] pilot 0 step  64600  lr=9.22e-04  loss=0.8387  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4653s  PASS
+[real_seed0] pilot 0 step  64700  lr=9.17e-04  loss=0.8139  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4661s  PASS
+[real_seed0] pilot 0 step  64800  lr=9.13e-04  loss=0.7256  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4668s  PASS
+[real_seed0] pilot 0 step  64900  lr=9.09e-04  loss=0.8393  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4678s  PASS
+[real_seed0] pilot 0 step  65000  lr=9.05e-04  loss=0.8127  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4684s  PASS
+[real_seed0] pilot 0 step  65100  lr=9.01e-04  loss=0.7141  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4691s  PASS
+[real_seed0] pilot 0 step  65200  lr=8.97e-04  loss=0.8376  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4698s  PASS
+[real_seed0] pilot 0 step  65300  lr=8.92e-04  loss=0.8139  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4706s  PASS
+[real_seed0] pilot 0 step  65400  lr=8.88e-04  loss=0.7210  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4713s  PASS
+[real_seed0] pilot 0 step  65500  lr=8.84e-04  loss=0.8424  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4720s  PASS
+[real_seed0] pilot 0 step  65600  lr=8.80e-04  loss=0.8116  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4728s  PASS
+[real_seed0] pilot 0 step  65700  lr=8.76e-04  loss=0.7175  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4735s  PASS
+[real_seed0] pilot 0 step  65800  lr=8.72e-04  loss=0.8421  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4742s  PASS
+[real_seed0] pilot 0 step  65900  lr=8.68e-04  loss=0.8151  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4749s  PASS
+[real_seed0] pilot 0 step  66000  lr=8.64e-04  loss=0.7299  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4756s  PASS
+[real_seed0] pilot 0 step  66100  lr=8.60e-04  loss=0.8338  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4763s  PASS
+[real_seed0] pilot 0 step  66200  lr=8.55e-04  loss=0.8179  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4771s  PASS
+[real_seed0] pilot 0 step  66300  lr=8.51e-04  loss=0.7157  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4778s  PASS
+[real_seed0] pilot 0 step  66400  lr=8.47e-04  loss=0.8527  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4785s  PASS
+[real_seed0] pilot 0 step  66500  lr=8.43e-04  loss=0.8055  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4792s  PASS
+[real_seed0] pilot 0 step  66600  lr=8.39e-04  loss=0.7248  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4799s  PASS
+[real_seed0] pilot 0 step  66700  lr=8.35e-04  loss=0.8378  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4806s  PASS
+[real_seed0] pilot 0 step  66800  lr=8.31e-04  loss=0.8084  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4814s  PASS
+[real_seed0] pilot 0 step  66900  lr=8.27e-04  loss=0.7207  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4821s  PASS
+[real_seed0] pilot 0 step  67000  lr=8.23e-04  loss=0.8354  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4828s  PASS
+[real_seed0] pilot 0 step  67100  lr=8.19e-04  loss=0.8070  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4835s  PASS
+[real_seed0] pilot 0 step  67200  lr=8.15e-04  loss=0.7161  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4842s  PASS
+[real_seed0] pilot 0 step  67300  lr=8.11e-04  loss=0.8452  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4849s  PASS
+[real_seed0] pilot 0 step  67400  lr=8.07e-04  loss=0.8041  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4856s  PASS
+[real_seed0] pilot 0 step  67500  lr=8.03e-04  loss=0.7199  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4863s  PASS
+[real_seed0] pilot 0 step  67600  lr=7.99e-04  loss=0.8418  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4870s  PASS
+[real_seed0] pilot 0 step  67700  lr=7.95e-04  loss=0.8181  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4877s  PASS
+[real_seed0] pilot 0 step  67800  lr=7.91e-04  loss=0.7335  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4884s  PASS
+[real_seed0] pilot 0 step  67900  lr=7.87e-04  loss=0.8366  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4892s  PASS
+[real_seed0] pilot 0 step  68000  lr=7.83e-04  loss=0.8172  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4898s  PASS
+[real_seed0] pilot 0 step  68100  lr=7.79e-04  loss=0.7217  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4906s  PASS
+[real_seed0] pilot 0 step  68200  lr=7.75e-04  loss=0.8378  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4912s  PASS
+[real_seed0] pilot 0 step  68300  lr=7.71e-04  loss=0.8077  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4920s  PASS
+[real_seed0] pilot 0 step  68400  lr=7.67e-04  loss=0.7314  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4927s  PASS
+[real_seed0] pilot 0 step  68500  lr=7.63e-04  loss=0.8350  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4933s  PASS
+[real_seed0] pilot 0 step  68600  lr=7.59e-04  loss=0.8182  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4941s  PASS
+[real_seed0] pilot 0 step  68700  lr=7.55e-04  loss=0.7321  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4948s  PASS
+[real_seed0] pilot 0 step  68800  lr=7.52e-04  loss=0.8384  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4955s  PASS
+[real_seed0] pilot 0 step  68900  lr=7.48e-04  loss=0.8205  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4962s  PASS
+[real_seed0] pilot 0 step  69000  lr=7.44e-04  loss=0.7188  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4969s  PASS
+[real_seed0] pilot 0 step  69100  lr=7.40e-04  loss=0.8459  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4976s  PASS
+[real_seed0] pilot 0 step  69200  lr=7.36e-04  loss=0.8174  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4984s  PASS
+[real_seed0] pilot 0 step  69300  lr=7.32e-04  loss=0.7342  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4991s  PASS
+[real_seed0] pilot 0 step  69400  lr=7.28e-04  loss=0.8361  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=4998s  PASS
+[real_seed0] pilot 0 step  69500  lr=7.24e-04  loss=0.8168  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5005s  PASS
+[real_seed0] pilot 0 step  69600  lr=7.21e-04  loss=0.7225  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5012s  PASS
+[real_seed0] pilot 0 step  69700  lr=7.17e-04  loss=0.8410  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5019s  PASS
+[real_seed0] pilot 0 step  69800  lr=7.13e-04  loss=0.8156  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5027s  PASS
+[real_seed0] pilot 0 step  69900  lr=7.09e-04  loss=0.7208  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5034s  PASS
+[real_seed0] pilot 0 step  70000  lr=7.05e-04  loss=0.8376  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5041s  PASS
+[real_seed0] pilot 0 step  70100  lr=7.01e-04  loss=0.8206  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5048s  PASS
+[real_seed0] pilot 0 step  70200  lr=6.98e-04  loss=0.7209  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5055s  PASS
+[real_seed0] pilot 0 step  70300  lr=6.94e-04  loss=0.8415  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5062s  PASS
+[real_seed0] pilot 0 step  70400  lr=6.90e-04  loss=0.8007  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5069s  PASS
+[real_seed0] pilot 0 step  70500  lr=6.86e-04  loss=0.7223  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5076s  PASS
+[real_seed0] pilot 0 step  70600  lr=6.82e-04  loss=0.8336  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5084s  PASS
+[real_seed0] pilot 0 step  70700  lr=6.79e-04  loss=0.8078  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5090s  PASS
+[real_seed0] pilot 0 step  70800  lr=6.75e-04  loss=0.7234  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5097s  PASS
+[real_seed0] pilot 0 step  70900  lr=6.71e-04  loss=0.8461  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5104s  PASS
+[real_seed0] pilot 0 step  71000  lr=6.67e-04  loss=0.8111  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5112s  PASS
+[real_seed0] pilot 0 step  71100  lr=6.64e-04  loss=0.7307  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5119s  PASS
+[real_seed0] pilot 0 step  71200  lr=6.60e-04  loss=0.8478  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5126s  PASS
+[real_seed0] pilot 0 step  71300  lr=6.56e-04  loss=0.8119  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5133s  PASS
+[real_seed0] pilot 0 step  71400  lr=6.52e-04  loss=0.7237  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5140s  PASS
+[real_seed0] pilot 0 step  71500  lr=6.49e-04  loss=0.8443  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5147s  PASS
+[real_seed0] pilot 0 step  71600  lr=6.45e-04  loss=0.8064  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5154s  PASS
+[real_seed0] pilot 0 step  71700  lr=6.41e-04  loss=0.7249  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5162s  PASS
+[real_seed0] pilot 0 step  71800  lr=6.38e-04  loss=0.8422  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5168s  PASS
+[real_seed0] pilot 0 step  71900  lr=6.34e-04  loss=0.8044  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5175s  PASS
+[real_seed0] pilot 0 step  72000  lr=6.30e-04  loss=0.7281  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5183s  PASS
+[real_seed0] pilot 0 step  72100  lr=6.27e-04  loss=0.8459  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5190s  PASS
+[real_seed0] pilot 0 step  72200  lr=6.23e-04  loss=0.8196  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5197s  PASS
+[real_seed0] pilot 0 step  72300  lr=6.19e-04  loss=0.7349  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5204s  PASS
+[real_seed0] pilot 0 step  72400  lr=6.16e-04  loss=0.8366  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5212s  PASS
+[real_seed0] pilot 0 step  72500  lr=6.12e-04  loss=0.8282  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5218s  PASS
+[real_seed0] pilot 0 step  72600  lr=6.09e-04  loss=0.7172  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5226s  PASS
+[real_seed0] pilot 0 step  72700  lr=6.05e-04  loss=0.8416  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5233s  PASS
+[real_seed0] pilot 0 step  72800  lr=6.01e-04  loss=0.8116  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5239s  PASS
+[real_seed0] pilot 0 step  72900  lr=5.98e-04  loss=0.7128  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5247s  PASS
+[real_seed0] pilot 0 step  73000  lr=5.94e-04  loss=0.8439  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5254s  PASS
+[real_seed0] pilot 0 step  73100  lr=5.91e-04  loss=0.8107  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5261s  PASS
+[real_seed0] pilot 0 step  73200  lr=5.87e-04  loss=0.7247  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5268s  PASS
+[real_seed0] pilot 0 step  73300  lr=5.84e-04  loss=0.8392  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5275s  PASS
+[real_seed0] pilot 0 step  73400  lr=5.80e-04  loss=0.8122  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5282s  PASS
+[real_seed0] pilot 0 step  73500  lr=5.76e-04  loss=0.7224  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5290s  PASS
+[real_seed0] pilot 0 step  73600  lr=5.73e-04  loss=0.8402  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5297s  PASS
+[real_seed0] pilot 0 step  73700  lr=5.69e-04  loss=0.8212  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5303s  PASS
+[real_seed0] pilot 0 step  73800  lr=5.66e-04  loss=0.7278  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5311s  PASS
+[real_seed0] pilot 0 step  73900  lr=5.62e-04  loss=0.8435  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5318s  PASS
+[real_seed0] pilot 0 step  74000  lr=5.59e-04  loss=0.8167  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5325s  PASS
+[real_seed0] pilot 0 step  74100  lr=5.55e-04  loss=0.7253  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5332s  PASS
+[real_seed0] pilot 0 step  74200  lr=5.52e-04  loss=0.8426  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5339s  PASS
+[real_seed0] pilot 0 step  74300  lr=5.48e-04  loss=0.8053  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5346s  PASS
+[real_seed0] pilot 0 step  74400  lr=5.45e-04  loss=0.7169  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5353s  PASS
+[real_seed0] pilot 0 step  74500  lr=5.42e-04  loss=0.8368  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5360s  PASS
+[real_seed0] pilot 0 step  74600  lr=5.38e-04  loss=0.8107  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5367s  PASS
+[real_seed0] pilot 0 step  74700  lr=5.35e-04  loss=0.7238  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5375s  PASS
+[real_seed0] pilot 0 step  74800  lr=5.31e-04  loss=0.8374  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5381s  PASS
+[real_seed0] pilot 0 step  74900  lr=5.28e-04  loss=0.8103  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5389s  PASS
+[real_seed0] pilot 0 step  75000  lr=5.25e-04  loss=0.7242  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5395s  PASS
+[real_seed0] pilot 0 step  75100  lr=5.21e-04  loss=0.8356  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5403s  PASS
+[real_seed0] pilot 0 step  75200  lr=5.18e-04  loss=0.8100  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5410s  PASS
+[real_seed0] pilot 0 step  75300  lr=5.14e-04  loss=0.7298  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5418s  PASS
+[real_seed0] pilot 0 step  75400  lr=5.11e-04  loss=0.8428  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5424s  PASS
+[real_seed0] pilot 0 step  75500  lr=5.08e-04  loss=0.8180  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5432s  PASS
+[real_seed0] pilot 0 step  75600  lr=5.04e-04  loss=0.7282  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5441s  PASS
+[real_seed0] pilot 0 step  75700  lr=5.01e-04  loss=0.8483  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5447s  PASS
+[real_seed0] pilot 0 step  75800  lr=4.98e-04  loss=0.8085  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5454s  PASS
+[real_seed0] pilot 0 step  75900  lr=4.94e-04  loss=0.7365  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5461s  PASS
+[real_seed0] pilot 0 step  76000  lr=4.91e-04  loss=0.8422  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5468s  PASS
+[real_seed0] pilot 0 step  76100  lr=4.88e-04  loss=0.8142  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5475s  PASS
+[real_seed0] pilot 0 step  76200  lr=4.84e-04  loss=0.7204  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5484s  PASS
+[real_seed0] pilot 0 step  76300  lr=4.81e-04  loss=0.8352  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5490s  PASS
+[real_seed0] pilot 0 step  76400  lr=4.78e-04  loss=0.8231  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5497s  PASS
+[real_seed0] pilot 0 step  76500  lr=4.75e-04  loss=0.7214  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5504s  PASS
+[real_seed0] pilot 0 step  76600  lr=4.71e-04  loss=0.8371  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5512s  PASS
+[real_seed0] pilot 0 step  76700  lr=4.68e-04  loss=0.8146  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5519s  PASS
+[real_seed0] pilot 0 step  76800  lr=4.65e-04  loss=0.7300  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5527s  PASS
+[real_seed0] pilot 0 step  76900  lr=4.62e-04  loss=0.8406  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5534s  PASS
+[real_seed0] pilot 0 step  77000  lr=4.59e-04  loss=0.8077  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5541s  PASS
+[real_seed0] pilot 0 step  77100  lr=4.55e-04  loss=0.7249  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5548s  PASS
+[real_seed0] pilot 0 step  77200  lr=4.52e-04  loss=0.8455  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5555s  PASS
+[real_seed0] pilot 0 step  77300  lr=4.49e-04  loss=0.8182  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5562s  PASS
+[real_seed0] pilot 0 step  77400  lr=4.46e-04  loss=0.7178  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5569s  PASS
+[real_seed0] pilot 0 step  77500  lr=4.43e-04  loss=0.8488  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5577s  PASS
+[real_seed0] pilot 0 step  77600  lr=4.39e-04  loss=0.8016  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5583s  PASS
+[real_seed0] pilot 0 step  77700  lr=4.36e-04  loss=0.7305  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5591s  PASS
+[real_seed0] pilot 0 step  77800  lr=4.33e-04  loss=0.8403  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5598s  PASS
+[real_seed0] pilot 0 step  77900  lr=4.30e-04  loss=0.8037  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5605s  PASS
+[real_seed0] pilot 0 step  78000  lr=4.27e-04  loss=0.7187  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5612s  PASS
+[real_seed0] pilot 0 step  78100  lr=4.24e-04  loss=0.8351  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5619s  PASS
+[real_seed0] pilot 0 step  78200  lr=4.21e-04  loss=0.8079  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5627s  PASS
+[real_seed0] pilot 0 step  78300  lr=4.18e-04  loss=0.7254  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5633s  PASS
+[real_seed0] pilot 0 step  78400  lr=4.15e-04  loss=0.8405  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5640s  PASS
+[real_seed0] pilot 0 step  78500  lr=4.12e-04  loss=0.8114  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5647s  PASS
+[real_seed0] pilot 0 step  78600  lr=4.09e-04  loss=0.7199  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5655s  PASS
+[real_seed0] pilot 0 step  78700  lr=4.06e-04  loss=0.8411  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5662s  PASS
+[real_seed0] pilot 0 step  78800  lr=4.03e-04  loss=0.7999  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5669s  PASS
+[real_seed0] pilot 0 step  78900  lr=4.00e-04  loss=0.7220  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5677s  PASS
+[real_seed0] pilot 0 step  79000  lr=3.97e-04  loss=0.8374  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5683s  PASS
+[real_seed0] pilot 0 step  79100  lr=3.94e-04  loss=0.8198  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5690s  PASS
+[real_seed0] pilot 0 step  79200  lr=3.91e-04  loss=0.7245  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5698s  PASS
+[real_seed0] pilot 0 step  79300  lr=3.88e-04  loss=0.8491  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5704s  PASS
+[real_seed0] pilot 0 step  79400  lr=3.85e-04  loss=0.8174  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5712s  PASS
+[real_seed0] pilot 0 step  79500  lr=3.82e-04  loss=0.7293  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5719s  PASS
+[real_seed0] pilot 0 step  79600  lr=3.79e-04  loss=0.8355  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5726s  PASS
+[real_seed0] pilot 0 step  79700  lr=3.76e-04  loss=0.8096  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5733s  PASS
+[real_seed0] pilot 0 step  79800  lr=3.73e-04  loss=0.7280  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5740s  PASS
+[real_seed0] pilot 0 step  79900  lr=3.70e-04  loss=0.8422  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5746s  PASS
+[real_seed0] pilot 0 step  80000  lr=3.67e-04  loss=0.8254  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5754s  PASS
+[real_seed0] pilot 0 step  80100  lr=3.64e-04  loss=0.7263  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5761s  PASS
+[real_seed0] pilot 0 step  80200  lr=3.61e-04  loss=0.8428  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5768s  PASS
+[real_seed0] pilot 0 step  80300  lr=3.58e-04  loss=0.8184  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5775s  PASS
+[real_seed0] pilot 0 step  80400  lr=3.56e-04  loss=0.7282  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5783s  PASS
+[real_seed0] pilot 0 step  80500  lr=3.53e-04  loss=0.8384  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5790s  PASS
+[real_seed0] pilot 0 step  80600  lr=3.50e-04  loss=0.7990  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5797s  PASS
+[real_seed0] pilot 0 step  80700  lr=3.47e-04  loss=0.7230  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5805s  PASS
+[real_seed0] pilot 0 step  80800  lr=3.44e-04  loss=0.8344  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5811s  PASS
+[real_seed0] pilot 0 step  80900  lr=3.42e-04  loss=0.8115  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5818s  PASS
+[real_seed0] pilot 0 step  81000  lr=3.39e-04  loss=0.7264  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5826s  PASS
+[real_seed0] pilot 0 step  81100  lr=3.36e-04  loss=0.8416  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5833s  PASS
+[real_seed0] pilot 0 step  81200  lr=3.33e-04  loss=0.8123  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5840s  PASS
+[real_seed0] pilot 0 step  81300  lr=3.30e-04  loss=0.7251  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5847s  PASS
+[real_seed0] pilot 0 step  81400  lr=3.28e-04  loss=0.8405  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5854s  PASS
+[real_seed0] pilot 0 step  81500  lr=3.25e-04  loss=0.8161  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5861s  PASS
+[real_seed0] pilot 0 step  81600  lr=3.22e-04  loss=0.7268  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5869s  PASS
+[real_seed0] pilot 0 step  81700  lr=3.20e-04  loss=0.8495  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5876s  PASS
+[real_seed0] pilot 0 step  81800  lr=3.17e-04  loss=0.8171  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5882s  PASS
+[real_seed0] pilot 0 step  81900  lr=3.14e-04  loss=0.7265  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5890s  PASS
+[real_seed0] pilot 0 step  82000  lr=3.11e-04  loss=0.8423  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5897s  PASS
+[real_seed0] pilot 0 step  82100  lr=3.09e-04  loss=0.8241  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5904s  PASS
+[real_seed0] pilot 0 step  82200  lr=3.06e-04  loss=0.7223  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5911s  PASS
+[real_seed0] pilot 0 step  82300  lr=3.04e-04  loss=0.8417  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5918s  PASS
+[real_seed0] pilot 0 step  82400  lr=3.01e-04  loss=0.8001  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5925s  PASS
+[real_seed0] pilot 0 step  82500  lr=2.98e-04  loss=0.7288  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5932s  PASS
+[real_seed0] pilot 0 step  82600  lr=2.96e-04  loss=0.8367  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5940s  PASS
+[real_seed0] pilot 0 step  82700  lr=2.93e-04  loss=0.8264  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5946s  PASS
+[real_seed0] pilot 0 step  82800  lr=2.90e-04  loss=0.7226  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5954s  PASS
+[real_seed0] pilot 0 step  82900  lr=2.88e-04  loss=0.8412  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5960s  PASS
+[real_seed0] pilot 0 step  83000  lr=2.85e-04  loss=0.8102  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5968s  PASS
+[real_seed0] pilot 0 step  83100  lr=2.83e-04  loss=0.7195  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5975s  PASS
+[real_seed0] pilot 0 step  83200  lr=2.80e-04  loss=0.8456  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5982s  PASS
+[real_seed0] pilot 0 step  83300  lr=2.78e-04  loss=0.8159  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5989s  PASS
+[real_seed0] pilot 0 step  83400  lr=2.75e-04  loss=0.7260  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=5998s  PASS
+[real_seed0] pilot 0 step  83500  lr=2.73e-04  loss=0.8319  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6005s  PASS
+[real_seed0] pilot 0 step  83600  lr=2.70e-04  loss=0.8140  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6011s  PASS
+[real_seed0] pilot 0 step  83700  lr=2.68e-04  loss=0.7217  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6018s  PASS
+[real_seed0] pilot 0 step  83800  lr=2.65e-04  loss=0.8440  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6025s  PASS
+[real_seed0] pilot 0 step  83900  lr=2.63e-04  loss=0.8169  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6032s  PASS
+[real_seed0] pilot 0 step  84000  lr=2.60e-04  loss=0.7306  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6039s  PASS
+[real_seed0] pilot 0 step  84100  lr=2.58e-04  loss=0.8339  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6046s  PASS
+[real_seed0] pilot 0 step  84200  lr=2.56e-04  loss=0.8086  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6054s  PASS
+[real_seed0] pilot 0 step  84300  lr=2.53e-04  loss=0.7234  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6061s  PASS
+[real_seed0] pilot 0 step  84400  lr=2.51e-04  loss=0.8402  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6068s  PASS
+[real_seed0] pilot 0 step  84500  lr=2.48e-04  loss=0.8190  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6075s  PASS
+[real_seed0] pilot 0 step  84600  lr=2.46e-04  loss=0.7214  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6082s  PASS
+[real_seed0] pilot 0 step  84700  lr=2.44e-04  loss=0.8476  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6089s  PASS
+[real_seed0] pilot 0 step  84800  lr=2.41e-04  loss=0.8157  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6097s  PASS
+[real_seed0] pilot 0 step  84900  lr=2.39e-04  loss=0.7254  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6104s  PASS
+[real_seed0] pilot 0 step  85000  lr=2.37e-04  loss=0.8409  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6111s  PASS
+[real_seed0] pilot 0 step  85100  lr=2.34e-04  loss=0.8231  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6118s  PASS
+[real_seed0] pilot 0 step  85200  lr=2.32e-04  loss=0.7150  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6125s  PASS
+[real_seed0] pilot 0 step  85300  lr=2.30e-04  loss=0.8356  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6131s  PASS
+[real_seed0] pilot 0 step  85400  lr=2.27e-04  loss=0.8125  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6140s  PASS
+[real_seed0] pilot 0 step  85500  lr=2.25e-04  loss=0.7234  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6146s  PASS
+[real_seed0] pilot 0 step  85600  lr=2.23e-04  loss=0.8416  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6153s  PASS
+[real_seed0] pilot 0 step  85700  lr=2.21e-04  loss=0.8142  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6160s  PASS
+[real_seed0] pilot 0 step  85800  lr=2.18e-04  loss=0.7248  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6168s  PASS
+[real_seed0] pilot 0 step  85900  lr=2.16e-04  loss=0.8407  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6175s  PASS
+[real_seed0] pilot 0 step  86000  lr=2.14e-04  loss=0.8140  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6182s  PASS
+[real_seed0] pilot 0 step  86100  lr=2.12e-04  loss=0.7283  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6188s  PASS
+[real_seed0] pilot 0 step  86200  lr=2.10e-04  loss=0.8334  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6196s  PASS
+[real_seed0] pilot 0 step  86300  lr=2.08e-04  loss=0.8139  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6204s  PASS
+[real_seed0] pilot 0 step  86400  lr=2.05e-04  loss=0.7263  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6211s  PASS
+[real_seed0] pilot 0 step  86500  lr=2.03e-04  loss=0.8362  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6218s  PASS
+[real_seed0] pilot 0 step  86600  lr=2.01e-04  loss=0.8076  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6227s  PASS
+[real_seed0] pilot 0 step  86700  lr=1.99e-04  loss=0.7288  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6234s  PASS
+[real_seed0] pilot 0 step  86800  lr=1.97e-04  loss=0.8468  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6241s  PASS
+[real_seed0] pilot 0 step  86900  lr=1.95e-04  loss=0.8108  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6248s  PASS
+[real_seed0] pilot 0 step  87000  lr=1.93e-04  loss=0.7257  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6255s  PASS
+[real_seed0] pilot 0 step  87100  lr=1.91e-04  loss=0.8458  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6262s  PASS
+[real_seed0] pilot 0 step  87200  lr=1.89e-04  loss=0.8164  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6270s  PASS
+[real_seed0] pilot 0 step  87300  lr=1.87e-04  loss=0.7227  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6277s  PASS
+[real_seed0] pilot 0 step  87400  lr=1.84e-04  loss=0.8365  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6285s  PASS
+[real_seed0] pilot 0 step  87500  lr=1.82e-04  loss=0.8094  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6292s  PASS
+[real_seed0] pilot 0 step  87600  lr=1.80e-04  loss=0.7292  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6299s  PASS
+[real_seed0] pilot 0 step  87700  lr=1.78e-04  loss=0.8524  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6306s  PASS
+[real_seed0] pilot 0 step  87800  lr=1.76e-04  loss=0.8081  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6313s  PASS
+[real_seed0] pilot 0 step  87900  lr=1.75e-04  loss=0.7229  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6320s  PASS
+[real_seed0] pilot 0 step  88000  lr=1.73e-04  loss=0.8477  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6327s  PASS
+[real_seed0] pilot 0 step  88100  lr=1.71e-04  loss=0.8052  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6334s  PASS
+[real_seed0] pilot 0 step  88200  lr=1.69e-04  loss=0.7064  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6342s  PASS
+[real_seed0] pilot 0 step  88300  lr=1.67e-04  loss=0.8425  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6349s  PASS
+[real_seed0] pilot 0 step  88400  lr=1.65e-04  loss=0.8151  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6356s  PASS
+[real_seed0] pilot 0 step  88500  lr=1.63e-04  loss=0.7244  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6363s  PASS
+[real_seed0] pilot 0 step  88600  lr=1.61e-04  loss=0.8351  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6370s  PASS
+[real_seed0] pilot 0 step  88700  lr=1.59e-04  loss=0.8092  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6377s  PASS
+[real_seed0] pilot 0 step  88800  lr=1.57e-04  loss=0.7186  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6384s  PASS
+[real_seed0] pilot 0 step  88900  lr=1.56e-04  loss=0.8483  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6391s  PASS
+[real_seed0] pilot 0 step  89000  lr=1.54e-04  loss=0.8236  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6399s  PASS
+[real_seed0] pilot 0 step  89100  lr=1.52e-04  loss=0.7115  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6406s  PASS
+[real_seed0] pilot 0 step  89200  lr=1.50e-04  loss=0.8365  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6413s  PASS
+[real_seed0] pilot 0 step  89300  lr=1.48e-04  loss=0.8102  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6419s  PASS
+[real_seed0] pilot 0 step  89400  lr=1.47e-04  loss=0.7285  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6427s  PASS
+[real_seed0] pilot 0 step  89500  lr=1.45e-04  loss=0.8371  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6434s  PASS
+[real_seed0] pilot 0 step  89600  lr=1.43e-04  loss=0.8137  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6442s  PASS
+[real_seed0] pilot 0 step  89700  lr=1.41e-04  loss=0.7261  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6449s  PASS
+[real_seed0] pilot 0 step  89800  lr=1.40e-04  loss=0.8411  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6456s  PASS
+[real_seed0] pilot 0 step  89900  lr=1.38e-04  loss=0.8104  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6463s  PASS
+[real_seed0] pilot 0 step  90000  lr=1.36e-04  loss=0.7271  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6471s  PASS
+[real_seed0] pilot 0 step  90100  lr=1.34e-04  loss=0.8475  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6478s  PASS
+[real_seed0] pilot 0 step  90200  lr=1.33e-04  loss=0.8247  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6485s  PASS
+[real_seed0] pilot 0 step  90300  lr=1.31e-04  loss=0.7307  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6491s  PASS
+[real_seed0] pilot 0 step  90400  lr=1.30e-04  loss=0.8421  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6499s  PASS
+[real_seed0] pilot 0 step  90500  lr=1.28e-04  loss=0.8141  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6506s  PASS
+[real_seed0] pilot 0 step  90600  lr=1.26e-04  loss=0.7275  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6513s  PASS
+[real_seed0] pilot 0 step  90700  lr=1.25e-04  loss=0.8505  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6520s  PASS
+[real_seed0] pilot 0 step  90800  lr=1.23e-04  loss=0.8117  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6527s  PASS
+[real_seed0] pilot 0 step  90900  lr=1.21e-04  loss=0.7274  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6534s  PASS
+[real_seed0] pilot 0 step  91000  lr=1.20e-04  loss=0.8506  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6542s  PASS
+[real_seed0] pilot 0 step  91100  lr=1.18e-04  loss=0.8200  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6549s  PASS
+[real_seed0] pilot 0 step  91200  lr=1.17e-04  loss=0.7242  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6556s  PASS
+[real_seed0] pilot 0 step  91300  lr=1.15e-04  loss=0.8490  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6563s  PASS
+[real_seed0] pilot 0 step  91400  lr=1.14e-04  loss=0.8130  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6570s  PASS
+[real_seed0] pilot 0 step  91500  lr=1.12e-04  loss=0.7249  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6577s  PASS
+[real_seed0] pilot 0 step  91600  lr=1.11e-04  loss=0.8416  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6585s  PASS
+[real_seed0] pilot 0 step  91700  lr=1.09e-04  loss=0.8205  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6592s  PASS
+[real_seed0] pilot 0 step  91800  lr=1.08e-04  loss=0.7215  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6599s  PASS
+[real_seed0] pilot 0 step  91900  lr=1.06e-04  loss=0.8377  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6606s  PASS
+[real_seed0] pilot 0 step  92000  lr=1.05e-04  loss=0.8118  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6613s  PASS
+[real_seed0] pilot 0 step  92100  lr=1.04e-04  loss=0.7209  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6621s  PASS
+[real_seed0] pilot 0 step  92200  lr=1.02e-04  loss=0.8333  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6628s  PASS
+[real_seed0] pilot 0 step  92300  lr=1.01e-04  loss=0.8071  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6635s  PASS
+[real_seed0] pilot 0 step  92400  lr=9.93e-05  loss=0.7350  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6642s  PASS
+[real_seed0] pilot 0 step  92500  lr=9.80e-05  loss=0.8372  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6649s  PASS
+[real_seed0] pilot 0 step  92600  lr=9.66e-05  loss=0.8065  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6657s  PASS
+[real_seed0] pilot 0 step  92700  lr=9.53e-05  loss=0.7220  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6664s  PASS
+[real_seed0] pilot 0 step  92800  lr=9.39e-05  loss=0.8366  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6671s  PASS
+[real_seed0] pilot 0 step  92900  lr=9.26e-05  loss=0.8074  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6678s  PASS
+[real_seed0] pilot 0 step  93000  lr=9.13e-05  loss=0.7264  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6685s  PASS
+[real_seed0] pilot 0 step  93100  lr=9.00e-05  loss=0.8372  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6693s  PASS
+[real_seed0] pilot 0 step  93200  lr=8.88e-05  loss=0.8130  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6699s  PASS
+[real_seed0] pilot 0 step  93300  lr=8.75e-05  loss=0.7251  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6707s  PASS
+[real_seed0] pilot 0 step  93400  lr=8.62e-05  loss=0.8458  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6714s  PASS
+[real_seed0] pilot 0 step  93500  lr=8.50e-05  loss=0.8095  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6721s  PASS
+[real_seed0] pilot 0 step  93600  lr=8.38e-05  loss=0.7310  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6728s  PASS
+[real_seed0] pilot 0 step  93700  lr=8.26e-05  loss=0.8352  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6735s  PASS
+[real_seed0] pilot 0 step  93800  lr=8.14e-05  loss=0.8167  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6742s  PASS
+[real_seed0] pilot 0 step  93900  lr=8.02e-05  loss=0.7210  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6749s  PASS
+[real_seed0] pilot 0 step  94000  lr=7.90e-05  loss=0.8371  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6756s  PASS
+[real_seed0] pilot 0 step  94100  lr=7.79e-05  loss=0.8147  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6763s  PASS
+[real_seed0] pilot 0 step  94200  lr=7.67e-05  loss=0.7238  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6770s  PASS
+[real_seed0] pilot 0 step  94300  lr=7.56e-05  loss=0.8421  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6777s  PASS
+[real_seed0] pilot 0 step  94400  lr=7.45e-05  loss=0.8183  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6785s  PASS
+[real_seed0] pilot 0 step  94500  lr=7.34e-05  loss=0.7268  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6792s  PASS
+[real_seed0] pilot 0 step  94600  lr=7.23e-05  loss=0.8380  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6799s  PASS
+[real_seed0] pilot 0 step  94700  lr=7.12e-05  loss=0.8195  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6806s  PASS
+[real_seed0] pilot 0 step  94800  lr=7.02e-05  loss=0.7334  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6813s  PASS
+[real_seed0] pilot 0 step  94900  lr=6.91e-05  loss=0.8403  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6820s  PASS
+[real_seed0] pilot 0 step  95000  lr=6.81e-05  loss=0.8135  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6827s  PASS
+[real_seed0] pilot 0 step  95100  lr=6.71e-05  loss=0.7281  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6834s  PASS
+[real_seed0] pilot 0 step  95200  lr=6.61e-05  loss=0.8398  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6842s  PASS
+[real_seed0] pilot 0 step  95300  lr=6.51e-05  loss=0.8151  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6848s  PASS
+[real_seed0] pilot 0 step  95400  lr=6.41e-05  loss=0.7251  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6856s  PASS
+[real_seed0] pilot 0 step  95500  lr=6.31e-05  loss=0.8419  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6863s  PASS
+[real_seed0] pilot 0 step  95600  lr=6.22e-05  loss=0.8087  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6870s  PASS
+[real_seed0] pilot 0 step  95700  lr=6.13e-05  loss=0.7296  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6877s  PASS
+[real_seed0] pilot 0 step  95800  lr=6.03e-05  loss=0.8377  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6884s  PASS
+[real_seed0] pilot 0 step  95900  lr=5.94e-05  loss=0.8137  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6892s  PASS
+[real_seed0] pilot 0 step  96000  lr=5.85e-05  loss=0.7337  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6901s  PASS
+[real_seed0] pilot 0 step  96100  lr=5.77e-05  loss=0.8454  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6907s  PASS
+[real_seed0] pilot 0 step  96200  lr=5.68e-05  loss=0.8131  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6914s  PASS
+[real_seed0] pilot 0 step  96300  lr=5.59e-05  loss=0.7118  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6922s  PASS
+[real_seed0] pilot 0 step  96400  lr=5.51e-05  loss=0.8344  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6929s  PASS
+[real_seed0] pilot 0 step  96500  lr=5.43e-05  loss=0.8212  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6936s  PASS
+[real_seed0] pilot 0 step  96600  lr=5.34e-05  loss=0.7347  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6943s  PASS
+[real_seed0] pilot 0 step  96700  lr=5.26e-05  loss=0.8370  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6952s  PASS
+[real_seed0] pilot 0 step  96800  lr=5.19e-05  loss=0.8094  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6959s  PASS
+[real_seed0] pilot 0 step  96900  lr=5.11e-05  loss=0.7251  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6966s  PASS
+[real_seed0] pilot 0 step  97000  lr=5.03e-05  loss=0.8417  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6974s  PASS
+[real_seed0] pilot 0 step  97100  lr=4.96e-05  loss=0.8117  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6981s  PASS
+[real_seed0] pilot 0 step  97200  lr=4.89e-05  loss=0.7145  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6988s  PASS
+[real_seed0] pilot 0 step  97300  lr=4.81e-05  loss=0.8390  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=6996s  PASS
+[real_seed0] pilot 0 step  97400  lr=4.74e-05  loss=0.8131  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7003s  PASS
+[real_seed0] pilot 0 step  97500  lr=4.67e-05  loss=0.7267  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7009s  PASS
+[real_seed0] pilot 0 step  97600  lr=4.61e-05  loss=0.8397  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7017s  PASS
+[real_seed0] pilot 0 step  97700  lr=4.54e-05  loss=0.8156  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7024s  PASS
+[real_seed0] pilot 0 step  97800  lr=4.48e-05  loss=0.7274  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7031s  PASS
+[real_seed0] pilot 0 step  97900  lr=4.41e-05  loss=0.8430  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7038s  PASS
+[real_seed0] pilot 0 step  98000  lr=4.35e-05  loss=0.8098  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7045s  PASS
+[real_seed0] pilot 0 step  98100  lr=4.29e-05  loss=0.7195  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7052s  PASS
+[real_seed0] pilot 0 step  98200  lr=4.23e-05  loss=0.8427  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7059s  PASS
+[real_seed0] pilot 0 step  98300  lr=4.17e-05  loss=0.8146  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7066s  PASS
+[real_seed0] pilot 0 step  98400  lr=4.12e-05  loss=0.7185  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7074s  PASS
+[real_seed0] pilot 0 step  98500  lr=4.06e-05  loss=0.8398  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7081s  PASS
+[real_seed0] pilot 0 step  98600  lr=4.01e-05  loss=0.8046  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7088s  PASS
+[real_seed0] pilot 0 step  98700  lr=3.96e-05  loss=0.7232  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7095s  PASS
+[real_seed0] pilot 0 step  98800  lr=3.90e-05  loss=0.8462  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7102s  PASS
+[real_seed0] pilot 0 step  98900  lr=3.86e-05  loss=0.8185  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7109s  PASS
+[real_seed0] pilot 0 step  99000  lr=3.81e-05  loss=0.7281  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7116s  PASS
+[real_seed0] pilot 0 step  99100  lr=3.76e-05  loss=0.8396  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7124s  PASS
+[real_seed0] pilot 0 step  99200  lr=3.72e-05  loss=0.8124  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7132s  PASS
+[real_seed0] pilot 0 step  99300  lr=3.67e-05  loss=0.7265  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7139s  PASS
+[real_seed0] pilot 0 step  99400  lr=3.63e-05  loss=0.8456  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7146s  PASS
+[real_seed0] pilot 0 step  99500  lr=3.59e-05  loss=0.8063  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7153s  PASS
+[real_seed0] pilot 0 step  99600  lr=3.55e-05  loss=0.7295  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7161s  PASS
+[real_seed0] pilot 0 step  99700  lr=3.51e-05  loss=0.8377  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7168s  PASS
+[real_seed0] pilot 0 step  99800  lr=3.47e-05  loss=0.8133  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7175s  PASS
+[real_seed0] pilot 0 step  99900  lr=3.44e-05  loss=0.7283  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7182s  PASS
+[real_seed0] pilot 0 step 100000  lr=3.40e-05  loss=0.8351  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7189s  PASS
+[real_seed0] pilot 0 step 100100  lr=3.37e-05  loss=0.8053  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7196s  PASS
+[real_seed0] pilot 0 step 100200  lr=3.34e-05  loss=0.7205  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7203s  PASS
+[real_seed0] pilot 0 step 100300  lr=3.31e-05  loss=0.8389  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7210s  PASS
+[real_seed0] pilot 0 step 100400  lr=3.28e-05  loss=0.8120  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7217s  PASS
+[real_seed0] pilot 0 step 100500  lr=3.25e-05  loss=0.7221  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7224s  PASS
+[real_seed0] pilot 0 step 100600  lr=3.23e-05  loss=0.8439  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7232s  PASS
+[real_seed0] pilot 0 step 100700  lr=3.20e-05  loss=0.8064  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7239s  PASS
+[real_seed0] pilot 0 step 100800  lr=3.18e-05  loss=0.7346  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7245s  PASS
+[real_seed0] pilot 0 step 100900  lr=3.16e-05  loss=0.8358  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7253s  PASS
+[real_seed0] pilot 0 step 101000  lr=3.14e-05  loss=0.8104  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7260s  PASS
+[real_seed0] pilot 0 step 101100  lr=3.12e-05  loss=0.7293  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7267s  PASS
+[real_seed0] pilot 0 step 101200  lr=3.10e-05  loss=0.8294  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7274s  PASS
+[real_seed0] pilot 0 step 101300  lr=3.08e-05  loss=0.8162  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7281s  PASS
+[real_seed0] pilot 0 step 101400  lr=3.07e-05  loss=0.7286  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7288s  PASS
+[real_seed0] pilot 0 step 101500  lr=3.06e-05  loss=0.8464  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7296s  PASS
+[real_seed0] pilot 0 step 101600  lr=3.04e-05  loss=0.8072  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7303s  PASS
+[real_seed0] pilot 0 step 101700  lr=3.03e-05  loss=0.7262  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7310s  PASS
+[real_seed0] pilot 0 step 101800  lr=3.03e-05  loss=0.8385  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7317s  PASS
+[real_seed0] pilot 0 step 101900  lr=3.02e-05  loss=0.8142  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7324s  PASS
+[real_seed0] pilot 0 step 102000  lr=3.01e-05  loss=0.7232  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7332s  PASS
+[real_seed0] pilot 0 step 102100  lr=3.01e-05  loss=0.8412  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7339s  PASS
+[real_seed0] pilot 0 step 102200  lr=3.00e-05  loss=0.8223  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7346s  PASS
+[real_seed0] pilot 0 step 102300  lr=3.00e-05  loss=0.7160  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7353s  PASS
+[real_seed0] pilot 0 step 102399  lr=3.00e-05  loss=0.8117  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  elapsed=7360s  PASS
+[real_seed0] pilot 0 stable from step 23800 onward (terminal check at 102399)
+[real_seed0] pilot 0 causal_PR=25.352  query_PR=26.985
+RESULT real_seed=0 regime=1 s_star=23800 causal_PR=25.3525 query_PR=26.9854
