@@ -210,6 +210,8 @@ Penalty `(Σ g_t − ρ)²` on arm A. A gate that always integrates becomes atte
 
 **The commitment is six runs, not three.** §2.4 requires two supervision regimes, each with three seeds, and the training budget (§3.1) is per-run: `6 × 102,400 = 614,400` optimizer steps, total, before any Phase 2-4 instrumentation. Written here so it cannot be missed at launch time — the failure mode is discovering the true cost halfway through and cutting seeds to fit, and one regime with three seeds is interpretable while two regimes with one seed each is not. Confirm the full six-run cost is affordable before launching any of them, not after the first one or two are already running.
 
+**Affordability, updated after fixing the generator (not the pool) instead of accepting the number.** The original ~70-hour estimate was measured against a generator later found to be reducible: bulk numpy generation, one `.tolist()` conversion instead of per-element access, reusing the item's own distractor pool for arm C instead of rebuilding one, and (caught in the same pass) a buffered-RNG bug that briefly made things worse by thrashing between two different alphabet sizes on one shared buffer. Clean, uncontended measurement after all four: **4.4× faster** (311ms/batch vs. 1,370ms baseline). Revised six-run estimate: **~16 hours**, not ~70 — same aggregate CPU budget, no 10-hour pool build, no 54GB artifact.
+
 **`102,400` is provisional on §3.1.7's throwaway pilot.** It was derived from full-rank pilots; the six real runs train at the bottleneck. If the rank-bottleneck pilot's `S*` exceeds the full-rank pilots', the budget is re-derived from it before this six-run commitment is spent, not discovered as insufficient partway through.
 
 ---

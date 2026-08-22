@@ -116,13 +116,18 @@ class _FastRandom:
 
     def __init__(self, seed: int | None = None):
         self._py = random.Random(seed)
-        self._buf: list[int] = []
-        self._pos = 0
-        self._alphabet_size: int | None = None
+        # keyed by alphabet_size: this generator draws from at least two
+        # sizes (symbols at |S|, and position choice at 3 in
+        # _flip_positions) that interleave constantly — a single shared
+        # buffer invalidated on every size change thrashed far worse than
+        # the random.sample() calls it was meant to replace.
+        self._bufs: dict[int, list[int]] = {}
+        self._pos: dict[int, int] = {}
 
     def seed(self, x) -> None:
         self._py.seed(x)
-        self._buf = []  # invalidate: next symbol() draw reflects the new seed
+        self._bufs = {}  # invalidate all: next symbol() draws reflect the new seed
+        self._pos = {}
 
     def randrange(self, *args):
         return self._py.randrange(*args)
@@ -134,15 +139,17 @@ class _FastRandom:
         return self._py.shuffle(*args, **kwargs)
 
     def symbol(self, alphabet_size: int) -> int:
-        if self._pos >= len(self._buf) or self._alphabet_size != alphabet_size:
+        buf = self._bufs.get(alphabet_size)
+        pos = self._pos.get(alphabet_size, 0)
+        if buf is None or pos >= len(buf):
             seed_material = self._py.getrandbits(63)
-            self._buf = np.random.default_rng(seed_material).integers(
+            buf = np.random.default_rng(seed_material).integers(
                 0, alphabet_size, size=self._BUFFER_SIZE
             ).tolist()
-            self._pos = 0
-            self._alphabet_size = alphabet_size
-        val = self._buf[self._pos]
-        self._pos += 1
+            pos = 0
+            self._bufs[alphabet_size] = buf
+        val = buf[pos]
+        self._pos[alphabet_size] = pos + 1
         return val
 
 
@@ -386,8 +393,17 @@ class TaskGenerator:
     def _random_tuple(self) -> Key:
         return (self._random_symbol(), self._random_symbol(), self._random_symbol())
 
+    _POSITION_SUBSETS = {1: [(0,), (1,), (2,)], 2: [(0, 1), (0, 2), (1, 2)], 3: [(0, 1, 2)]}
+
     def _flip_positions(self, base: Key, n_positions: int) -> Key:
-        positions = self.rng.sample(range(3), n_positions)
+        """Was random.sample(range(3), n_positions) — a general-purpose
+        combinatorial sample for a choice that only ever has 3, 3, or 1
+        possible outcomes (n_positions is always 1 or 3 in this
+        generator). Precomputed subsets + one fast buffered draw, same
+        uniform distribution over C(3, n_positions), profiled as the next
+        bottleneck once _random_symbol itself stopped being one."""
+        subsets = self._POSITION_SUBSETS[n_positions]
+        positions = subsets[0] if len(subsets) == 1 else subsets[self.rng.symbol(len(subsets))]
         result = list(base)
         for p in positions:
             original = result[p]
