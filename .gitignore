@@ -2,9 +2,4 @@
 __pycache__/
 *.pyc
 .pytest_cache/
-
-# Pilot-training artifacts: checkpoints, logs, and result JSON regenerate
-# from the scripts in model/ plus the seeds logged in PREREG.md/RESULTS.md.
-# Excluded while runs are in flight; revisit once a run's outputs are
-# stable and worth publishing alongside the code.
-runs/
+.claude/

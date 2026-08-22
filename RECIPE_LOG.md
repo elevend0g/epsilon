@@ -27,3 +27,13 @@ Damping that tracks the LR cut is the recipe signature, not the architecture sig
 **Final schedule, written into `PREREG.md` and `docs/phase1.md` §3.1**: cosine, `3e-3 → 3e-5`, no warmup, decaying across the full pilot cap (30,000 steps) rather than a fixed window — the discriminator's 2,000-step window was sized for a test starting from an already-far-along checkpoint, not for a from-scratch run. No warmup because the original constant-LR runs showed fast, stable early progress (near-0% to ~90%+ within 100-300 steps) starting cold at 3e-3; nothing in the failure mode implicated the start of training.
 
 **Next**: all three pilots re-run from scratch under this schedule, to the full cap, `S*` computed from that run's history — not deformed from the discriminator's continuation, which answers "does decay change the picture" and nothing about what `S*` actually is.
+
+**Re-run complete, 2026-08-22.** All three pilots trained from scratch to the full 30,000-step cap under the cosine schedule, no early stopping. Result — a genuinely different shape from every prior attempt:
+
+| Pilot | `S*` (onset of stable competence) | causal PR | query PR |
+|---|---|---|---|
+| 0 | 25,600 | 30.10 | 32.54 |
+| 1 | 21,100 | 30.10 | 32.53 |
+| 2 | 21,600 | 29.17 | 31.57 |
+
+All three genuinely stable — criterion holds at every evaluation from `S*` through the terminal checkpoint, the first time this project has produced that. `S*` spread (4,500, ~20% relative) is real but far tighter than the 76× seen under constant LR. Both PR measurements cluster within ~3% of their mean across all three seeds — a striking contrast with the pre-fix measurement's wide, direction-flipping spread (§3.1.5 in `PREREG.md`). Confirms the diagnosis directly: the earlier instability wasn't only a competence problem, it was corrupting the geometry measurement too. `S*=25,600` → training budget `4×25,600=102,400`; `max(query PR)=32.54` → rank `36`. Both written into `PREREG.md` as final.

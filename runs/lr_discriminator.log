@@ -1,0 +1,32 @@
+=== LR discriminator: pilot 2 from runs/pilot_2_capped.pt (step 8100), cosine 0.003->3e-05 over 2000 steps, then hold 500 more ===
+step   8100  lr=3.00e-03  loss=0.6725  val_acc={1: 1.0, 2: 0.977, 3: 0.984}  PASS
+step   8200  lr=2.98e-03  loss=0.7655  val_acc={1: 1.0, 2: 0.969, 3: 0.977}  PASS
+step   8300  lr=2.93e-03  loss=0.7861  val_acc={1: 1.0, 2: 0.953, 3: 0.93}  
+step   8400  lr=2.84e-03  loss=0.6782  val_acc={1: 1.0, 2: 0.977, 3: 0.969}  PASS
+step   8500  lr=2.72e-03  loss=0.7636  val_acc={1: 1.0, 2: 0.992, 3: 0.984}  PASS
+step   8600  lr=2.57e-03  loss=0.7870  val_acc={1: 1.0, 2: 0.977, 3: 0.961}  PASS
+step   8700  lr=2.39e-03  loss=0.6803  val_acc={1: 1.0, 2: 0.992, 3: 0.969}  PASS
+step   8800  lr=2.19e-03  loss=0.7642  val_acc={1: 1.0, 2: 0.984, 3: 0.984}  PASS
+step   8900  lr=1.97e-03  loss=0.7835  val_acc={1: 1.0, 2: 0.992, 3: 0.969}  PASS
+step   9000  lr=1.75e-03  loss=0.6788  val_acc={1: 1.0, 2: 1.0, 3: 0.992}  PASS
+step   9100  lr=1.52e-03  loss=0.7598  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  PASS
+step   9200  lr=1.28e-03  loss=0.7882  val_acc={1: 1.0, 2: 0.969, 3: 0.977}  PASS
+step   9300  lr=1.06e-03  loss=0.6783  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  PASS
+step   9400  lr=8.41e-04  loss=0.7503  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  PASS
+step   9500  lr=6.42e-04  loss=0.7940  val_acc={1: 1.0, 2: 0.969, 3: 0.984}  PASS
+step   9600  lr=4.65e-04  loss=0.6835  val_acc={1: 1.0, 2: 0.992, 3: 1.0}  PASS
+step   9700  lr=3.14e-04  loss=0.7640  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  PASS
+step   9800  lr=1.92e-04  loss=0.7911  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  PASS
+step   9900  lr=1.03e-04  loss=0.6801  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  PASS
+step  10000  lr=4.83e-05  loss=0.7752  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  PASS
+step  10100  lr=3.00e-05  loss=0.7949  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  PASS
+step  10200  lr=3.00e-05  loss=0.6736  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  PASS
+step  10300  lr=3.00e-05  loss=0.7669  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  PASS
+step  10400  lr=3.00e-05  loss=0.7894  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  PASS
+step  10500  lr=3.00e-05  loss=0.6718  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  PASS
+step  10599  lr=3.00e-05  loss=0.6758  val_acc={1: 1.0, 2: 1.0, 3: 1.0}  PASS
+
+=== SUMMARY ===
+L=2  early third amplitude=0.039  late third amplitude=0.000  late-third values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+L=3  early third amplitude=0.055  late third amplitude=0.000  late-third values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+DISCRIMINATOR_DONE

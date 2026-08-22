@@ -1,0 +1,9 @@
+[pilot0] === resuming pilot 0 from runs/pilot_0_continued.pt (step 7600) to cap 8100 ===
+[pilot0] pilot 0 step   7600  loss=0.6651  val_acc={1: 1.0, 2: 0.859, 3: 0.867}
+[pilot0] pilot 0 step   7700  loss=0.7540  val_acc={1: 1.0, 2: 0.82, 3: 0.914}
+[pilot0] pilot 0 step   7800  loss=0.7853  val_acc={1: 1.0, 2: 0.828, 3: 0.922}
+[pilot0] pilot 0 step   7900  loss=0.6718  val_acc={1: 1.0, 2: 0.859, 3: 0.875}
+[pilot0] pilot 0 step   8000  loss=0.7572  val_acc={1: 1.0, 2: 0.898, 3: 0.906}
+[pilot0] pilot 0 step   8099  loss=0.7596  val_acc={1: 1.0, 2: 0.898, 3: 0.891}
+[pilot0] pilot 0 DONE: s_star=None  causal_PR=29.967  query_PR=33.051  final_acc={1: 1.0, 2: 0.8984375, 3: 0.890625}
+RESULT pilot=0 s_star=None causal_PR=29.9671 query_PR=33.0506
