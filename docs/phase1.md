@@ -208,6 +208,8 @@ Penalty `(Σ g_t − ρ)²` on arm A. A gate that always integrates becomes atte
 
 **Three seeds minimum per condition.** Every result in the prior project was a single-checkpoint result; that is its broadest quiet limitation and it is cheap to fix at this scale.
 
+**The commitment is six runs, not three.** §2.4 requires two supervision regimes, each with three seeds, and the training budget (§3.1) is per-run: `6 × 102,400 = 614,400` optimizer steps, total, before any Phase 2-4 instrumentation. Written here so it cannot be missed at launch time — the failure mode is discovering the true cost halfway through and cutting seeds to fit, and one regime with three seeds is interpretable while two regimes with one seed each is not. Confirm the full six-run cost is affordable before launching any of them, not after the first one or two are already running.
+
 ---
 
 ## 3. Phase 1 — Competence gate
@@ -255,6 +257,15 @@ The pilots are discarded, so running integrity checks on them contaminates nothi
 - **END-entry census.** Count `END`-valued entries per item and confirm §1.6.8.
 
 Any failure here is a generator defect. Fix the generator and re-run the pilots; this is not a threshold move and does not consume the §4.4 calibration budget.
+
+### 3.1.7 Rank-bottleneck throwaway pilot — validate the bottleneck before spending real runs
+
+**One discarded pilot, trained with the query projection actually bottlenecked to `rank` (§3.1.5), before any of the six real-seed runs launch.** Same logic as §3.1.6, applied to the model instead of the task: every §3.1-§3.1.6 pilot is mandated full-rank by construction, so the low-rank projection is a component nothing has ever exercised. The first real seed would otherwise be the first time the bottleneck exists at all — an expensive way to discover it doesn't fit.
+
+- Same architecture, same generator config, same cosine schedule as the official pilots, with the query projection fixed at `rank` instead of full-rank.
+- Judged against the same §3.2 criterion, at the same terminal-checkpoint standard — does competence survive the bottleneck, not just "does loss go down."
+- **Pass:** rank 36 is survivable; proceed to the six-run matrix. **Fails or plateaus below criterion:** that is a finding about the rank itself, to report before committing real-seed budget to it, not a hyperparameter to quietly bump.
+- Discarded regardless of outcome — this is a validation run, not a seed.
 
 ### 3.2 The gate
 
@@ -352,7 +363,7 @@ Linear probe on frozen state, predicting answerable vs. not.
 
 Displacement enters as a quantile (§2.2), so τ is a percentile of the frozen calibration distribution, fixed on **validation before any test evaluation**.
 
-**Target: 5 percentage points above a measured floor, not a flat 5%.** The floor is the model's structural false-abstention rate on arm A with no τ involved — the `m=0` "declined to start" rate, which pilots showed at 6.6–7.2%. A flat 5% target is unreachable when the floor already exceeds it, and no threshold choice fixes a gate that declines to open on the first hop. **If the floor dominates the budget, report the floor itself as the finding** rather than presenting a calibrated τ that was never the binding constraint.
+**Target: 5 percentage points above a measured floor, not a flat 5%.** The floor is the model's structural false-abstention rate on arm A with no τ involved — the `m=0` "declined to start" rate. Under the unstable constant-LR recipe, pilots showed this at 6.6–7.2%; under the stable cosine-schedule recipe it dropped to 0-0.65%, confirming the floor was a training-instability symptom rather than an architectural ceiling. **That measurement was on full-rank pilots (§3.1.5) — do not treat it as resolved for real seeds.** A rank-36 bottleneck is a component the floor has never been measured against, and could reintroduce it; re-measure on real seeds before trusting the near-zero figure. The floor-relative form of this target costs nothing if the floor stays near zero and catches it immediately if it doesn't. **If the floor dominates the budget, report the floor itself as the finding** rather than presenting a calibrated τ that was never the binding constraint.
 
 **Re-examine displacement distributions under END notation before applying one τ across arms.** Pointer advances are discrete jumps, so "settled" may confound with "stopped" — and a chain that ends and a chain that stalls can both show low displacement. Verify the distributions are on comparable scales across arms and report the check. If they are not, a single τ is not defensible and that must be stated.
 

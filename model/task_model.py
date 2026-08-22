@@ -5,7 +5,12 @@ per-step retrieval loss + count penalty; eval: autoregressive rollout).
 Pilot-scope simplifications (§8: implement the simplest version, log it):
   - Trained on arm A only (Regime 1 is A+D; D is deferred to real-seed
     training, since pilots are discarded and exist only for S*/rank).
-  - Query projection is full-rank (§3.1.5: pilots must not be rank-limited).
+  - Query projection defaults to full-rank (§3.1.5: pilots must not be
+    rank-limited); pass `rank=` to bottleneck it, for the §3.1.7
+    throwaway pilot and real seeds. Factored as state -> rank -> d_model
+    (two linear layers) rather than one low-rank-constrained matrix, so
+    the bottleneck dimension is architecturally exact, not just
+    encouraged.
   - Displacement is the raw state-delta norm, not a causal-subspace
     projection (no causal subspace is defined yet at pilot time — that is
     exactly what §3.1.5 measures, from these very pilots).
@@ -27,12 +32,22 @@ from model.ssm import SSMCell
 
 
 class GatedCacheModel(nn.Module):
-    def __init__(self, alphabet_size: int, symbol_dim: int, d_model: int, d_state: int):
+    def __init__(
+        self, alphabet_size: int, symbol_dim: int, d_model: int, d_state: int,
+        rank: int | None = None,
+    ):
         super().__init__()
         self.encoder = TupleEncoder(alphabet_size, symbol_dim, d_model)
         self.ssm = SSMCell(d_model, d_state)
         self.gate = QuantileGate()
-        self.query_proj = nn.Linear(d_model * d_state, d_model)  # full-rank (pilots)
+        self.rank = rank
+        if rank is None:
+            self.query_proj = nn.Linear(d_model * d_state, d_model)  # full-rank (pilots)
+        else:
+            self.query_proj = nn.Sequential(
+                nn.Linear(d_model * d_state, rank),
+                nn.Linear(rank, d_model),
+            )
         self.value_proj = nn.Linear(d_model, d_model)  # W_v, §2.1's additive write
 
     def _query(self, state: torch.Tensor) -> torch.Tensor:

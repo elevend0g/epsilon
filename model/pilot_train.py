@@ -98,12 +98,16 @@ def first_stable_step(history: list[tuple[int, dict]]) -> int | None:
     return history[last_fail_idx + 1][0]
 
 
-def run_pilot(pilot_idx: int, device, val_batches: dict, geom_batch: dict, log, n_workers: int = N_WORKERS) -> dict:
+def run_pilot(
+    pilot_idx: int, device, val_batches: dict, geom_batch: dict, log,
+    n_workers: int = N_WORKERS, rank: int | None = None, checkpoint_name: str | None = None,
+) -> dict:
     torch.manual_seed(1000 + pilot_idx)
-    model = GatedCacheModel(ALPHABET_SIZE, SYMBOL_DIM, D_MODEL, D_STATE).to(device)
+    model = GatedCacheModel(ALPHABET_SIZE, SYMBOL_DIM, D_MODEL, D_STATE, rank=rank).to(device)
     opt = torch.optim.Adam(model.parameters(), lr=START_LR)
+    checkpoint_name = checkpoint_name or f"pilot_{pilot_idx}"
 
-    log(f"=== pilot {pilot_idx} start, params={sum(p.numel() for p in model.parameters())}, "
+    log(f"=== pilot {pilot_idx} start, rank={rank or 'full'}, params={sum(p.numel() for p in model.parameters())}, "
         f"cosine LR {START_LR}->{FLOOR_LR} over {STEP_CAP} steps, no early stopping ===")
     t0 = time.time()
     history: list[tuple[int, dict]] = []
@@ -147,14 +151,14 @@ def run_pilot(pilot_idx: int, device, val_batches: dict, geom_batch: dict, log, 
     query_pr, _ = measure_query_participation_ratio(model, geom_batch)
     log(f"pilot {pilot_idx} causal_PR={causal_pr:.3f}  query_PR={query_pr:.3f}")
 
-    torch.save(model.state_dict(), f"runs/pilot_{pilot_idx}.pt")
+    torch.save(model.state_dict(), f"runs/{checkpoint_name}.pt")
     result = {
-        "pilot_idx": pilot_idx, "s_star": s_star, "cap": STEP_CAP,
+        "pilot_idx": pilot_idx, "rank": rank, "s_star": s_star, "cap": STEP_CAP,
         "reached_stable_criterion": s_star is not None,
         "final_val_acc": final_accs, "causal_pr": causal_pr, "query_pr": query_pr,
         "wall_time_s": time.time() - t0, "history": history,
     }
-    with open(f"runs/pilot_{pilot_idx}_result.json", "w") as f:
+    with open(f"runs/{checkpoint_name}_result.json", "w") as f:
         json.dump(result, f, indent=2)
     return result
 
