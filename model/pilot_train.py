@@ -98,6 +98,23 @@ def first_stable_step(history: list[tuple[int, dict]]) -> int | None:
     return history[last_fail_idx + 1][0]
 
 
+CHECKPOINT_EVERY = 1000  # ~5-25 min of compute depending on throughput; bounds crash losses
+
+
+def _resume_path(checkpoint_name: str) -> str:
+    return f"runs/{checkpoint_name}_resume.pt"
+
+
+def _save_resume_checkpoint(path: str, step: int, model, opt, history: list, rank: int | None) -> None:
+    tmp = path + ".tmp"
+    torch.save({
+        "step": step, "model_state": model.state_dict(), "opt_state": opt.state_dict(),
+        "history": history, "rank": rank,
+    }, tmp)
+    import os
+    os.replace(tmp, path)  # atomic: a crash mid-write never corrupts the last good checkpoint
+
+
 def run_pilot(
     pilot_idx: int, device, val_batches: dict, geom_batch: dict, log,
     n_workers: int = N_WORKERS, rank: int | None = None, checkpoint_name: str | None = None,
@@ -106,20 +123,32 @@ def run_pilot(
     model = GatedCacheModel(ALPHABET_SIZE, SYMBOL_DIM, D_MODEL, D_STATE, rank=rank).to(device)
     opt = torch.optim.Adam(model.parameters(), lr=START_LR)
     checkpoint_name = checkpoint_name or f"pilot_{pilot_idx}"
+    resume_path = _resume_path(checkpoint_name)
 
-    log(f"=== pilot {pilot_idx} start, rank={rank or 'full'}, params={sum(p.numel() for p in model.parameters())}, "
-        f"cosine LR {START_LR}->{FLOOR_LR} over {STEP_CAP} steps, no early stopping ===")
-    t0 = time.time()
+    start_step = 0
     history: list[tuple[int, dict]] = []
+    try:
+        ckpt = torch.load(resume_path, map_location=device, weights_only=True)
+        model.load_state_dict(ckpt["model_state"])
+        opt.load_state_dict(ckpt["opt_state"])
+        history = ckpt["history"]
+        start_step = ckpt["step"] + 1
+        log(f"=== pilot {pilot_idx} RESUMED from {resume_path} at step {start_step} "
+            f"({len(history)} history points already recorded) ===")
+    except FileNotFoundError:
+        log(f"=== pilot {pilot_idx} start, rank={rank or 'full'}, params={sum(p.numel() for p in model.parameters())}, "
+            f"cosine LR {START_LR}->{FLOOR_LR} over {STEP_CAP} steps, no early stopping ===")
+
+    t0 = time.time()
 
     prefetcher = BatchPrefetcher(
         alphabet_size=ALPHABET_SIZE, n_distractors=N_DISTRACTORS, n_hard=N_HARD,
         batch_size=BATCH_SIZE, chain_lengths=CHAIN_LENGTHS,
-        seed_stream_start=TRAIN_SEED_BASE + pilot_idx * 10_000_000,
+        seed_stream_start=TRAIN_SEED_BASE + pilot_idx * 10_000_000 + start_step,
         n_workers=n_workers, depth=PREFETCH_DEPTH,
     )
     try:
-        for step in range(STEP_CAP):
+        for step in range(start_step, STEP_CAP):
             lr = lr_at(step)
             for g in opt.param_groups:
                 g["lr"] = lr
@@ -137,8 +166,13 @@ def run_pilot(
                 log(f"pilot {pilot_idx} step {step:6d}  lr={lr:.2e}  loss={logs['loss']:.4f}  "
                     f"val_acc={ {k: round(v,3) for k,v in accs.items()} }  "
                     f"elapsed={elapsed:.0f}s  {'PASS' if all_pass else ''}")
+
+            if step % CHECKPOINT_EVERY == 0 and step > start_step:
+                _save_resume_checkpoint(resume_path, step, model, opt, history, rank)
     finally:
         prefetcher.close()
+
+    _save_resume_checkpoint(resume_path, STEP_CAP - 1, model, opt, history, rank)
 
     s_star = first_stable_step(history)
     final_accs = history[-1][1]
