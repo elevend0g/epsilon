@@ -188,6 +188,13 @@ Regime 2 tells you whether a trained abstention signal is real or a surface corr
 
 **Regime 1 on B2 is a preregistered generalization test.** Its gate learned "open iff the retrieved value is a key, hold at END" from complete chains alone. At test time on B2, does it open on `x` — treating a dead end as another step? Higher gate confidence is *worse* here: an open gate commits the terminal to state, and the abstention decision must then fight its own committed garbage. Preregister the prediction and the direction.
 
+**ABSTAIN mechanism, pinned before the code exists.** Two structural decisions, both binding across all three Regime 2 seeds:
+
+- **A separate binary head, not an added entry in the retrieval softmax.** The model has no answer readout distinct from retrieval to begin with — §1.1's emit rule reports whichever cache key the pointer lands on at END, a deterministic function of the retrieval mechanism, not a learned output layer. Folding ABSTAIN into that softmax would make "retrieved right" and "abstained" mutually exclusive by construction, foreclosing exactly what §5.4 needs open: whether the model would have retrieved correctly *and* abstained anyway. A separate head — trained on the same state that feeds the step's query, at the step the model would otherwise emit; Regime 2 target is B1/B2/C → 1, A/D → 0 — keeps that question askable.
+- **The §2.2 gate quadrant stays measured and untrained.** It already exists to avoid "a learned prediction about the model's own epistemic state" — the prior project's documented failure mode. A trained ABSTAIN signal competing with the quadrant's routing decision would reintroduce exactly that. Regime 2 trains the head; the quadrant's inputs (margin, displacement) are never a training target. The head is the answer-level output; the quadrant is the routing signal that was already there — two distinct things, not one renamed.
+
+**Phase 3 treats agreement between them as an empirical question, not an assumption (§5.4).** A trained head that fires without the gate ever reaching the abstain quadrant (bottom-right, §2.2) is tracking B1/B2/C's structural signature — count shortfall, decoy pattern — rather than the coverage representation Q2 is asking about. Both are reported; neither stands in for the other.
+
 ### 2.5 Integration count supervision
 
 Let **ρ = number of key-to-key hops** = chain length − 1 under END notation. The END retrieval **does not open the gate** (this is a design commitment, not an emergent property — state it).

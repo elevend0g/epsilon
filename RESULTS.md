@@ -66,6 +66,8 @@ This is not a repeat of findings 1-6 — nothing was measured wrong. Both number
 
 Query PR came in closer: `26.99` against the pilot's `27.99`, both comfortably below `rank=36` — the bottleneck-headroom finding replicated even though `S*` didn't.
 
+**That contrast — geometry tight, timing loose — is worth stating on its own, not just as a footnote to the S* gap.** §3.3 already flagged the general shape from watching a single pilot mid-training ("participation ratios converging across all three [pilot] seeds *while one was still at 0.88 accuracy*: representational geometry stabilizes before behaviour does"). This is the same pattern, seen across two independently-trained runs rather than within one training trajectory, with a cleaner number attached: a 50% swing in *when* the network stabilizes produced under a 4% swing in *what* it stabilized to. Good news for §6.1's claims specifically, since those depend on the causal subspace being a stable property of the task rather than an artifact of one training run's particular path. **Not yet §3.3's actual seed-spread result** — that requires all three Regime 1 real seeds, not one real seed against one discarded pilot — logged here only so the pattern is on record before the remaining seeds arrive, not reconstructed from memory once they do.
+
 ---
 
 ## Verdict against preregistered conditions
