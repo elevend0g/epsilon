@@ -17,7 +17,7 @@ from collections import deque
 
 import torch
 
-from generator import END, GeneratorConfig, TaskGenerator
+from generator import ABSTAIN, END, GeneratorConfig, TaskGenerator
 
 
 def make_batch_cpu(
@@ -29,10 +29,24 @@ def make_batch_cpu(
     seed: int | None = None,
     arm: str = "A",
 ) -> dict:
-    """arm: "A" (default, matches every pilot to date) or "D" — Regime 1
-    (§2.4) trains on both. D shares A's exact walk structure (answerable,
-    same L retrieval steps, same rho=L-1), so forward_train needs no
-    change at all for D batches; only which arm gets generated differs."""
+    """arm: any of "A", "B1", "B2", "C", "D". "A" (default) matches every
+    pilot to date; Regime 1 (§2.4) also uses "D"; Regime 2 uses all five.
+
+    Retrieval targets and the abstain label are read mechanically off
+    fields the generator already computes (item.rho, item.answer,
+    item.chain_keys) — no arm-specific branching needed here, since the
+    same formula is correct for every arm:
+
+      n_steps = rho if answer is ABSTAIN else rho + 1
+
+    For an END-terminal arm (A, D), the walk succeeds through its own
+    is_end-flagged entry, which IS a valid retrieval target — hence
+    rho+1 valid steps (matches item.chain_keys exactly, L of them). For a
+    DEAD-terminal arm (B1, B2, C), the walk's last position has no cache
+    entry at all by construction (that absence *is* the dead end) — hence
+    only the first `rho` positions of chain_keys are valid retrieval
+    targets; the abstain head, not a retrieval index, supervises the step
+    where the walk actually breaks (docs/phase1.md §2.4)."""
     gen = TaskGenerator(
         GeneratorConfig(
             alphabet_size=alphabet_size, chain_length=chain_length,
@@ -51,6 +65,9 @@ def make_batch_cpu(
     is_end_list: list[list[bool]] = []
     start_key_list: list[tuple] = []
     target_idx_list: list[list[int]] = []
+    n_steps_list: list[int] = []
+    is_abstain_list: list[bool] = []
+    rho_list: list[int] = []
     zero_tuple = (0, 0, 0)
 
     for item in items:
@@ -71,17 +88,30 @@ def make_batch_cpu(
         values_list.append(item_values)
         is_end_list.append(item_is_end)
         start_key_list.append(item.start_key)
-        target_idx_list.append([key_to_idx[ck] for ck in item.chain_keys])
+
+        is_abstain = item.answer == ABSTAIN
+        n_steps = item.rho if is_abstain else item.rho + 1
+        retrieval_keys = item.chain_keys[:n_steps]
+        idxs = [key_to_idx[ck] for ck in retrieval_keys]
+        idxs += [0] * (L - len(idxs))  # pad to L with a dummy index; masked out by n_steps downstream
+        target_idx_list.append(idxs)
+        n_steps_list.append(n_steps)
+        is_abstain_list.append(is_abstain)
+        rho_list.append(item.rho)
 
     keys = torch.tensor(keys_list, dtype=torch.long)
     values = torch.tensor(values_list, dtype=torch.long)
     is_end = torch.tensor(is_end_list, dtype=torch.bool)
     start_key = torch.tensor(start_key_list, dtype=torch.long)
     target_idx = torch.tensor(target_idx_list, dtype=torch.long)
+    n_steps = torch.tensor(n_steps_list, dtype=torch.long)
+    is_abstain_t = torch.tensor(is_abstain_list, dtype=torch.bool)
+    rho = torch.tensor(rho_list, dtype=torch.long)
 
     return {
         "keys": keys, "values": values, "is_end": is_end,
         "start_key": start_key, "target_idx": target_idx, "L": L,
+        "n_steps": n_steps, "is_abstain": is_abstain_t, "rho": rho,
     }
 
 

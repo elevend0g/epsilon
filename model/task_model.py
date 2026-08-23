@@ -49,6 +49,12 @@ class GatedCacheModel(nn.Module):
                 nn.Linear(rank, d_model),
             )
         self.value_proj = nn.Linear(d_model, d_model)  # W_v, §2.1's additive write
+        # §2.4: a separate head, not an added retrieval-softmax entry —
+        # retrieve() scores per-item content-addressed cache_keys, so
+        # there is no fixed answer vocabulary to add an ABSTAIN token to.
+        # Reads the same flattened state as the query; only used by
+        # forward_train_regime2 (Regime 1 never trains it).
+        self.abstain_head = nn.Linear(d_model * d_state, 1)
 
     def _query(self, state: torch.Tensor) -> torch.Tensor:
         return self.query_proj(state.flatten(1))
@@ -99,6 +105,89 @@ class GatedCacheModel(nn.Module):
             "retrieval_loss": retrieval_loss.item(),
             "count_penalty": count_penalty.item(),
             "teacher_forced_exact_match": exact_match.item(),
+        }
+        return loss, logs
+
+    def forward_train_regime2(self, batch: dict) -> tuple[torch.Tensor, dict]:
+        """Teacher-forced over all five arms (§2.4 Regime 2). batch carries
+        per-item `n_steps` (valid retrieval steps, arm-independent —
+        model/data.py derives it mechanically from item.rho/item.answer),
+        `is_abstain` (the head's training target: True for B1/B2/C), and
+        `rho` (the count-penalty target, arm A/D only).
+
+        Steps beyond an item's own `n_steps` are masked out of the
+        retrieval loss and frozen out of the state update entirely (not
+        just the write — the whole state, via torch.where) so that the
+        final state, read once after the loop, already equals "the state
+        at the step this item would otherwise emit" for every item
+        regardless of how many padding iterations the batch's longer
+        items force it to sit through.
+
+        Training-time only: forward_eval_autoregressive does not consult
+        abstain_head. §3.2's competence gate is arm-A-only and never sees
+        B1/B2/C, so nothing about the competence measurement requires the
+        head to be wired into inference yet — that is a Phase 3 concern
+        (§5.4: agreement between the head and the §2.2 gate quadrant is
+        an empirical question, not assumed by this function)."""
+        cache_keys, cache_values = build_cache(
+            self.encoder, batch["keys"], batch["values"], batch["is_end"]
+        )
+        start_embed = self.encoder.encode_tuples(batch["start_key"])
+        state = self.ssm.init_state(start_embed)
+        prev_state = state
+
+        L = batch["L"]
+        n_steps = batch["n_steps"]
+        is_abstain = batch["is_abstain"]
+        rho = batch["rho"]
+        B = cache_keys.shape[0]
+
+        step_losses = []
+        gate_sum = state.new_zeros(B)
+
+        for t in range(L):
+            active = (t < n_steps).float()  # 1 for a real step, 0 for padding beyond this item's walk
+
+            query = self._query(state)
+            logits = retrieve(query, cache_keys)
+            target = batch["target_idx"][:, t]
+            ce = F.cross_entropy(logits, target, reduction="none")
+            step_losses.append(ce * active)
+
+            margin = margin_from_logits(logits)
+            displacement = (state - prev_state).flatten(1).norm(dim=-1)
+            g = self.gate(margin, displacement)
+            is_end_now = batch["is_end"].gather(1, target.view(-1, 1)).squeeze(1).float()
+            g_eff = g * active * (1.0 - is_end_now)  # END never opens the gate; neither does padding
+
+            gate_sum = gate_sum + g_eff
+            retrieved_value = cache_values.gather(
+                1, target.view(-1, 1, 1).expand(-1, 1, cache_values.shape[-1])
+            ).squeeze(1)
+            prev_state = state
+            new_state = self.ssm.step(state, g_eff.unsqueeze(-1) * self.value_proj(retrieved_value))
+            active_mask = active.bool().view(-1, 1, 1)
+            state = torch.where(active_mask, new_state, state)  # freeze finished items completely
+
+        valid_count = n_steps.sum().clamp(min=1)
+        retrieval_loss = torch.stack(step_losses, dim=1).sum() / valid_count
+
+        count_eligible = (~is_abstain).float()  # §2.5: count penalty on A/D only, never B1/B2/C
+        count_penalty = (((gate_sum - rho.float()) ** 2) * count_eligible).sum() / count_eligible.sum().clamp(min=1)
+
+        abstain_logit = self.abstain_head(state.flatten(1)).squeeze(-1)
+        abstain_loss = F.binary_cross_entropy_with_logits(abstain_logit, is_abstain.float())
+
+        loss = retrieval_loss + count_penalty + abstain_loss  # λ=1, unweighted (§2.4, PREREG.md)
+
+        abstain_pred = (torch.sigmoid(abstain_logit) > 0.5)
+        logs = {
+            "loss": loss.item(),
+            "retrieval_loss": retrieval_loss.item(),
+            "count_penalty": count_penalty.item(),
+            "abstain_loss": abstain_loss.item(),
+            "abstain_class_balance": is_abstain.float().mean().item(),
+            "abstain_head_accuracy": (abstain_pred == is_abstain).float().mean().item(),
         }
         return loss, logs
 

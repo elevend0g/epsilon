@@ -118,12 +118,15 @@ def _save_resume_checkpoint(path: str, step: int, model, opt, history: list, ran
 def run_pilot(
     pilot_idx: int, device, val_batches: dict, geom_batch: dict, log,
     n_workers: int = N_WORKERS, rank: int | None = None, checkpoint_name: str | None = None,
-    arms: tuple[str, ...] = ("A",),
+    arms: tuple[str, ...] = ("A",), regime2: bool = False,
 ) -> dict:
     """arms: which arms to train on. ("A",) matches every pilot to date.
-    ("A","D") is §2.4 Regime 1. The §3.2 competence gate stays arm-A-only
-    regardless (val_batches is always built on arm A) — arms here only
-    controls the training stream."""
+    ("A","D") is §2.4 Regime 1. ("A","B1","B2","C","D") is Regime 2 — pass
+    regime2=True alongside it to route through forward_train_regime2
+    (variable-length teacher forcing + the abstain head) instead of
+    forward_train. The §3.2 competence gate stays arm-A-only regardless
+    (val_batches is always built on arm A) — arms/regime2 here only
+    control the training stream."""
     torch.manual_seed(1000 + pilot_idx)
     model = GatedCacheModel(ALPHABET_SIZE, SYMBOL_DIM, D_MODEL, D_STATE, rank=rank).to(device)
     opt = torch.optim.Adam(model.parameters(), lr=START_LR)
@@ -158,7 +161,7 @@ def run_pilot(
             for g in opt.param_groups:
                 g["lr"] = lr
             batch = prefetcher.next_batch(device)
-            loss, logs = model.forward_train(batch)
+            loss, logs = model.forward_train_regime2(batch) if regime2 else model.forward_train(batch)
             opt.zero_grad()
             loss.backward()
             opt.step()
@@ -168,9 +171,15 @@ def run_pilot(
                 history.append((step, accs))
                 elapsed = time.time() - t0
                 all_pass = all(a >= CRITERION for a in accs.values())
+                regime2_detail = (
+                    f"  abstain_loss={logs['abstain_loss']:.4f}  "
+                    f"abstain_class_balance={logs['abstain_class_balance']:.3f}  "
+                    f"abstain_head_acc={logs['abstain_head_accuracy']:.3f}"
+                    if regime2 else ""
+                )
                 log(f"pilot {pilot_idx} step {step:6d}  lr={lr:.2e}  loss={logs['loss']:.4f}  "
                     f"val_acc={ {k: round(v,3) for k,v in accs.items()} }  "
-                    f"elapsed={elapsed:.0f}s  {'PASS' if all_pass else ''}")
+                    f"elapsed={elapsed:.0f}s  {'PASS' if all_pass else ''}{regime2_detail}")
 
             if step % CHECKPOINT_EVERY == 0 and step > start_step:
                 _save_resume_checkpoint(resume_path, step, model, opt, history, rank)
