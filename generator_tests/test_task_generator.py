@@ -232,6 +232,30 @@ def test_per_hop_hard_negatives_present():
             )
 
 
+@pytest.mark.parametrize("n_distractors", [256, 1021])
+@pytest.mark.parametrize("chain_length", [1, 2, 3])
+def test_per_hop_hard_negatives_survive_the_256_band(n_distractors, chain_length):
+    """§5.2's cross-condition n_distractors=1021->256 transfer combo is only
+    a clean test of length/scale transfer if retrieval difficulty per hop
+    is unchanged between bands. At production scale (alphabet_size=64,
+    n_hard=4), confirm both bands place exactly n_hard hard negatives at
+    distance 1 from every hop, not fewer at the smaller band."""
+    n_hard = 4
+    gen = TaskGenerator(GeneratorConfig(
+        alphabet_size=64, chain_length=chain_length, n_distractors=n_distractors, n_hard=n_hard, seed=0,
+    ))
+    for seed in range(50):
+        gen.rng.seed(seed)
+        family = gen.generate_family()
+        cache_keys = [e.key for e in family.A.memory]
+        for hop_key in family.A.chain_keys:
+            n_at_distance_1 = sum(1 for k in cache_keys if hamming(k, hop_key) == 1)
+            assert n_at_distance_1 >= n_hard, (
+                f"n_distractors={n_distractors} L={chain_length} seed={seed}: "
+                f"only {n_at_distance_1} hard negatives at distance 1, expected >= {n_hard}"
+            )
+
+
 # -- requirement 2: hard negatives don't continue the active chain ------------
 
 
