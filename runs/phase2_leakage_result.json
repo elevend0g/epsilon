@@ -1,0 +1,224 @@
+{
+  "L1": {
+    "real_seed_r1_0": {
+      "n_correct": 18,
+      "n_total": 16384,
+      "accuracy": 0.0010986328125,
+      "chance": 0.0009784735812133072,
+      "p_value": 0.34353869482553817,
+      "verdict": "at or below chance",
+      "end_guess_frac": 0.03271484375,
+      "nominal_end_guess_rate": 0.008806262230919765,
+      "n_cache": 1022,
+      "n_end_per_cache": 9
+    },
+    "real_seed_r1_1": {
+      "n_correct": 18,
+      "n_total": 16384,
+      "accuracy": 0.0010986328125,
+      "chance": 0.0009784735812133072,
+      "p_value": 0.34353869482553817,
+      "verdict": "at or below chance",
+      "end_guess_frac": 0.03173828125,
+      "nominal_end_guess_rate": 0.008806262230919765,
+      "n_cache": 1022,
+      "n_end_per_cache": 9
+    },
+    "real_seed_r1_2": {
+      "n_correct": 16,
+      "n_total": 16384,
+      "accuracy": 0.0009765625,
+      "chance": 0.0009784735812133072,
+      "p_value": 0.5364086463081243,
+      "verdict": "at or below chance",
+      "end_guess_frac": 0.03167724609375,
+      "nominal_end_guess_rate": 0.008806262230919765,
+      "n_cache": 1022,
+      "n_end_per_cache": 9
+    },
+    "real_seed_r2_0": {
+      "n_correct": 15,
+      "n_total": 16384,
+      "accuracy": 0.00091552734375,
+      "chance": 0.0009784735812133072,
+      "p_value": 0.6354715040817115,
+      "verdict": "at or below chance",
+      "end_guess_frac": 0.07135009765625,
+      "nominal_end_guess_rate": 0.008806262230919765,
+      "n_cache": 1022,
+      "n_end_per_cache": 9
+    },
+    "real_seed_r2_1": {
+      "n_correct": 17,
+      "n_total": 16384,
+      "accuracy": 0.00103759765625,
+      "chance": 0.0009784735812133072,
+      "p_value": 0.4371456737991466,
+      "verdict": "at or below chance",
+      "end_guess_frac": 0.0718994140625,
+      "nominal_end_guess_rate": 0.008806262230919765,
+      "n_cache": 1022,
+      "n_end_per_cache": 9
+    },
+    "real_seed_r2_2": {
+      "n_correct": 12,
+      "n_total": 16384,
+      "accuracy": 0.000732421875,
+      "chance": 0.0009784735812133072,
+      "p_value": 0.8746736021264706,
+      "verdict": "at or below chance",
+      "end_guess_frac": 0.06976318359375,
+      "nominal_end_guess_rate": 0.008806262230919765,
+      "n_cache": 1022,
+      "n_end_per_cache": 9
+    }
+  },
+  "L2": {
+    "real_seed_r1_0": {
+      "n_correct": 13,
+      "n_total": 16384,
+      "accuracy": 0.00079345703125,
+      "chance": 0.0009775171065493646,
+      "p_value": 0.8080400487324718,
+      "verdict": "at or below chance",
+      "end_guess_frac": 0.0311279296875,
+      "nominal_end_guess_rate": 0.008797653958944282,
+      "n_cache": 1023,
+      "n_end_per_cache": 9
+    },
+    "real_seed_r1_1": {
+      "n_correct": 13,
+      "n_total": 16384,
+      "accuracy": 0.00079345703125,
+      "chance": 0.0009775171065493646,
+      "p_value": 0.8080400487324718,
+      "verdict": "at or below chance",
+      "end_guess_frac": 0.0283203125,
+      "nominal_end_guess_rate": 0.008797653958944282,
+      "n_cache": 1023,
+      "n_end_per_cache": 9
+    },
+    "real_seed_r1_2": {
+      "n_correct": 16,
+      "n_total": 16384,
+      "accuracy": 0.0009765625,
+      "chance": 0.0009775171065493646,
+      "p_value": 0.5348553671236693,
+      "verdict": "at or below chance",
+      "end_guess_frac": 0.02789306640625,
+      "nominal_end_guess_rate": 0.008797653958944282,
+      "n_cache": 1023,
+      "n_end_per_cache": 9
+    },
+    "real_seed_r2_0": {
+      "n_correct": 13,
+      "n_total": 16384,
+      "accuracy": 0.00079345703125,
+      "chance": 0.0009775171065493646,
+      "p_value": 0.8080400487324718,
+      "verdict": "at or below chance",
+      "end_guess_frac": 0.07781982421875,
+      "nominal_end_guess_rate": 0.008797653958944282,
+      "n_cache": 1023,
+      "n_end_per_cache": 9
+    },
+    "real_seed_r2_1": {
+      "n_correct": 25,
+      "n_total": 16384,
+      "accuracy": 0.00152587890625,
+      "chance": 0.0009775171065493646,
+      "p_value": 0.02248460315598917,
+      "verdict": "at or below chance",
+      "end_guess_frac": 0.06951904296875,
+      "nominal_end_guess_rate": 0.008797653958944282,
+      "n_cache": 1023,
+      "n_end_per_cache": 9
+    },
+    "real_seed_r2_2": {
+      "n_correct": 13,
+      "n_total": 16384,
+      "accuracy": 0.00079345703125,
+      "chance": 0.0009775171065493646,
+      "p_value": 0.8080400487324718,
+      "verdict": "at or below chance",
+      "end_guess_frac": 0.07550048828125,
+      "nominal_end_guess_rate": 0.008797653958944282,
+      "n_cache": 1023,
+      "n_end_per_cache": 9
+    }
+  },
+  "L3": {
+    "real_seed_r1_0": {
+      "n_correct": 14,
+      "n_total": 16384,
+      "accuracy": 0.0008544921875,
+      "chance": 0.0009765625,
+      "p_value": 0.7256083627681945,
+      "verdict": "at or below chance",
+      "end_guess_frac": 0.03326416015625,
+      "nominal_end_guess_rate": 0.0087890625,
+      "n_cache": 1024,
+      "n_end_per_cache": 9
+    },
+    "real_seed_r1_1": {
+      "n_correct": 12,
+      "n_total": 16384,
+      "accuracy": 0.000732421875,
+      "chance": 0.0009765625,
+      "p_value": 0.8731284522282637,
+      "verdict": "at or below chance",
+      "end_guess_frac": 0.03082275390625,
+      "nominal_end_guess_rate": 0.0087890625,
+      "n_cache": 1024,
+      "n_end_per_cache": 9
+    },
+    "real_seed_r1_2": {
+      "n_correct": 17,
+      "n_total": 16384,
+      "accuracy": 0.00103759765625,
+      "chance": 0.0009765625,
+      "p_value": 0.43403756909739927,
+      "verdict": "at or below chance",
+      "end_guess_frac": 0.03094482421875,
+      "nominal_end_guess_rate": 0.0087890625,
+      "n_cache": 1024,
+      "n_end_per_cache": 9
+    },
+    "real_seed_r2_0": {
+      "n_correct": 22,
+      "n_total": 16384,
+      "accuracy": 0.0013427734375,
+      "chance": 0.0009765625,
+      "p_value": 0.08912256729497933,
+      "verdict": "at or below chance",
+      "end_guess_frac": 0.0791015625,
+      "nominal_end_guess_rate": 0.0087890625,
+      "n_cache": 1024,
+      "n_end_per_cache": 9
+    },
+    "real_seed_r2_1": {
+      "n_correct": 12,
+      "n_total": 16384,
+      "accuracy": 0.000732421875,
+      "chance": 0.0009765625,
+      "p_value": 0.8731284522282637,
+      "verdict": "at or below chance",
+      "end_guess_frac": 0.07611083984375,
+      "nominal_end_guess_rate": 0.0087890625,
+      "n_cache": 1024,
+      "n_end_per_cache": 9
+    },
+    "real_seed_r2_2": {
+      "n_correct": 17,
+      "n_total": 16384,
+      "accuracy": 0.00103759765625,
+      "chance": 0.0009765625,
+      "p_value": 0.43403756909739927,
+      "verdict": "at or below chance",
+      "end_guess_frac": 0.07513427734375,
+      "nominal_end_guess_rate": 0.0087890625,
+      "n_cache": 1024,
+      "n_end_per_cache": 9
+    }
+  }
+}

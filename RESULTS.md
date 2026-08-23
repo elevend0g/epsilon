@@ -131,6 +131,20 @@ Direct challenge to finding 9's "geometry converges to essentially the same solu
 
 ---
 
+### 11. Regime 2 checkpoints guess END-flagged entries ~2x more often than Regime 1 under a foreign cache (2026-08-23)
+
+A secondary signature surfaced while running §4.1's leakage check, flagged in advance as a specific risk to watch for: with `MIN_END_DECOYS=8` plus each item's own true terminal, every cache carries exactly 9 END-flagged entries out of `N≈1022-1024` — a model that gives up on an unfamiliar (shuffled/foreign) cache and falls back to "guess among the END-looking entries" would land on one at a rate near `9/N≈0.88%` if guessing uniformly among them, well above the `1/N` rate of guessing uniformly among *all* cache entries.
+
+Measured directly: **Regime 1 checkpoints land on an END-flagged entry 2.8-3.3% of the time under a foreign cache; Regime 2 checkpoints land on one 6.9-7.9% of the time — both well above the 0.88% nominal rate, and Regime 2 consistently roughly double Regime 1, across all three chain lengths and all six checkpoints.** Plausible mechanism: Regime 2 was explicitly trained to recognize dead ends (B1/B2/C → ABSTAIN), so its query mechanism may have learned a genuine "when nothing looks right, prefer terminal-looking entries" fallback that Regime 1 — never trained on a single dead end — has no reason to develop. Not asserted as confirmed; Phase 3 (§5.4, comparing the trained abstain head against the §2.2 gate quadrant) is the actual test of whether this reflects a real dead-end-sensitive representation or a shallower correlate.
+
+**Does not affect the §4.1 leakage verdict.** Landing on *an* END-flagged position is a different event from landing on the *specific* position matching the true target — the primary accuracy metric stayed at nominal chance in every case regardless of this elevated rate, exactly as predicted before running the check: the two are separate questions, and an elevated END-guess rate should be reported as a behavioral finding, not mistaken for above-chance leakage.
+
+---
+
 ## Verdict against preregistered conditions
 
-**Phase 1 (competence gate) verdict: PASS on all six real seeds.** The full §2.6 commitment (2 regimes × 3 seeds, 614,400 total optimizer steps) has trained and every seed reached and held the §3.2 criterion (≥95% exact-match accuracy on arm A, held-out, at every `L ∈ {1,2,3}`, stable from `S*` through the terminal checkpoint). §3.3's rank verification passes for both regimes — query PR never approaches `rank=36` in any of the six seeds. No condition has been evaluated for Phase 2 (integrity checks) or Phase 3/4 (coverage, recursion) yet; those are downstream and unstarted.
+**Phase 1 (competence gate) verdict: PASS on all six real seeds.** The full §2.6 commitment (2 regimes × 3 seeds, 614,400 total optimizer steps) has trained and every seed reached and held the §3.2 criterion (≥95% exact-match accuracy on arm A, held-out, at every `L ∈ {1,2,3}`, stable from `S*` through the terminal checkpoint). §3.3's rank verification passes for both regimes — query PR never approaches `rank=36` in any of the six seeds.
+
+**Phase 2, §4.1 (leakage) verdict: PASS, all 18 checkpoint×chain-length combinations (2026-08-23).** Reported on its own, not pooled with §4.2/§4.3 — §4 requires all three checks reported separately, and a pooled verdict would hide which one measures what. Accuracy against the true target under a shuffled (different-item) cache stayed at or below nominal chance (`1/N`, `N≈1022-1024`) in every case; no `p`-value approached the `0.01` halt threshold (closest: `real_seed_r2_1` at `L=2`, `p=0.0225`, unremarkable given 18 tests run). No evidence the model's answer depends on anything but genuine cache content. See finding 11 below for a related behavioral signature that does not affect this verdict.
+
+Phase 2 §4.2 (counterfactual content flow) and §4.3 (margin dynamic range) have not been evaluated yet. Phase 3/4 (coverage, recursion) remain downstream and unstarted.
