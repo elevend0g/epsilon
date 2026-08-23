@@ -149,6 +149,18 @@ Plausible mechanism, consistent with finding 11's END-guessing asymmetry: a mode
 
 ---
 
+### 13. §4.3 fails its own preregistered criterion — top-1 accuracy saturates to exactly 1.0000, AUROC undefined (2026-08-23)
+
+`model/phase2_margin.py` measured teacher-forced per-step retrieval accuracy and margin AUROC on held-out arm-A items across all six checkpoints, all three chain lengths. Result, uniform across every checkpoint and every `L`: **top-1 accuracy = 1.0000, zero incorrect retrieval steps out of 294,912 pooled teacher-forced steps** (49,152 per checkpoint: 8,192 items × `L` summed over `L∈{1,2,3}`, times 6 checkpoints). §4.3 preregisters accuracy within `[0.60, 0.98]` — `1.0000` is outside that window. Margin AUROC needs both a correct and an incorrect class to be computable at all; with zero incorrect steps in a sample this large, it is undefined, not merely below the `0.70` threshold.
+
+**This is a coherent consequence of task structure, not an obviously broken measurement.** There is no error-correction across hops — a wrong retrieval at any single step propagates forward with nothing to recover it. §3.2's whole-walk exact-match gate (≥95%, held stable from `S*` through the terminal checkpoint) is therefore a much harder bar than any single step's accuracy: even a modest per-step error rate compounds multiplicatively across up to 3 hops and would drag whole-walk accuracy well below 95%. A checkpoint that reliably clears §3.2's gate is close to structurally required to show near-100% per-step accuracy on the same in-distribution (arm-A) data §4.3 measures against. The criterion's `[0.60, 0.98]` window looks like it was calibrated expecting daylight between per-step and whole-walk accuracy that these fully-converged, budget-exhaustion checkpoints don't have.
+
+**Reported as a genuine failure, not reinterpreted into a pass — this was an explicit decision, not a default.** §4 states all three checks must pass before any coverage or recursion claim; asked directly how to handle a check that fails for a structurally coherent reason, the answer was to log it exactly as measured and hold §4 as not fully cleared, rather than reason around it to let Phase 3 proceed. §4.1 and §4.2 both passed cleanly (findings above); §4.3's failure is specific to itself and does not average out against the other two.
+
+**What this means going forward, stated plainly so it isn't quietly worked around later:** Phase 3/4 do not proceed on the strength of §4.1/§4.2 alone. Resolving §4.3 — whether by remeasuring at a different point in training, revisiting whether the criterion transfers to a task this saturable, or some other explicit decision — is required before a coverage or recursion claim can be made, per §4's own stated rule.
+
+---
+
 ## Verdict against preregistered conditions
 
 **Phase 1 (competence gate) verdict: PASS on all six real seeds.** The full §2.6 commitment (2 regimes × 3 seeds, 614,400 total optimizer steps) has trained and every seed reached and held the §3.2 criterion (≥95% exact-match accuracy on arm A, held-out, at every `L ∈ {1,2,3}`, stable from `S*` through the terminal checkpoint). §3.3's rank verification passes for both regimes — query PR never approaches `rank=36` in any of the six seeds.
@@ -157,4 +169,6 @@ Plausible mechanism, consistent with finding 11's END-guessing asymmetry: a mode
 
 **Phase 2, §4.2 (counterfactual content flow) verdict: PASS, all six checkpoints (2026-08-23).** Reported separately from §4.1/§4.3. All three predictions confirmed exactly on `N=4096` held-out `L=2` items per checkpoint: clean arm retrieves the true `k2` 100% of the time; wrong-value arm retrieves the substituted `k2'`'s own entry 100% of the time (never the true `k2`) with margin *higher* than clean, not collapsed — the specific signature §4.2 requires, distinguishing genuine content flow from generic trajectory disruption; clamped arm collapses to near-chance on both targets with margin markedly lower. The pathway carries actual retrieved content forward, not a generic "something happened" signal. See finding 12 for a secondary pattern in the clamped arm's margin.
 
-Phase 2 §4.3 (margin dynamic range) has not been evaluated yet. Phase 3/4 (coverage, recursion) remain downstream and unstarted.
+**Phase 2, §4.3 (margin dynamic range) verdict: FAIL, all six checkpoints (2026-08-23).** Reported separately from §4.1/§4.2. Top-1 retrieval accuracy `= 1.0000` on every checkpoint, pooled and per-`L` — outside the preregistered `[0.60, 0.98]` window. Margin AUROC is undefined, not merely below `0.70`: zero incorrect retrieval steps occurred across 294,912 pooled teacher-forced steps (49,152 per checkpoint × 6), leaving no negative class to compute a ROC curve from. See finding 13 for the full writeup.
+
+**§4 states all three Phase 2 checks must pass before any coverage or recursion claim. That is read literally: Phase 2 is not fully cleared, and Phase 3/4 do not proceed on the strength of §4.1/§4.2's passes alone.** §4.1 and §4.2 passing does not offset §4.3 failing — reported per-check specifically so a partial result can't be misread as a pooled pass.
