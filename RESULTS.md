@@ -176,6 +176,8 @@ Every checkpoint clears `0.70` by a wide margin — margin genuinely and strongl
 
 **§4.3 is now PASS via this superseding criterion. Phase 2 (§4.1, §4.2, §4.3) is fully cleared — all three checks pass, reported separately, none pooled to hide a partial result.** This is also, in its own right, encouraging evidence for the §2.2 gate's basic premise: the margin signal the gate's integrate/abstain quadrant depends on does carry real information about whether a lookup should succeed, measured directly rather than assumed. Phase 3 may now proceed on Phase 2's strength — with the two predictions preregistered alongside this resolution (docs/phase1.md §4.3: the Regime-2 coverage-probe prediction from finding 12) standing as explicit, falsifiable commitments made before that data exists.
 
+**Addendum (2026-08-24): the Regime-2 prediction above was sharpened before Phase 3 launched, not after.** As originally written it was ordering-only ("Regime 2 higher than Regime 1") — satisfiable by a trivial `0.71` vs `0.70`, which understates what a sevenfold clamped-margin asymmetry actually predicts. `docs/phase1.md` §5.4 now fixes a real magnitude (Regime 2 AUROC `≥0.80` **and** a gap `≥0.15` over Regime 1) and, separately, an interpretation-priority rule for the most likely outcome pattern: if Regime 2 confirms while Regime 1 falls at/below its own `0.65` falsification line, the Regime 1 null is the headline finding, not a footnote to Regime 2's success — Regime 2 succeeding is close to tautological given it was trained directly on the abstention arms, while Regime 1 is the actual test of whether coverage emerges without supervision. Both fixed before any Phase 3 data exists.
+
 ---
 
 ## Verdict against preregistered conditions
