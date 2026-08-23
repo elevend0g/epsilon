@@ -68,8 +68,16 @@ Query PR came in closer: `26.99` against the pilot's `27.99`, both comfortably b
 
 **That contrast — geometry tight, timing loose — is worth stating on its own, not just as a footnote to the S* gap.** §3.3 already flagged the general shape from watching a single pilot mid-training ("participation ratios converging across all three [pilot] seeds *while one was still at 0.88 accuracy*: representational geometry stabilizes before behaviour does"). This is the same pattern, seen across two independently-trained runs rather than within one training trajectory, with a cleaner number attached: a 50% swing in *when* the network stabilizes produced under a 4% swing in *what* it stabilized to. Good news for §6.1's claims specifically, since those depend on the causal subspace being a stable property of the task rather than an artifact of one training run's particular path. **Not yet §3.3's actual seed-spread result** — that requires all three Regime 1 real seeds, not one real seed against one discarded pilot — logged here only so the pattern is on record before the remaining seeds arrive, not reconstructed from memory once they do.
 
+### 8. First Regime 2 real seed stabilized 3.2x faster than Regime 1's canary (2026-08-23)
+
+`real_seed_r2_0` (all five arms, the new abstain head, otherwise identical rank/budget/schedule to `real_seed_r1_0`) reached `S*=7,500` — against Regime 1's `23,800` on the same seed index. The abstain head itself converged fast and stayed there: BCE loss and per-batch accuracy both saturated (≈0 loss, 1.0 accuracy) from roughly step 700 onward, holding through the terminal checkpoint. Query PR (`28.58`) and causal PR (`26.92`) both landed in the same `26-29` cluster as the other three real-data points so far (§3.1.7's pilot, `real_seed_r1_0`) — the geometry-tight/timing-loose pattern from finding 7 held again, this time across regimes rather than across seeds.
+
+**One seed per regime is not evidence the effect is regime-general** — this is exactly §2.6's "one regime with three seeds is interpretable, two regimes with one seed each is not" concern, now showing up as a real number rather than a hypothetical. Logged here, not in `PREREG.md`'s numbers, specifically so it isn't quietly treated as established once `R1seed1`/`R2seed1` arrive.
+
+Worth naming a plausible mechanism without asserting it: Regime 2 trains on B1/B2/C in addition to A/D, and those arms include short, quickly-satisfiable examples (arm C's `rho=0` items supervise only the abstain head, no retrieval steps at all) — more, and more varied, gradient signal per wall-clock step could plausibly speed early optimization independent of anything specific to abstention as a capability. Equally plausible: pure seed variance, no regime effect at all, and `R1seed0`'s `23,800` or `R2seed0`'s `7,500` (or both) is simply where that particular seed's optimization landed. Nothing here distinguishes those two explanations — that is what the remaining four seeds are for.
+
 ---
 
 ## Verdict against preregistered conditions
 
-Not yet — one real seed (real_seed_r1_0, Regime 1) has trained and passed its canary check. The five-run remainder of the matrix has not launched.
+Not yet — two real seeds have trained (`real_seed_r1_0`, `real_seed_r2_0`) and both passed their checks. Four of six runs remain: `R1seed1, R2seed1, R1seed2, R2seed2`, per the pinned interleaved order.
