@@ -46,7 +46,10 @@ START_LR = 3e-3
 FLOOR_LR = 3e-5
 STEP_CAP = 30_000  # §3.1: ~4x where the slowest constant-LR pilot stabilized
 VAL_EVERY = 100
-N_VAL = 128
+N_VAL = 1024  # was 128 through the six-run matrix (RESULTS.md finding 10): 1/128 granularity
+              # is coarse against a criterion this close to its threshold and against §5.3's
+              # 5-point abstention budget. Raised for Phase 2 onward; the six completed real
+              # seeds' S* stays measured on the old instrument, not retroactively changed.
 N_GEOM = 30
 CRITERION = 0.95
 CHAIN_LENGTHS = (1, 2, 3)
