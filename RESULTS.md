@@ -76,6 +76,8 @@ Query PR came in closer: `26.99` against the pilot's `27.99`, both comfortably b
 
 Worth naming a plausible mechanism without asserting it: Regime 2 trains on B1/B2/C in addition to A/D, and those arms include short, quickly-satisfiable examples (arm C's `rho=0` items supervise only the abstain head, no retrieval steps at all) — more, and more varied, gradient signal per wall-clock step could plausibly speed early optimization independent of anything specific to abstention as a capability. Equally plausible: pure seed variance, no regime effect at all, and `R1seed0`'s `23,800` or `R2seed0`'s `7,500` (or both) is simply where that particular seed's optimization landed. Nothing here distinguishes those two explanations — that is what the remaining four seeds are for.
 
+**Update, second Regime 2 seed (2026-08-23): `real_seed_r2_1` reached `S*=3,000`.** Both Regime 2 seeds now sit far below both Regime 1 seeds — `[23800, 23800]` vs `[7500, 3000]`, no overlap at all — which is a materially stronger signal than the single-seed version of this finding above. Still four data points, not the six §2.6 commits to, but a regime effect on stabilization speed is now the better-supported explanation than pure coincidence. **Not yet claimed as settled**: `real_seed_r1_2` and `real_seed_r2_2` are what would make this a real 3-vs-3 comparison rather than 2-vs-2.
+
 ### 9. Two Regime 1 seeds landed on the exact same S* (2026-08-23) — verified genuine, not a duplicate-run bug
 
 `real_seed_r1_1` reached `S*=23,800` — the identical checkpoint index as `real_seed_r1_0`. Causal PR (25.36 vs 25.35) and query PR (26.99 vs 26.99) are likewise nearly indistinguishable. An exact match on a 100-step checkpoint grid across 102,400 steps was surprising enough on its own (roughly 1-in-1,000 by chance if S* were uniformly distributed across checkpoints) that it was checked before being logged as a result rather than a bug, following the standing lesson from findings 1-6: an implausible-looking number gets verified, not reported on faith.
@@ -86,8 +88,10 @@ Worth naming a plausible mechanism without asserting it: Regime 2 trains on B1/B
 
 **Not yet interpretable with two data points.** Either `23,800` is a real structural boundary this task/architecture combination converges toward regardless of seed (which would be a genuinely interesting finding about the training dynamics), or two independent seeds coincided by chance and a third will land somewhere else entirely. `real_seed_r1_2` is the run that distinguishes these — logged now so the coincidence is on record before that seed's result either sharpens it into a pattern or dissolves it into noise.
 
+**Weak evidence against the structural-boundary reading, from Regime 2 (finding 8's update):** `real_seed_r2_1` reached `S*=3,000` against `real_seed_r2_0`'s `7,500` — a 2.5x spread between two seeds trained under the identical schedule, rank, and step cap that produced R1's exact match. If `23,800` (or some other fixed step) reflected a genuine architectural/schedule boundary independent of training data, Regime 2's seeds would be expected to cluster near their own common value too, not spread 2.5x. They don't. This doesn't resolve the R1 coincidence — Regime 1 and Regime 2 are different training distributions, so a mechanism specific to one regime isn't ruled out — but it weakens the "universal boundary" reading somewhat in favor of "R1 seeds 0 and 1 coincided." `real_seed_r1_2` remains the direct test.
+
 ---
 
 ## Verdict against preregistered conditions
 
-Not yet — three real seeds have trained (`real_seed_r1_0`, `real_seed_r2_0`, `real_seed_r1_1`) and all three passed their checks. Three of six runs remain: `R2seed1, R1seed2, R2seed2`, per the pinned interleaved order.
+Not yet — four real seeds have trained (`real_seed_r1_0`, `real_seed_r2_0`, `real_seed_r1_1`, `real_seed_r2_1`) and all four passed their checks. Two of six runs remain: `R1seed2, R2seed2`, per the pinned interleaved order.
