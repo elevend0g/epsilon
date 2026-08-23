@@ -76,8 +76,18 @@ Query PR came in closer: `26.99` against the pilot's `27.99`, both comfortably b
 
 Worth naming a plausible mechanism without asserting it: Regime 2 trains on B1/B2/C in addition to A/D, and those arms include short, quickly-satisfiable examples (arm C's `rho=0` items supervise only the abstain head, no retrieval steps at all) — more, and more varied, gradient signal per wall-clock step could plausibly speed early optimization independent of anything specific to abstention as a capability. Equally plausible: pure seed variance, no regime effect at all, and `R1seed0`'s `23,800` or `R2seed0`'s `7,500` (or both) is simply where that particular seed's optimization landed. Nothing here distinguishes those two explanations — that is what the remaining four seeds are for.
 
+### 9. Two Regime 1 seeds landed on the exact same S* (2026-08-23) — verified genuine, not a duplicate-run bug
+
+`real_seed_r1_1` reached `S*=23,800` — the identical checkpoint index as `real_seed_r1_0`. Causal PR (25.36 vs 25.35) and query PR (26.99 vs 26.99) are likewise nearly indistinguishable. An exact match on a 100-step checkpoint grid across 102,400 steps was surprising enough on its own (roughly 1-in-1,000 by chance if S* were uniformly distributed across checkpoints) that it was checked before being logged as a result rather than a bug, following the standing lesson from findings 1-6: an implausible-looking number gets verified, not reported on faith.
+
+**Checked and ruled out as a duplicate:** step-0 loss differs (7.3425 vs 7.3834), the step-500 val_acc dip differs in shape and magnitude (seed 0 drops to L2=0.758/L3=0.719; seed 1 drops to L2=0.898/L3=0.906), the full trajectories differ at every logged step in between, and the two `.pt` checkpoint files have different content hashes. These are genuinely two different training runs, from different `torch.manual_seed` values and different data-generation seed streams, that independently converged to the same stabilization point.
+
+**What actually happened at that point:** both runs show their own *last* failing checkpoint at step 23,700 — both dipping to L3=0.945, one hundredth below the 0.95 criterion — then both hold PASS from 23,800 through their respective terminal checkpoints (78,600 and 78,700 steps later, with no further failures on either). The synchronization is not explained by a trivial "waiting for the LR schedule to anneal" story: `lr_at(23800) ≈ 2.62e-3`, only 13% decayed from the 3e-3 peak, nowhere near the floor.
+
+**Not yet interpretable with two data points.** Either `23,800` is a real structural boundary this task/architecture combination converges toward regardless of seed (which would be a genuinely interesting finding about the training dynamics), or two independent seeds coincided by chance and a third will land somewhere else entirely. `real_seed_r1_2` is the run that distinguishes these — logged now so the coincidence is on record before that seed's result either sharpens it into a pattern or dissolves it into noise.
+
 ---
 
 ## Verdict against preregistered conditions
 
-Not yet — two real seeds have trained (`real_seed_r1_0`, `real_seed_r2_0`) and both passed their checks. Four of six runs remain: `R1seed1, R2seed1, R1seed2, R2seed2`, per the pinned interleaved order.
+Not yet — three real seeds have trained (`real_seed_r1_0`, `real_seed_r2_0`, `real_seed_r1_1`) and all three passed their checks. Three of six runs remain: `R2seed1, R1seed2, R2seed2`, per the pinned interleaved order.
