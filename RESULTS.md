@@ -78,6 +78,19 @@ Worth naming a plausible mechanism without asserting it: Regime 2 trains on B1/B
 
 **Update, second Regime 2 seed (2026-08-23): `real_seed_r2_1` reached `S*=3,000`.** Both Regime 2 seeds now sit far below both Regime 1 seeds — `[23800, 23800]` vs `[7500, 3000]`, no overlap at all — which is a materially stronger signal than the single-seed version of this finding above. Still four data points, not the six §2.6 commits to, but a regime effect on stabilization speed is now the better-supported explanation than pure coincidence. **Not yet claimed as settled**: `real_seed_r1_2` and `real_seed_r2_2` are what would make this a real 3-vs-3 comparison rather than 2-vs-2.
 
+**Final update, full six-run matrix complete (2026-08-23): `real_seed_r2_2` reached `S*=3,000`, matching seed 1 exactly.** The complete comparison, all 3 seeds per regime:
+
+| | S* | causal PR | query PR |
+|---|---|---|---|
+| Regime 1 | `[23800, 23800, 24800]`, spread **1,000** | `[25.352, 25.362, 25.353]`, spread **0.010** | `[26.985, 26.986, 26.983]`, spread **0.003** |
+| Regime 2 | `[7500, 3000, 3000]`, spread **4,500** | `[26.921, 26.343, 27.263]`, spread **0.920** | `[28.580, 27.824, 28.946]`, spread **1.122** |
+
+No overlap between the regimes on `S*` at all — every Regime 2 seed stabilized faster than every Regime 1 seed. That is now a well-supported finding, not a coincidence: 3 vs 3, not 1 vs 1.
+
+**A second pattern emerges only with the full set, not visible in any pairwise comparison above: Regime 1 is tight on every axis, Regime 2 is loose on every axis.** Regime 1's spreads (1,000 / 0.010 / 0.003) are dramatically smaller than Regime 2's (4,500 / 0.920 / 1.122) across all three quantities — timing *and* geometry. This is the opposite of what finding 7/9 established as the general pattern (geometry tight, timing loose, *within* a regime) — here the axis that varies is *between* regimes, and Regime 2 is simply noisier across the board. Plausible mechanism, not asserted: Regime 2's more varied training distribution (five arms of differing structure and difficulty, versus Regime 1's two nearly-identical ones) gives each seed more room to find a different specific solution, even though all three still land in a materially faster, materially tighter time-to-competence than any Regime 1 seed. Both query PR maxima (Regime 1: 26.986, Regime 2: 28.946) stay well clear of `rank=36` — the bottleneck has slack in both regimes, this pattern doesn't threaten that conclusion.
+
+**Six-run commitment (§2.6) fully satisfied.** All findings above (this one and finding 9) are now based on the complete, preregistered sample — not partial data pending confirmation.
+
 ### 9. Two Regime 1 seeds landed on the exact same S* (2026-08-23) — verified genuine, not a duplicate-run bug
 
 `real_seed_r1_1` reached `S*=23,800` — the identical checkpoint index as `real_seed_r1_0`. Causal PR (25.36 vs 25.35) and query PR (26.99 vs 26.99) are likewise nearly indistinguishable. An exact match on a 100-step checkpoint grid across 102,400 steps was surprising enough on its own (roughly 1-in-1,000 by chance if S* were uniformly distributed across checkpoints) that it was checked before being logged as a result rather than a bug, following the standing lesson from findings 1-6: an implausible-looking number gets verified, not reported on faith.
@@ -96,4 +109,4 @@ Worth naming a plausible mechanism without asserting it: Regime 2 trains on B1/B
 
 ## Verdict against preregistered conditions
 
-Not yet — five real seeds have trained and all five passed their checks. Regime 1 is complete (3/3 seeds). One run remains: `R2seed2`, per the pinned interleaved order.
+**Phase 1 (competence gate) verdict: PASS on all six real seeds.** The full §2.6 commitment (2 regimes × 3 seeds, 614,400 total optimizer steps) has trained and every seed reached and held the §3.2 criterion (≥95% exact-match accuracy on arm A, held-out, at every `L ∈ {1,2,3}`, stable from `S*` through the terminal checkpoint). §3.3's rank verification passes for both regimes — query PR never approaches `rank=36` in any of the six seeds. No condition has been evaluated for Phase 2 (integrity checks) or Phase 3/4 (coverage, recursion) yet; those are downstream and unstarted.
