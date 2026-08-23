@@ -147,6 +147,7 @@ The shortcut hypothesis had four checks; the census and per-step trace were repo
 | Phase 4 pass structure | 2 arms (constrained/free) × 3 chain lengths = **6 combinations per run**, step budget fixed (above), not additionally swept | FIXED |
 | Integration count distribution — expectation | Mode at `ρ`, with **`P(m = ρ) ≥ 0.80`** on held-out arm A. Below that: report a gate failure, not a count finding | FIXED |
 | Integration count distribution — deviation semantics | `m > ρ`: gate over-fires, drifting toward always-integrate. `m < ρ`: gate skipped a hop — **not distinguishable from the count alone**; requires both the §1.3 capacity arithmetic and a §4.1 shuffled-cache check on those specific items before a "synthesis" interpretation is claimed. All `m ≠ ρ` findings logged, never filtered | FIXED |
+| Causal-subspace floor (§6.1, `RESULTS.md` finding 10) | Untrained/random-init models measure causal PR ≈15-17, query PR ≈21-22 on this fixed architecture — a floor supplied by `rank=36`'s dimensionality alone, before any training. Real seeds add a further, fairly consistent 5-11 points on top. §6.1's causal-subspace-constrained-recursion claims must be reported against this floor (raw PR **and** the floor-relative increment), not the raw measured PR alone, since the raw number conflates architecture with learned computation | FIXED (disclosure requirement for Phase 4 reporting) |
 
 ---
 

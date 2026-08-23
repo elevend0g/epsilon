@@ -411,6 +411,8 @@ Motivation: in the prior project, causal-subspace perturbation preserved ~98% of
 
 **This is an untested hypothesis, not a finding.** Report it as such regardless of outcome, and bound the claim by the §3.3 seed spread.
 
+**The causal subspace must be shown to be a property of the learned computation, not of the rank-36 projection alone (`RESULTS.md` finding 10).** Untrained, randomly-initialized models already measure causal PR in the 15-17 range and query PR in the 21-22 range on this architecture — the projection's fixed dimensionality supplies a floor before any training happens. Training moves both quantities up by a further, fairly consistent 5-11 points across every real seed measured so far. §6.1's constrained-vs-free comparison, and any claim built on "the causal subspace," should be read against that floor: the untrained baseline is what a causal-subspace-constrained perturbation would preserve from architecture alone, and the interesting claim is about the *increment* above it, not the raw measured PR. Report both the raw PR and the floor-relative increment when characterizing the causal subspace in Phase 4, not the raw number alone.
+
 ### 6.2 Integration count distribution
 
 Record `P(m integrations | generator chain length L)` — **conditioned on the generator's `L`, not on any depth label**, which no longer exists in the input.
