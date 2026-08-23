@@ -141,10 +141,20 @@ Measured directly: **Regime 1 checkpoints land on an END-flagged entry 2.8-3.3% 
 
 ---
 
+### 12. Clamped-arm margin collapses far more sharply for Regime 2 than Regime 1 (2026-08-23)
+
+§4.2's clamped arm (force `g₁=0`, nothing integrated) collapsed to near-chance retrieval on both the true and substituted targets in every checkpoint, as required — but the *margin* it collapsed to differs sharply by regime: **Regime 1's clamped margin sits at 1.64-2.25 (barely below its own clean-arm margin of ~2.09-2.25); Regime 2's clamped margin drops to 0.31-0.33, roughly a sixth to a seventh of Regime 1's.** Both regimes' clean and wrong-value margins are comparable to each other (~2.08-3.02 across the board) — the divergence is specific to the uninformative (clamped) state.
+
+Plausible mechanism, consistent with finding 11's END-guessing asymmetry: a model trained to recognize dead ends (Regime 2) may have learned a sharper, more discriminative "nothing here" signal — when the state genuinely carries no useful content, its retrieval margin drops hard, rather than defaulting to whatever residual bias an untrained-for-this-situation network happens to retain (Regime 1, which never saw an uninformative or dead-end state during training). Not asserted as confirmed. Consistent with, but not the same claim as, finding 11 — that one was about *which* entries get guessed under an out-of-distribution cache; this one is about the *confidence* of retrieval under a genuinely empty state. Both point the same direction: Regime 2's training exposure to dead ends appears to leave a measurable trace in how the model behaves when given nothing to work with, beyond just answering B1/B2/C items correctly.
+
+---
+
 ## Verdict against preregistered conditions
 
 **Phase 1 (competence gate) verdict: PASS on all six real seeds.** The full §2.6 commitment (2 regimes × 3 seeds, 614,400 total optimizer steps) has trained and every seed reached and held the §3.2 criterion (≥95% exact-match accuracy on arm A, held-out, at every `L ∈ {1,2,3}`, stable from `S*` through the terminal checkpoint). §3.3's rank verification passes for both regimes — query PR never approaches `rank=36` in any of the six seeds.
 
 **Phase 2, §4.1 (leakage) verdict: PASS, all 18 checkpoint×chain-length combinations (2026-08-23).** Reported on its own, not pooled with §4.2/§4.3 — §4 requires all three checks reported separately, and a pooled verdict would hide which one measures what. Accuracy against the true target under a shuffled (different-item) cache stayed at or below nominal chance (`1/N`, `N≈1022-1024`) in every case; no `p`-value approached the `0.01` halt threshold (closest: `real_seed_r2_1` at `L=2`, `p=0.0225`, unremarkable given 18 tests run). No evidence the model's answer depends on anything but genuine cache content. See finding 11 below for a related behavioral signature that does not affect this verdict.
 
-Phase 2 §4.2 (counterfactual content flow) and §4.3 (margin dynamic range) have not been evaluated yet. Phase 3/4 (coverage, recursion) remain downstream and unstarted.
+**Phase 2, §4.2 (counterfactual content flow) verdict: PASS, all six checkpoints (2026-08-23).** Reported separately from §4.1/§4.3. All three predictions confirmed exactly on `N=4096` held-out `L=2` items per checkpoint: clean arm retrieves the true `k2` 100% of the time; wrong-value arm retrieves the substituted `k2'`'s own entry 100% of the time (never the true `k2`) with margin *higher* than clean, not collapsed — the specific signature §4.2 requires, distinguishing genuine content flow from generic trajectory disruption; clamped arm collapses to near-chance on both targets with margin markedly lower. The pathway carries actual retrieved content forward, not a generic "something happened" signal. See finding 12 for a secondary pattern in the clamped arm's margin.
+
+Phase 2 §4.3 (margin dynamic range) has not been evaluated yet. Phase 3/4 (coverage, recursion) remain downstream and unstarted.

@@ -1,0 +1,109 @@
+{
+  "real_seed_r1_0": {
+    "clean": {
+      "hits_true_k2": 1.0,
+      "hits_wrong_idx": 0.0,
+      "mean_margin": 2.239468067884445
+    },
+    "wrong_value": {
+      "hits_true_k2": 0.0,
+      "hits_wrong_idx": 1.0,
+      "mean_margin": 2.8861561119556427
+    },
+    "clamped": {
+      "hits_true_k2": 0.0,
+      "hits_wrong_idx": 0.00048828125,
+      "mean_margin": 1.9069281071424484
+    }
+  },
+  "real_seed_r1_1": {
+    "clean": {
+      "hits_true_k2": 1.0,
+      "hits_wrong_idx": 0.0,
+      "mean_margin": 2.25114968419075
+    },
+    "wrong_value": {
+      "hits_true_k2": 0.0,
+      "hits_wrong_idx": 1.0,
+      "mean_margin": 2.8802401423454285
+    },
+    "clamped": {
+      "hits_true_k2": 0.0,
+      "hits_wrong_idx": 0.002197265625,
+      "mean_margin": 1.7990142405033112
+    }
+  },
+  "real_seed_r1_2": {
+    "clean": {
+      "hits_true_k2": 1.0,
+      "hits_wrong_idx": 0.0,
+      "mean_margin": 2.2541343569755554
+    },
+    "wrong_value": {
+      "hits_true_k2": 0.0,
+      "hits_wrong_idx": 1.0,
+      "mean_margin": 2.8872833251953125
+    },
+    "clamped": {
+      "hits_true_k2": 0.0,
+      "hits_wrong_idx": 0.0009765625,
+      "mean_margin": 1.6369441449642181
+    }
+  },
+  "real_seed_r2_0": {
+    "clean": {
+      "hits_true_k2": 1.0,
+      "hits_wrong_idx": 0.0,
+      "mean_margin": 2.0846208333969116
+    },
+    "wrong_value": {
+      "hits_true_k2": 0.0,
+      "hits_wrong_idx": 1.0,
+      "mean_margin": 2.9916937947273254
+    },
+    "clamped": {
+      "hits_true_k2": 0.000732421875,
+      "hits_wrong_idx": 0.00048828125,
+      "mean_margin": 0.30958523973822594
+    }
+  },
+  "real_seed_r2_1": {
+    "clean": {
+      "hits_true_k2": 1.0,
+      "hits_wrong_idx": 0.0,
+      "mean_margin": 2.086862802505493
+    },
+    "wrong_value": {
+      "hits_true_k2": 0.0,
+      "hits_wrong_idx": 1.0,
+      "mean_margin": 3.0162127017974854
+    },
+    "clamped": {
+      "hits_true_k2": 0.000732421875,
+      "hits_wrong_idx": 0.000732421875,
+      "mean_margin": 0.31529490649700165
+    }
+  },
+  "real_seed_r2_2": {
+    "clean": {
+      "hits_true_k2": 1.0,
+      "hits_wrong_idx": 0.0,
+      "mean_margin": 2.11321485042572
+    },
+    "wrong_value": {
+      "hits_true_k2": 0.0,
+      "hits_wrong_idx": 1.0,
+      "mean_margin": 3.0056054890155792
+    },
+    "clamped": {
+      "hits_true_k2": 0.00146484375,
+      "hits_wrong_idx": 0.0009765625,
+      "mean_margin": 0.3258231170475483
+    }
+  },
+  "_meta": {
+    "n": 4096,
+    "cache_size": 1023,
+    "chance": 0.0009775171065493646
+  }
+}
