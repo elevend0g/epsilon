@@ -372,6 +372,52 @@ Range across all 12: `[0.4927, 0.5068]`. Every cell's bootstrap CI straddles `0.
 
 ---
 
+### 23. The §5.4 secondary, built: the gate shows no discrimination between a genuine END and B2's fake terminal, in any of six seeds — cleaner and more complete than the probe null (2026-08-24)
+
+§5.4's own words: "The secondary Q2 result is the gate, not the probe. If the model abstains off count shortfall alone, with no difference in gate behaviour at the terminal step, then the abstention signal is a counter rather than a status. Report that explicitly either way." Sketched in finding 19, built here: `model/phase3_gate_secondary.py` measures the gate's raw soft output at the terminal step — `t=n_steps-1`, a single formula covering both arms (arm A: the step retrieving its own true END entry; arm B2: the step retrieving `kj`'s own entry, whose *key* is untouched by the corruption and whose retrieval is therefore a genuine, confident key match — only the *next* query, on the fake value `x` itself, is where B2 actually fails, already measured as P2).
+
+**All six checkpoints, `N=2048`/arm at the training config (`n_distractors=1021, L=2`):**
+
+| | A open frac | B2 open frac | A mean `g` | B2 mean `g` | raw AUROC | JOINT residual |
+|---|---|---|---|---|---|---|
+| R1seed0 | 1.0000 | 1.0000 | 0.9995 | 0.9995 | 0.4971 | 0.4801 |
+| R1seed1 | 1.0000 | 0.9995 | 0.9992 | 0.9989 | 0.5082 | 0.4531 |
+| R1seed2 | 1.0000 | 0.9990 | 0.9983 | 0.9976 | 0.4896 | 0.4606 |
+| R2seed0 | 1.0000 | 1.0000 | 0.9999 | 0.9999 | 0.4885 | 0.5009 |
+| R2seed1 | 1.0000 | 1.0000 | 0.9995 | 0.9995 | 0.4977 | 0.4617 |
+| R2seed2 | 1.0000 | 1.0000 | 0.9988 | 0.9990 | 0.5001 | 0.5444 |
+
+**The gate opens on essentially every item of both arms — near-universal, near-maximal confidence, in every checkpoint. Raw AUROC is already at chance (`0.489-0.508`) before any residualization is applied at all.** This is a cleaner result than finding 19's probe null in one specific sense: the probe's raw signal needed the margin/END-flag/count controls to reveal chance-level performance underneath a near-ceiling raw number. The gate's raw behavior needs no controls to read as chance — it simply does not distinguish the two conditions at all, at the one specific decision point (§2.2's integrate/hold gate) the whole architecture built to make exactly this distinction.
+
+**§2.2's quadrant occupancy, per arm, is close to identical within every checkpoint** — e.g. R1seed2: arm A `{integrate: 0.108, recurse: 0.392, emit: 0.392, abstain: 0.108}`, arm B2 `{integrate: 0.108, recurse: 0.392, emit: 0.392, abstain: 0.108}`, matching to three decimal places. (Quantiles here are empirical rank within the pooled A+B2 population at this checkpoint — no calibration-split CDF exists yet, per §8's simplest-version stand-in, logged in `AMENDMENTS.md`.) Whatever margin/displacement pattern the terminal step produces, arm A and arm B2 produce statistically indistinguishable versions of it.
+
+**§2.4's specific Regime-1 question, "does it open on `x`" — answered directly: yes, at `99.90-100%`, statistically indistinguishable from how often it opens on arm A's own genuine END (also `100%` in every R1 seed).** §2.4's own framing names the outcome: "Higher gate confidence is worse here: an open gate commits the terminal to state, and the abstention decision must then fight its own committed garbage." Confidence here is not merely high, it is *maximal and equal* between the two conditions — the outcome the text names as worse, observed cleanly, in all three Regime 1 seeds.
+
+**A genuine preregistration gap, surfaced by trying to report against it and logged rather than papered over:** §2.4's text ends "Preregister the prediction and the direction" — an instruction to state a specific, falsifiable claim before this data existed — but no such claim was ever actually pinned anywhere in `docs/phase1.md` or `PREREG.md`. The qualitative framing ("higher confidence is worse") is present; a testable number or rate is not. `AMENDMENTS.md` #4 logs this as a gap in the original preregistration, not as license to construct one retroactively — this finding reports the measured rate plainly, against the qualitative framing that does exist, without inventing the missing quantitative target after the fact.
+
+**§5.4's own stated criterion for the counter-not-status reading is met, in its own words, across all six seeds: no difference in gate behavior at the terminal step.** Combined with finding 16's P1 null (no evidence of encoded non-key status either) and finding 20's abstain-head null (the trained signal is a surface correlate), this is now three independent operationalizations — a frozen-state linear probe, a fully-trained nonlinear head, and the gate mechanism itself — agreeing on the same reading, on the same six checkpoints. This does not by itself settle Q2 (the 30-combo sweep remains outstanding, and this is six checkpoints' worth of one architecture, not a general claim), but within what this protocol actually measured, the gate result closes the specific question §5.4 named as secondary — and reads, if anything, more decisively than the probe did.
+
+---
+
+### 24. Positive control: the instrument correctly detects planted signal — the null is about the model, not a broken pipeline (2026-08-24)
+
+Post-hoc methodological control, per §8, explicitly not an arm, not a seed, never contributing to any Q2 result. §2.1: "A tempting response is to build an explicit register holding hop count, last margin, and value-validity, and point the probe at it. Do not... a probe that finds coverage in a channel built to carry coverage has measured the architect, not the model." This control deliberately builds exactly that forbidden channel and points the identical probe pipeline at it — confirming, before trusting the null any further, that the pipeline is even capable of reporting high AUROC when strong signal is genuinely, artificially present.
+
+**Implementation choice, logged (`AMENDMENTS.md` #5): the register was appended as extra probe input features on an existing checkpoint (`real_seed_r1_0`, no new training) rather than built into a separately-trained model.** §2.1's concern is that a channel *built to carry* coverage lets a probe measure the architect rather than the model — that is a claim about the instrument's detection capability, not about training dynamics, so post-hoc concatenation isolates the actual question this control is for.
+
+`model/phase3_positive_control.py`: `[pos2_state ; pos2_margin ; pos2_is_end ; pos2_integration_count]` fed to the same `fit_linear_probe`, on the same combo1 (`L=2→3`) items as findings 15/19.
+
+```
+augmented-feature probe: train_AUROC=1.0000  test_raw_AUROC=0.9992  JOINT_resid=0.5008[0.483,0.518]
+plain (unaugmented) state probe, same items: raw_AUROC=0.9976
+```
+
+**Reads cleanly: raw AUROC `0.9992`, near-ceiling — the pipeline correctly reports strong discrimination when a genuinely, artificially separable channel is present. The null found elsewhere is about the model, not a silently broken instrument.** The joint-residualized number (`0.5008`, chance) is *expected here and not informative* — it is not a second confirmation of anything, since the planted register is literally the same three quantities being residualized against; controlling for them removes almost the entire signal by construction, the way asking whether a shadow is still visible after removing the object that cast it isn't really a further test.
+
+**One genuinely interesting side observation, not the point of the control but worth keeping:** the plain, unaugmented state probe on the same items already reads `0.9976` — barely below the deliberately-augmented version's `0.9992`. Real state, produced by the model's own retrieval mechanics, already carries near-ceiling raw separability without any explicit register at all — consistent with finding 15's original observation that raw P2 AUROC is almost entirely margin-explained. The positive control's real information is in the raw number confirming instrument sanity; the near-equality with the unaugmented probe is a restatement of findings already on record, not a new one.
+
+---
+
 ## Verdict against preregistered conditions
 
 **Phase 1 (competence gate) verdict: PASS on all six real seeds.** The full §2.6 commitment (2 regimes × 3 seeds, 614,400 total optimizer steps) has trained and every seed reached and held the §3.2 criterion (≥95% exact-match accuracy on arm A, held-out, at every `L ∈ {1,2,3}`, stable from `S*` through the terminal checkpoint). §3.3's rank verification passes for both regimes — query PR never approaches `rank=36` in any of the six seeds.
@@ -388,4 +434,8 @@ Range across all 12: `[0.4927, 0.5068]`. Every cell's bootstrap CI straddles `0.
 
 **The §1.3 lower bound is not simply "clear" the way it first looked.** Raw-width computation gives `99.9x` the required floor — but that's too generous for this specific bound (finding 21): substituting a measured effective dimension (causal PR ≈`25.35`, primary) for the raw `512`-element width gives `4.95x`; even the most generous substitute (`rank=36`) gives only `7.02x` — **neither clears `16x`.** Per §5.4's own stated condition, this now-complete null is not entitled to the strong "ample room, unused" reading — the accurate framing is capacity-ambiguous, computed and stated before the remaining seeds landed, not chosen after.
 
-**No Q2-wide verdict is drawn — this comparison is complete, but Q2 is not.** The full 30-combo sweep (5 arms × 3 chain lengths × 2 bands; this covered 7 of those 30 per checkpoint) and the §5.4 secondary (terminal-step gate behavior, sketched in finding 19, not yet built) remain outstanding. What is now settled, across the complete preregistered seed commitment for this specific comparison: §5.4 does not formally fail, and no evidence of genuine state- or head-level coverage representation was found anywhere this canary looked, in either regime, replicated across all three seeds each. The two facts do not conflict — `AMENDMENTS.md` #1 already explains why the formal non-failure isn't informative on its own — but neither should be reported without the other.
+**The §5.4 secondary is now built, not just sketched, and agrees (finding 23).** Gate opens on ~100% of both arm A and arm B2 items in every checkpoint; raw AUROC `0.489-0.508` — chance, without even needing residualization; §2.2 quadrant occupancy near-identical between arms in every checkpoint. §2.4's Regime-1 question ("does it open on `x`?") answered directly: yes, `99.90-100%`, indistinguishable from arm A's own open rate. §5.4's own stated criterion for the counter-not-status reading — "no difference in gate behaviour at the terminal step" — is met in its own words, on all six seeds. A genuine gap surfaced in the process: §2.4 instructs "preregister the prediction and the direction" for this test but no specific numeric target was ever actually written down — logged (`AMENDMENTS.md` #4), not backfilled after seeing the result.
+
+**A positive control (finding 24) confirms this isn't an instrument artifact.** §2.1's explicitly-forbidden register (hop count, last margin, value-validity), appended post-hoc to an existing checkpoint's probe features, reads cleanly (raw AUROC `0.9992`) — the pipeline correctly detects strong signal when genuinely present. The nulls found elsewhere are about the model, not a silently broken measurement.
+
+**No Q2-wide verdict is drawn — this comparison (arm A vs. B2, probe + gate + trained head, all six seeds) is now complete on every operationalization attempted, but Q2 is not.** Three independent methods — a frozen-state linear probe, a fully-trained nonlinear head, and the gate mechanism itself — agree: no evidence of genuine coverage representation, on this architecture, at this scale. The full 30-combo sweep (5 arms × 3 chain lengths × 2 bands; this covered 7 of those 30 per checkpoint) remains outstanding and is being held pending review of this result, not run automatically. What is now settled: §5.4 does not formally fail, and nothing beyond structural confounds was found anywhere this looked, in either regime, replicated across all three seeds each and three separate methods. The two facts (formal non-failure, complete substantive null) do not conflict — `AMENDMENTS.md` #1 already explains why the formal non-failure isn't informative on its own — but neither should be reported without the other.

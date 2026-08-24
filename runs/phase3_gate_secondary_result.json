@@ -1,0 +1,164 @@
+{
+  "R1seed0": {
+    "a_mean_g": 0.9995483160018921,
+    "b2_mean_g": 0.9994862079620361,
+    "a_open_frac": 1.0,
+    "b2_open_frac": 1.0,
+    "raw_auroc": 0.4971134662628174,
+    "joint_residual": {
+      "resid_auroc": 0.4801156520843506,
+      "resid_ci": [
+        0.46277087926864624,
+        0.49735960364341736
+      ]
+    },
+    "a_quadrant": {
+      "integrate (high m, high d)": 0.115234375,
+      "recurse (low m, high d)": 0.384765625,
+      "emit (high m, low d)": 0.384765625,
+      "abstain (low m, low d)": 0.115234375
+    },
+    "b2_quadrant": {
+      "integrate (high m, high d)": 0.111328125,
+      "recurse (low m, high d)": 0.388671875,
+      "emit (high m, low d)": 0.388671875,
+      "abstain (low m, low d)": 0.111328125
+    },
+    "regime": "R1"
+  },
+  "R1seed1": {
+    "a_mean_g": 0.9991649389266968,
+    "b2_mean_g": 0.9988711476325989,
+    "a_open_frac": 1.0,
+    "b2_open_frac": 0.99951171875,
+    "raw_auroc": 0.5081627368927002,
+    "joint_residual": {
+      "resid_auroc": 0.45307064056396484,
+      "resid_ci": [
+        0.43551281094551086,
+        0.4702603220939636
+      ]
+    },
+    "a_quadrant": {
+      "integrate (high m, high d)": 0.10791015625,
+      "recurse (low m, high d)": 0.39208984375,
+      "emit (high m, low d)": 0.39208984375,
+      "abstain (low m, low d)": 0.10791015625
+    },
+    "b2_quadrant": {
+      "integrate (high m, high d)": 0.10302734375,
+      "recurse (low m, high d)": 0.39697265625,
+      "emit (high m, low d)": 0.39697265625,
+      "abstain (low m, low d)": 0.10302734375
+    },
+    "regime": "R1"
+  },
+  "R1seed2": {
+    "a_mean_g": 0.9982675909996033,
+    "b2_mean_g": 0.997569739818573,
+    "a_open_frac": 1.0,
+    "b2_open_frac": 0.9990234375,
+    "raw_auroc": 0.489605188369751,
+    "joint_residual": {
+      "resid_auroc": 0.46060991287231445,
+      "resid_ci": [
+        0.443086177110672,
+        0.47860217094421387
+      ]
+    },
+    "a_quadrant": {
+      "integrate (high m, high d)": 0.1083984375,
+      "recurse (low m, high d)": 0.3916015625,
+      "emit (high m, low d)": 0.3916015625,
+      "abstain (low m, low d)": 0.1083984375
+    },
+    "b2_quadrant": {
+      "integrate (high m, high d)": 0.1083984375,
+      "recurse (low m, high d)": 0.3916015625,
+      "emit (high m, low d)": 0.3916015625,
+      "abstain (low m, low d)": 0.1083984375
+    },
+    "regime": "R1"
+  },
+  "R2seed0": {
+    "a_mean_g": 0.9998545050621033,
+    "b2_mean_g": 0.9998553395271301,
+    "a_open_frac": 1.0,
+    "b2_open_frac": 1.0,
+    "raw_auroc": 0.48850250244140625,
+    "joint_residual": {
+      "resid_auroc": 0.5008549690246582,
+      "resid_ci": [
+        0.482730507850647,
+        0.518636167049408
+      ]
+    },
+    "a_quadrant": {
+      "integrate (high m, high d)": 0.20556640625,
+      "recurse (low m, high d)": 0.29443359375,
+      "emit (high m, low d)": 0.29443359375,
+      "abstain (low m, low d)": 0.20556640625
+    },
+    "b2_quadrant": {
+      "integrate (high m, high d)": 0.19873046875,
+      "recurse (low m, high d)": 0.30126953125,
+      "emit (high m, low d)": 0.30126953125,
+      "abstain (low m, low d)": 0.19873046875
+    },
+    "regime": "R2"
+  },
+  "R2seed1": {
+    "a_mean_g": 0.9995307326316833,
+    "b2_mean_g": 0.9994901418685913,
+    "a_open_frac": 1.0,
+    "b2_open_frac": 1.0,
+    "raw_auroc": 0.4977085590362549,
+    "joint_residual": {
+      "resid_auroc": 0.4617464542388916,
+      "resid_ci": [
+        0.4440491497516632,
+        0.4799617528915405
+      ]
+    },
+    "a_quadrant": {
+      "integrate (high m, high d)": 0.201171875,
+      "recurse (low m, high d)": 0.298828125,
+      "emit (high m, low d)": 0.298828125,
+      "abstain (low m, low d)": 0.201171875
+    },
+    "b2_quadrant": {
+      "integrate (high m, high d)": 0.2080078125,
+      "recurse (low m, high d)": 0.2919921875,
+      "emit (high m, low d)": 0.2919921875,
+      "abstain (low m, low d)": 0.2080078125
+    },
+    "regime": "R2"
+  },
+  "R2seed2": {
+    "a_mean_g": 0.9988248348236084,
+    "b2_mean_g": 0.9990254640579224,
+    "a_open_frac": 1.0,
+    "b2_open_frac": 1.0,
+    "raw_auroc": 0.5000855922698975,
+    "joint_residual": {
+      "resid_auroc": 0.5443825721740723,
+      "resid_ci": [
+        0.5261807441711426,
+        0.5617430806159973
+      ]
+    },
+    "a_quadrant": {
+      "integrate (high m, high d)": 0.18310546875,
+      "recurse (low m, high d)": 0.31689453125,
+      "emit (high m, low d)": 0.31689453125,
+      "abstain (low m, low d)": 0.18310546875
+    },
+    "b2_quadrant": {
+      "integrate (high m, high d)": 0.18310546875,
+      "recurse (low m, high d)": 0.31689453125,
+      "emit (high m, low d)": 0.31689453125,
+      "abstain (low m, low d)": 0.18310546875
+    },
+    "regime": "R2"
+  }
+}

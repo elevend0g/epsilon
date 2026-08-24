@@ -43,3 +43,25 @@ Per §8: "Where a design decision is ambiguous, implement the simplest version, 
 **Result: all three substitutes fall below `16×`** — causal PR gives `4.95×`, query PR `5.27×`, `rank` (the most generous) `7.02×`. `RESULTS.md` finding 21 has the full table and the consequence for how a P2/abstain-head null (findings 19, 20) should be framed if it holds through the remaining four seeds: capacity-ambiguous, not "ample room, unused" — the accurate framing under the effective-dimension reading, stated now rather than chosen after seeing whether the null holds up.
 
 **Does not touch §1.3's preregistered bounds themselves — both were, and remain, satisfied under the raw-width computation exactly as specified.** This changes how a *different* preregistered clause (§5.4's, which leans on the lower bound for interpretation, not for its own pass/fail) should read the number, not the number's own preregistered status.
+
+---
+
+## 4. §2.4's generalization test was never actually given a testable prediction (2026-08-24)
+
+**The gap.** §2.4 closes its description of the Regime-1-on-B2 generalization test with: "Preregister the prediction and the direction." That sentence is an instruction to state something — a specific, falsifiable rate or comparison — before the data existed. No such statement was ever written anywhere in `docs/phase1.md` or `PREREG.md`. What exists instead is qualitative framing one sentence earlier: "Higher gate confidence is worse here." Useful for *interpreting* a result, not sufficient to have preregistered one.
+
+**What triggered noticing it.** Building `model/phase3_gate_secondary.py` to report this test's result (`RESULTS.md` finding 23) required checking what, exactly, had been preregistered to report *against*. There wasn't one.
+
+**Resolution — do not construct the missing prediction now, after seeing the data.** That would be indistinguishable from choosing a threshold to fit a result already in hand, the exact failure mode this project's discipline exists to prevent, even though the *instruction* to preregister came first — a gap in execution, not license to backfill it once measurement is possible. Finding 23 reports the measured rate (gate opens on B2's `x` at `99.90-100%`, statistically indistinguishable from arm A's own `100%` genuine-END open rate) plainly, against the qualitative framing that does exist ("higher confidence is worse" — confidence here is maximal on both), without asserting that a specific numeric target was cleared or missed, because no such target was ever set.
+
+**General note for future preregistration text in this project: an instruction to preregister something, standing alone, is not the same as having preregistered it.** Worth checking, before treating any doc section as complete, whether every "preregister X" sentence has a corresponding X actually written down somewhere, not just the instruction to write one.
+
+---
+
+## 5. Positive control: register appended post-hoc, not a separately-trained model (2026-08-24)
+
+**The choice.** §5.4's secondary evidence plan called for a positive control — a throwaway model with the explicit status register §2.1 forbids (hop count, last margin, value-validity), run through the identical probe pipeline, to confirm the P2 null is about the model and not a broken instrument. Implemented as: append `[pos2_margin, pos2_is_end, pos2_integration_count]` directly to the probe's input features on an *already-trained* checkpoint (`real_seed_r1_0`), rather than building and training a separate model with the register wired into its forward pass.
+
+**Reasoning, logged per §8's simplest-version rule.** §2.1's stated concern — "a probe that finds coverage in a channel built to carry coverage has measured the architect, not the model" — is a claim about what the *instrument* can detect when given a genuinely, artificially separable channel, not a claim about *training dynamics* (whether gradient descent would naturally discover or entangle such a channel). Post-hoc concatenation isolates exactly the instrument question without the added cost and confound of new training, and without needing to decide how such a register would be exposed to the rest of a network's forward pass (a design question this control doesn't need to answer to serve its purpose).
+
+**What this does and doesn't validate.** `RESULTS.md` finding 24: raw AUROC `0.9992` on the augmented probe confirms the capture→probe→AUROC pipeline correctly reports near-ceiling discrimination when strong signal is genuinely present — ruling out a silently-broken instrument as the explanation for the P2/gate nulls elsewhere. The joint-residualized reading (`0.5008`, chance) is expected by construction here (the planted register **is** the residualized covariates) and is not a second, independent confirmation of anything — noted explicitly in the finding so it isn't misread as such.
