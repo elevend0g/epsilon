@@ -19,6 +19,7 @@ from model.phase2_counterfactual import COUNTERFACTUAL_SEED
 from model.phase2_margin import MARGIN_SEED
 from model.phase2_margin_barm import BARM_SEED
 from model.phase4_count import COUNT_SEED_BASE
+from model.gate_calibration import CALIBRATION_SEED_BASE
 
 MAX_L = max(CHAIN_LENGTHS)
 
@@ -50,6 +51,8 @@ RESERVED_RANGES: dict[str, tuple[int, int]] = {
     "PHASE3_GAP_DIAGNOSTIC (§8 post-hoc)": (820_000_000, 820_000_005),
     # model/phase4_count.py: COUNT_SEED_BASE + L, L in CHAIN_LENGTHS.
     "PHASE4_COUNT (§6.2)": (COUNT_SEED_BASE + 1, COUNT_SEED_BASE + MAX_L),
+    # model/gate_calibration.py: CALIBRATION_SEED_BASE + L, L in CHAIN_LENGTHS.
+    "GATE_CALIBRATION (§2.2/§5.3)": (CALIBRATION_SEED_BASE + 1, CALIBRATION_SEED_BASE + MAX_L),
 }
 
 

@@ -25,8 +25,18 @@ path as model/phase3_canary.py. No threshold on the residualized number
 Also computes §2.2's quadrant occupancy (margin-quantile x displacement-
 quantile) as a 2x2 per arm, not collapsed to a scalar. No calibration-
 split CDF exists yet (PREREG.md: PENDING) -- quantiles are the empirical
-rank within the pooled A+B2 terminal-step population for this checkpoint,
+rank WITHIN EACH ARM'S OWN terminal-step population for this checkpoint
+(quadrant_table() is called separately on a_data and b2_data below),
 logged as the §8 simplest-version stand-in.
+
+CORRECTION (2026-08-24): this docstring previously said "pooled A+B2
+population" -- wrong, checked by direct code trace (RESULTS.md finding
+29). The split is per-arm, which makes most of the table's apparent
+cross-arm agreement a mathematical guarantee (RESULTS.md finding 23's
+correction has the full derivation), not a fact about the arms. A
+non-tautological version, using a real fitted calibration-split CDF and
+tau applied identically to both arms, is in model/gate_calibration.py
+(RESULTS.md finding 30).
 """
 
 from __future__ import annotations

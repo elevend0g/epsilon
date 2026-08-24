@@ -1,0 +1,38 @@
+=== R1seed0 (R1): runs/real_seed_r1_0.pt ===
+  calibration: n_pooled=6144  margin_median=2.1857  frac_exactly_zero_displacement=0.5000
+  floor: L1=N/A(rho=0)  L2=0.0000  L3=0.0000  tau_quantile=0.0500  tau=0.0000
+  displacement scale check: A mean/median=2187.86/2207.54  B2 mean/median=2182.58/2201.76  separability_AUROC=0.5080
+  A quadrant (fitted CDF/tau):  {'integrate (high m, high d)': 0.4892578125, 'recurse (low m, high d)': 0.5107421875, 'emit (high m, low d)': 0.0, 'abstain (low m, low d)': 0.0}
+  B2 quadrant (fitted CDF/tau): {'integrate (high m, high d)': 0.4892578125, 'recurse (low m, high d)': 0.5107421875, 'emit (high m, low d)': 0.0, 'abstain (low m, low d)': 0.0}
+=== R1seed1 (R1): runs/real_seed_r1_1.pt ===
+  calibration: n_pooled=6146  margin_median=2.1839  frac_exactly_zero_displacement=0.4998
+  floor: L1=N/A(rho=0)  L2=0.0000  L3=0.0000  tau_quantile=0.0500  tau=0.0000
+  displacement scale check: A mean/median=2092.31/2111.69  B2 mean/median=2085.10/2102.27  separability_AUROC=0.5100
+  A quadrant (fitted CDF/tau):  {'integrate (high m, high d)': 0.48388671875, 'recurse (low m, high d)': 0.51611328125, 'emit (high m, low d)': 0.0, 'abstain (low m, low d)': 0.0}
+  B2 quadrant (fitted CDF/tau): {'integrate (high m, high d)': 0.501953125, 'recurse (low m, high d)': 0.498046875, 'emit (high m, low d)': 0.0, 'abstain (low m, low d)': 0.0}
+=== R1seed2 (R1): runs/real_seed_r1_2.pt ===
+  calibration: n_pooled=6144  margin_median=2.1904  frac_exactly_zero_displacement=0.5000
+  floor: L1=N/A(rho=0)  L2=0.0000  L3=0.0000  tau_quantile=0.0500  tau=0.0000
+  displacement scale check: A mean/median=1979.05/1994.44  B2 mean/median=1986.85/1998.38  separability_AUROC=0.4922
+  A quadrant (fitted CDF/tau):  {'integrate (high m, high d)': 0.5234375, 'recurse (low m, high d)': 0.4765625, 'emit (high m, low d)': 0.0, 'abstain (low m, low d)': 0.0}
+  B2 quadrant (fitted CDF/tau): {'integrate (high m, high d)': 0.50146484375, 'recurse (low m, high d)': 0.49853515625, 'emit (high m, low d)': 0.0, 'abstain (low m, low d)': 0.0}
+=== R2seed0 (R2): runs/real_seed_r2_0.pt ===
+  calibration: n_pooled=6144  margin_median=2.0540  frac_exactly_zero_displacement=0.5000
+  floor: L1=N/A(rho=0)  L2=0.0000  L3=0.0000  tau_quantile=0.0500  tau=0.0000
+  displacement scale check: A mean/median=2371.89/2356.12  B2 mean/median=2357.42/2346.58  separability_AUROC=0.5196
+  A quadrant (fitted CDF/tau):  {'integrate (high m, high d)': 0.5, 'recurse (low m, high d)': 0.5, 'emit (high m, low d)': 0.0, 'abstain (low m, low d)': 0.0}
+  B2 quadrant (fitted CDF/tau): {'integrate (high m, high d)': 0.48828125, 'recurse (low m, high d)': 0.51171875, 'emit (high m, low d)': 0.0, 'abstain (low m, low d)': 0.0}
+=== R2seed1 (R2): runs/real_seed_r2_1.pt ===
+  calibration: n_pooled=6144  margin_median=2.0426  frac_exactly_zero_displacement=0.5000
+  floor: L1=N/A(rho=0)  L2=0.0000  L3=0.0000  tau_quantile=0.0500  tau=0.0000
+  displacement scale check: A mean/median=2445.23/2434.35  B2 mean/median=2460.76/2449.63  separability_AUROC=0.4806
+  A quadrant (fitted CDF/tau):  {'integrate (high m, high d)': 0.50439453125, 'recurse (low m, high d)': 0.49560546875, 'emit (high m, low d)': 0.0, 'abstain (low m, low d)': 0.0}
+  B2 quadrant (fitted CDF/tau): {'integrate (high m, high d)': 0.48828125, 'recurse (low m, high d)': 0.51171875, 'emit (high m, low d)': 0.0, 'abstain (low m, low d)': 0.0}
+=== R2seed2 (R2): runs/real_seed_r2_2.pt ===
+  calibration: n_pooled=6144  margin_median=2.0740  frac_exactly_zero_displacement=0.5000
+  floor: L1=N/A(rho=0)  L2=0.0000  L3=0.0000  tau_quantile=0.0500  tau=0.0000
+  displacement scale check: A mean/median=1940.03/1941.09  B2 mean/median=1933.14/1931.51  separability_AUROC=0.5130
+  A quadrant (fitted CDF/tau):  {'integrate (high m, high d)': 0.48486328125, 'recurse (low m, high d)': 0.51513671875, 'emit (high m, low d)': 0.0, 'abstain (low m, low d)': 0.0}
+  B2 quadrant (fitted CDF/tau): {'integrate (high m, high d)': 0.49462890625, 'recurse (low m, high d)': 0.50537109375, 'emit (high m, low d)': 0.0, 'abstain (low m, low d)': 0.0}
+
+wrote runs/gate_calibration_result.json
