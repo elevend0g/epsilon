@@ -180,6 +180,27 @@ Every checkpoint clears `0.70` by a wide margin — margin genuinely and strongl
 
 ---
 
+### 15. Phase 3 canary: the P2 probe pipeline validates end to end on one Regime 1 seed — no verdict drawn, one seed can't carry one (2026-08-24)
+
+Before spending the full six-checkpoint, 30-combo sweep, `model/phase3_probe.py` and `model/phase3_run_canary.py` ran the P2/P1 probes and the arm-D disqualifier on one checkpoint (`real_seed_r1_0`) and a 7-combo subset (arm A/B2 at the training config, both cross-condition test configs, arm D at the training config) — same staging logic as the real-seed canary run. Results, `N=2048`/combo:
+
+| | train AUROC | test raw | test margin-only | test residualized [95% CI] |
+|---|---|---|---|---|
+| P2, combo1 (`L=2→3`) | 0.9999 | 0.9976 | 0.9955 | `0.6438` `[0.6263, 0.6607]` |
+| P2, combo2 (`1021→256`) | 0.9999 | 0.9986 | 0.9913 | `0.7133` `[0.6967, 0.7291]` |
+
+P1 (raw only — see `AMENDMENTS.md` #1 for why residualization doesn't apply here): combo1 `0.6871`, combo2 `1.0000`. Arm D disqualifier: the A-vs-B2 probe predicts "answerable" on **100%** of D items — passes cleanly, not a length/token-count artifact.
+
+**Exactly the pattern predicted before running anything: raw AUROC is near-ceiling and almost entirely explained by margin alone (margin-only AUROC ~0.99, nearly matching raw); after residualizing, real but modest signal survives.** This is the first empirical confirmation that P2's raw number would have been close to uninformative on its own, and that the residualized number is where the actual content is.
+
+**§5.4's threshold turned out to be genuinely ambiguous against this new residualized quantity — resolved in `AMENDMENTS.md` #1, not decided in the moment.** Combo1's residualized point estimate (`0.6438`) landed a few thousandths under `0.65`; deciding right then whether §5.4's threshold was ever meant to apply to the residualized reading would have been interpretation made after seeing a boundary-adjacent number. Resolved instead via §8's simplest-version rule: §5.4 reads on raw AUROC as literally written; residualized AUROC is a separate, always-reported condition with no threshold of its own. Under that resolution, nothing here is close to failing §5.4 — raw AUROC clears `0.65` by a wide margin in both combos.
+
+**The 95% CI matters more than the point estimate here, and was computed before treating `0.6438` as meaningfully close to anything.** Bootstrap CI on combo1's residualized AUROC: `[0.6263, 0.6607]`, width ≈`±0.017` — `0.65` sits comfortably inside it. A gap this size, on one seed, is within ordinary sampling noise, not a signal — the same lesson `N_VAL` being raised 128→1,024 already established (finding 10): don't let a margin this thin drive an interpretation.
+
+**No falsification or confirmation verdict is drawn from this. One seed cannot carry one — §2.6's three-seeds-per-regime commitment exists precisely so no single run does, whether the result looks like a pass or a fail.** This canary's job was narrower and is done: confirm the pipeline produces real, stable, non-degenerate numbers (it does — train AUROC near-ceiling, sensible raw/margin-only/residualized ordering, a clean D-disqualifier pass, a CI properly sized to the sample) before spending the other five checkpoints' worth of compute on it.
+
+---
+
 ## Verdict against preregistered conditions
 
 **Phase 1 (competence gate) verdict: PASS on all six real seeds.** The full §2.6 commitment (2 regimes × 3 seeds, 614,400 total optimizer steps) has trained and every seed reached and held the §3.2 criterion (≥95% exact-match accuracy on arm A, held-out, at every `L ∈ {1,2,3}`, stable from `S*` through the terminal checkpoint). §3.3's rank verification passes for both regimes — query PR never approaches `rank=36` in any of the six seeds.
@@ -191,3 +212,5 @@ Every checkpoint clears `0.70` by a wide margin — margin genuinely and strongl
 **Phase 2, §4.3 (margin dynamic range) verdict: the arm-A form FAILED and is permanently unsatisfiable by construction (finding 13); superseded by a B-arm criterion fixed before measurement, which PASSES on all six checkpoints (finding 14, 2026-08-23).** Reported separately from §4.1/§4.2. Arm-A top-1 retrieval accuracy `= 1.0000` on every checkpoint, outside `[0.60, 0.98]`, with margin AUROC undefined for lack of a negative class — a structural consequence of no error-correction across hops, not an artifact of measurement timing. The superseding criterion (margin AUROC discriminating present-key from absent-key queries, threshold `≥0.70` fixed before this was run) passes cleanly on all six checkpoints: AUROC `0.9987-0.9990` (Regime 1), `0.9944-0.9956` (Regime 2).
 
 **Phase 2 (§4.1, §4.2, §4.3) is now fully cleared — all three checks pass, reported separately.** Phase 3/4 may proceed on Phase 2's strength. Two predictions were preregistered before Phase 3 data exists, alongside §4.3's resolution: the Regime-2 coverage-probe prediction from finding 12 (docs/phase1.md §4.3), and §5.4's existing Regime-1 falsification threshold (unchanged).
+
+**Phase 3 (Q2 coverage probe): pipeline validated, no verdict yet (2026-08-24).** One Regime 1 checkpoint (`real_seed_r1_0`) ran end to end and produced real, stable, interpretable numbers (finding 15) — raw P2 AUROC `0.998-0.999`, residualized `0.644-0.713` (95% CI `[0.626,0.661]`/`[0.697,0.729]`), clean arm-D disqualifier pass. §5.4's `0.65` threshold is confirmed to apply to raw AUROC, not residualized (`AMENDMENTS.md` #1) — under that reading nothing here is close to falsifying. **No falsification-or-confirmation verdict is drawn: §2.6 commits to three seeds per regime specifically so no single run carries an interpretation, and that applies whether the one seed available looks like a pass or a fail.** Remaining work: the other two Regime 1 seeds, all three Regime 2 seeds, the full 30-combo sweep (this canary covered 7), and P1's own interpretation (asymmetric so far: `0.687` combo1 vs `1.000` combo2, not yet explained).
