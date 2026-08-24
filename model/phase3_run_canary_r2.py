@@ -1,14 +1,14 @@
-"""Phase 3 canary: one Regime 1 checkpoint (real_seed_r1_0), end to end
--- probe corpus, state capture, P2 probe with margin regression, P1,
-arm D disqualifier. Confirms the pipeline produces interpretable
-numbers before spending the other five checkpoints (same staging logic
-as the real-seed canary run, §2.6).
+"""Phase 3 canary: one Regime 2 checkpoint (real_seed_r2_0), end to end
+-- probe corpus, state capture, P2 probe with BOTH regress-out controls
+built in from the start (margin, per §5.1's original requirement, and
+END-flag identity, per §5.1's Regime-2-specific second control fixed
+in the prior commit, from finding 11's END-guess-rate asymmetry), P1,
+arm D disqualifier.
 
-Scope, deliberately narrower than the full 30-combo sweep: arm A and
-B2 at the training config (n_distractors=1021, L=2), both cross-
-condition test configs (L=3 same band; n_distractors=256 same L), and
-arm D at the training config for the disqualifier. B1/C and the L=1
-condition are part of the full sweep, not this validation pass.
+Same probe corpus (same seeds, same items) as the Regime 1 canary
+(model/phase3_run_canary.py) -- only the checkpoint differs, so the two
+runs' numbers are directly comparable. Scope is the same 7-combo subset
+as the R1 canary, same reasons.
 """
 
 from __future__ import annotations
@@ -20,7 +20,7 @@ from model.phase3_probe import (
     load_model, probe_score, residualize,
 )
 
-CHECKPOINT = "runs/real_seed_r1_0.pt"
+CHECKPOINT = "runs/real_seed_r2_0.pt"
 
 
 def report_transfer(name: str, train_pos: dict, test_pos: dict, position: str,
@@ -104,15 +104,20 @@ def main() -> None:
     test_L3 = combine(("A", 1021, 3), ("B2", 1021, 3))
     test_256 = combine(("A", 256, 2), ("B2", 256, 2))
 
-    print("\n=== P2 (after the next lookup returns low margin) ===", flush=True)
-    p2_L3 = report_transfer("combo1 (L=2->3)", train, test_L3, "pos2", [("pos2_margin", "margin")])
-    p2_256 = report_transfer("combo2 (1021->256)", train, test_256, "pos2", [("pos2_margin", "margin")])
+    print("\n=== P2 (after the next lookup returns low margin) — both controls built in ===", flush=True)
+    P2_CONTROLS = [("pos2_margin", "margin"), ("pos2_is_end", "endflag")]
+    p2_L3 = report_transfer("combo1 (L=2->3)", train, test_L3, "pos2", P2_CONTROLS)
+    p2_256 = report_transfer("combo2 (1021->256)", train, test_256, "pos2", P2_CONTROLS)
     p2_L3_resid = p2_L3["residuals"]["margin"]["resid_auroc"]
     p2_256_resid = p2_256["residuals"]["margin"]["resid_auroc"]
-    print(f"P2 residualized spread: combo1(L transfer)={p2_L3_resid:.4f}  "
+    print(f"P2 margin-residualized spread: combo1(L transfer)={p2_L3_resid:.4f}  "
           f"combo2(band transfer)={p2_256_resid:.4f}  -- "
-          f"{'L transfer is lower, same direction as P1' if p2_L3_resid < p2_256_resid else 'L transfer is NOT lower -- does not match P1 pattern'}",
+          f"{'L transfer is lower, same direction as R1' if p2_L3_resid < p2_256_resid else 'L transfer is NOT lower'}",
           flush=True)
+    print(f"P2 endflag-residualized: combo1={p2_L3['residuals']['endflag']['resid_auroc']:.4f}  "
+          f"combo2={p2_256['residuals']['endflag']['resid_auroc']:.4f}  "
+          f"(endflag_only_AUROC: combo1={p2_L3['residuals']['endflag']['cov_only_auroc']:.4f}  "
+          f"combo2={p2_256['residuals']['endflag']['cov_only_auroc']:.4f})", flush=True)
 
     print("\n=== P1 (after integrating kj, before the next lookup resolves) ===", flush=True)
     report_transfer("combo1 (L=2->3)", train, test_L3, "pos1", [("pos1_integration_count", "count")])
