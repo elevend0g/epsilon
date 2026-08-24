@@ -178,7 +178,9 @@ The shortcut hypothesis had four checks; the census and per-step trace were repo
 
 **FIXED now, everything Phase 1 pilots can settle:** generator structure and invariants, capacity bounds (computed), gate mechanics, supervision regimes, `ρ` definition (including the B1/B2 off-by-one) and its scoping to arm A, competence gate threshold (judged at the terminal checkpoint, never first pass), seed-shopping prohibition, the corrected §3.1.5/§3.3 rank division of labor, all of §4's integrity-check criteria, Q2 probe protocol and falsification threshold, the §6.1 step-budget formula, the §6.2 expected-distribution target and deviation semantics, the `MIN_END_DECOYS=8` generator requirement (§3.1.6), the corrected `S*` definition, the `4×` budget multiplier, the cosine LR schedule (`RECIPE_LOG.md`), and — final, measured 2026-08-22 on genuinely stable pilots — the training budget (**102,400 steps**) and query-projection rank (**36**).
 
-**PENDING (needs a real-seed run to produce a number):** gate CDF fit, abstention threshold τ, query-PR verification against the real-seed rank (§3.3).
+**PENDING:** abstention threshold `τ` (needs a real-seed validation-split measurement, including the floor itself, per §5.3's corrected target — never run). **Gate CDF fit: not merely pending a run — `RESULTS.md` finding 29 (2026-08-24) found it was never implemented at all, for the whole project, not just pilots.** `model/gate.py::QuantileGate` uses `BatchNorm1d` running statistics throughout (all six real seeds), not the frozen calibration-split empirical CDF §2.2 specifies; the "pilot-specific simplification" comment in the code was never revisited. Fixing this needs an implementation change and re-verification, not just a measurement pass on data that already exists.
+
+*(Query-PR verification against the real-seed rank, §3.3 — previously listed here — is complete: **FIXED, measured, PASS**, see the §3.3 row above. Corrected 2026-08-24; this line had gone stale after §3.3 finished while remaining unremoved here, contradicting this file's own "nothing frozen until every entry reads FIXED" rule.)*
 
 **BLOCKED:** none.
 
