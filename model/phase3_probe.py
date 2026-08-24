@@ -85,6 +85,8 @@ def capture_pos1_pos2(model, batch: dict, arm: str) -> dict:
     # decisive (break) query is step n_steps, one past their valid prefix.
     pos1_count = torch.where(is_abstain, n_steps, (n_steps - 1).clamp(min=0))
 
+    integration_count = torch.zeros(state.shape[0], device=state.device)  # sum of g_eff through pos1 -- the actual
+                                                                            # gate-fire count, not just the step index
     for t in range(L):
         active = (t < pos1_count)
         query = model._query(state)
@@ -94,6 +96,7 @@ def capture_pos1_pos2(model, batch: dict, arm: str) -> dict:
         margin = margin_from_logits(logits)
         g = model.gate(margin, (state - prev_state).flatten(1).norm(dim=-1))
         g_eff = g * active.float() * (1.0 - is_end_now.float())
+        integration_count = integration_count + g_eff
         retrieved_value = cache_values.gather(
             1, target.view(-1, 1, 1).expand(-1, 1, cache_values.shape[-1])
         ).squeeze(1)
@@ -104,6 +107,7 @@ def capture_pos1_pos2(model, batch: dict, arm: str) -> dict:
         state = torch.where(active_mask, new_state, state)
 
     pos1_state = state.clone()
+    pos1_integration_count = integration_count.clone()
 
     # pos2: one further, natural (autoregressive) step from pos1. Displacement
     # uses the same prev-state convention as the main loop (the state one
@@ -128,6 +132,8 @@ def capture_pos1_pos2(model, batch: dict, arm: str) -> dict:
         "pos1": pos1_state.flatten(1).cpu(),
         "pos2": pos2_state.flatten(1).cpu(),
         "pos2_margin": margin2.cpu(),
+        "pos1_integration_count": pos1_integration_count.cpu(),
+        "pos2_is_end": is_end_2.cpu(),  # for the §5.1 Regime-2 END-preference control (finding 11)
         "label": torch.full((pos1_state.shape[0],), arm in ANSWERABLE_ARMS, dtype=torch.bool),
     }
 

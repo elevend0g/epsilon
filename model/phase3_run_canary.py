@@ -23,13 +23,15 @@ from model.phase3_probe import (
 CHECKPOINT = "runs/real_seed_r1_0.pt"
 
 
-def report_transfer(name: str, train_pos: dict, test_pos: dict, position: str, with_margin_regression: bool) -> None:
-    """with_margin_regression: only meaningful for pos2, where §5.1 defines
-    "the current margin value" precisely (the margin of the failing lookup
-    itself). Pos1 has no analogous well-defined single margin -- the last
-    successful retrieval's margin isn't captured, and reusing pos2's margin
-    as a stand-in would residualize against the wrong quantity, so pos1 is
-    reported as raw AUROC only, not silently given a misleading number."""
+def report_transfer(name: str, train_pos: dict, test_pos: dict, position: str,
+                     regress_key: str | None, regress_label: str) -> dict:
+    """regress_key: the covariate to residualize against (e.g. "pos2_margin"
+    for P2, "pos1_integration_count" for P1), or None to report raw only.
+    Each position gets the covariate that is actually well-defined for it --
+    P2 has "the current margin value" (§5.1); P1 has no single well-defined
+    margin (the last successful retrieval's margin isn't captured), but does
+    have a well-defined integration count (§2.5's rho), which is the leading
+    shortcut candidate for P1 specifically."""
     x_key = position  # "pos1" or "pos2"
     train_x, train_y = train_pos[x_key], train_pos["label"]
     test_x, test_y = test_pos[x_key], test_pos["label"]
@@ -41,19 +43,22 @@ def report_transfer(name: str, train_pos: dict, test_pos: dict, position: str, w
     train_auroc = auroc(train_score, train_y)
     raw_auroc = auroc(test_score, test_y)
 
-    if with_margin_regression:
-        train_margin, test_margin = train_pos["pos2_margin"], test_pos["pos2_margin"]
-        test_resid = residualize(test_score, test_margin)
+    result = {"train_auroc": train_auroc, "raw_auroc": raw_auroc, "probe": probe}
+
+    if regress_key is not None:
+        test_cov = test_pos[regress_key].float()
+        test_resid = residualize(test_score, test_cov)
         resid_auroc, resid_lo, resid_hi = bootstrap_auroc_ci(test_resid, test_y)
-        margin_only_auroc = auroc(test_margin, test_y)
+        cov_only_auroc = auroc(test_cov, test_y)
         print(f"{name} [{position}]: train_AUROC={train_auroc:.4f}  "
-              f"test_raw_AUROC={raw_auroc:.4f}  test_margin_only_AUROC={margin_only_auroc:.4f}  "
-              f"test_residualized_AUROC={resid_auroc:.4f}  [95% CI {resid_lo:.4f}-{resid_hi:.4f}]", flush=True)
+              f"test_raw_AUROC={raw_auroc:.4f}  test_{regress_label}_only_AUROC={cov_only_auroc:.4f}  "
+              f"test_{regress_label}_residualized_AUROC={resid_auroc:.4f}  [95% CI {resid_lo:.4f}-{resid_hi:.4f}]",
+              flush=True)
+        result.update({"resid_auroc": resid_auroc, "resid_ci": (resid_lo, resid_hi), "cov_only_auroc": cov_only_auroc})
     else:
         print(f"{name} [{position}]: train_AUROC={train_auroc:.4f}  "
-              f"test_raw_AUROC={raw_auroc:.4f}  (no margin regression -- no well-defined "
-              f"single 'current margin' at this position)", flush=True)
-    return probe
+              f"test_raw_AUROC={raw_auroc:.4f}  (no regression covariate available at this position)", flush=True)
+    return result
 
 
 def main() -> None:
@@ -74,47 +79,42 @@ def main() -> None:
 
     print("capturing pos1/pos2 states (one instrumentation pass per combo)...", flush=True)
     CHUNK = 512
+    FIELDS = ["pos1", "pos2", "pos2_margin", "pos1_integration_count", "pos2_is_end", "label"]
     captured = {}
     for key, batch in combos.items():
         arm = key[0]
-        pos1_chunks, pos2_chunks, margin_chunks, label_chunks = [], [], [], []
+        chunks = {f: [] for f in FIELDS}
         for start in range(0, N_PER_COMBO, CHUNK):
             end = min(start + CHUNK, N_PER_COMBO)
             chunk = {k: (v[start:end] if isinstance(v, torch.Tensor) else v) for k, v in batch.items()}
             out = capture_pos1_pos2(model, chunk, arm)
-            pos1_chunks.append(out["pos1"])
-            pos2_chunks.append(out["pos2"])
-            margin_chunks.append(out["pos2_margin"])
-            label_chunks.append(out["label"])
-        captured[key] = {
-            "pos1": torch.cat(pos1_chunks), "pos2": torch.cat(pos2_chunks),
-            "pos2_margin": torch.cat(margin_chunks), "label": torch.cat(label_chunks),
-        }
+            for f in FIELDS:
+                chunks[f].append(out[f])
+        captured[key] = {f: torch.cat(chunks[f]) for f in FIELDS}
     print("done capturing.", flush=True)
 
     def combine(*keys):
-        return {
-            "pos1": torch.cat([captured[k]["pos1"] for k in keys]),
-            "pos2": torch.cat([captured[k]["pos2"] for k in keys]),
-            "pos2_margin": torch.cat([captured[k]["pos2_margin"] for k in keys]),
-            "label": torch.cat([captured[k]["label"] for k in keys]),
-        }
+        return {f: torch.cat([captured[k][f] for k in keys]) for f in FIELDS}
 
     train = combine(("A", 1021, 2), ("B2", 1021, 2))
     test_L3 = combine(("A", 1021, 3), ("B2", 1021, 3))
     test_256 = combine(("A", 256, 2), ("B2", 256, 2))
 
     print("\n=== P2 (after the next lookup returns low margin) ===", flush=True)
-    p2_probe_L3 = report_transfer("combo1 (L=2->3)", train, test_L3, "pos2", with_margin_regression=True)
-    p2_probe_256 = report_transfer("combo2 (1021->256)", train, test_256, "pos2", with_margin_regression=True)
+    p2_L3 = report_transfer("combo1 (L=2->3)", train, test_L3, "pos2", "pos2_margin", "margin")
+    p2_256 = report_transfer("combo2 (1021->256)", train, test_256, "pos2", "pos2_margin", "margin")
+    print(f"P2 residualized spread: combo1(L transfer)={p2_L3['resid_auroc']:.4f}  "
+          f"combo2(band transfer)={p2_256['resid_auroc']:.4f}  -- "
+          f"{'L transfer is lower, same direction as P1' if p2_L3['resid_auroc'] < p2_256['resid_auroc'] else 'L transfer is NOT lower -- does not match P1 pattern'}",
+          flush=True)
 
     print("\n=== P1 (after integrating kj, before the next lookup resolves) ===", flush=True)
-    report_transfer("combo1 (L=2->3)", train, test_L3, "pos1", with_margin_regression=False)
-    report_transfer("combo2 (1021->256)", train, test_256, "pos1", with_margin_regression=False)
+    p1_L3 = report_transfer("combo1 (L=2->3)", train, test_L3, "pos1", "pos1_integration_count", "count")
+    p1_256 = report_transfer("combo2 (1021->256)", train, test_256, "pos1", "pos1_integration_count", "count")
 
     print("\n=== Arm D disqualifier (probe trained on A vs B2, applied to D) ===", flush=True)
     d_data = captured[("D", 1021, 2)]
-    d_score = probe_score(p2_probe_L3, d_data["pos2"])
+    d_score = probe_score(p2_L3["probe"], d_data["pos2"])
     d_pred_answerable = (torch.sigmoid(d_score) > 0.5)
     d_frac_correct = d_pred_answerable.float().mean().item()
     print(f"P2 probe (trained on A vs B2, combo1's train set) applied to arm D: "

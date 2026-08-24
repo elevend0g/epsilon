@@ -189,13 +189,36 @@ Before spending the full six-checkpoint, 30-combo sweep, `model/phase3_probe.py`
 | P2, combo1 (`L=2→3`) | 0.9999 | 0.9976 | 0.9955 | `0.6438` `[0.6263, 0.6607]` |
 | P2, combo2 (`1021→256`) | 0.9999 | 0.9986 | 0.9913 | `0.7133` `[0.6967, 0.7291]` |
 
-P1 (raw only — see `AMENDMENTS.md` #1 for why residualization doesn't apply here): combo1 `0.6871`, combo2 `1.0000`. Arm D disqualifier: the A-vs-B2 probe predicts "answerable" on **100%** of D items — passes cleanly, not a length/token-count artifact.
+P1 raw: combo1 `0.6872`, combo2 `1.0000` — **see finding 16: this raw signal turned out to be almost entirely an integration-count shortcut, not evidence of state encoding dead-end status.** Arm D disqualifier: the A-vs-B2 probe predicts "answerable" on **100%** of D items — passes cleanly, not a length/token-count artifact.
 
 **Exactly the pattern predicted before running anything: raw AUROC is near-ceiling and almost entirely explained by margin alone (margin-only AUROC ~0.99, nearly matching raw); after residualizing, real but modest signal survives.** This is the first empirical confirmation that P2's raw number would have been close to uninformative on its own, and that the residualized number is where the actual content is.
 
 **§5.4's threshold turned out to be genuinely ambiguous against this new residualized quantity — resolved in `AMENDMENTS.md` #1, not decided in the moment.** Combo1's residualized point estimate (`0.6438`) landed a few thousandths under `0.65`; deciding right then whether §5.4's threshold was ever meant to apply to the residualized reading would have been interpretation made after seeing a boundary-adjacent number. Resolved instead via §8's simplest-version rule: §5.4 reads on raw AUROC as literally written; residualized AUROC is a separate, always-reported condition with no threshold of its own. Under that resolution, nothing here is close to failing §5.4 — raw AUROC clears `0.65` by a wide margin in both combos.
 
 **The 95% CI matters more than the point estimate here, and was computed before treating `0.6438` as meaningfully close to anything.** Bootstrap CI on combo1's residualized AUROC: `[0.6263, 0.6607]`, width ≈`±0.017` — `0.65` sits comfortably inside it. A gap this size, on one seed, is within ordinary sampling noise, not a signal — the same lesson `N_VAL` being raised 128→1,024 already established (finding 10): don't let a margin this thin drive an interpretation.
+
+---
+
+### 16. P1's raw AUROC was almost entirely an integration-count shortcut, not encoded dead-end status (2026-08-24)
+
+P1's raw numbers from finding 15 (`0.687` combo1, `1.000` combo2) looked, on their own, like P1 might be an *easier* signal than P2 in one combo and *harder* in the other — an odd, unexplained asymmetry. The actual explanation is a shortcut, and it was checkable directly from §2.5's own `ρ` definition without touching the model at all.
+
+**The mechanism, confirmed against the generator before touching model output at all:** arm A's `ρ = L−1` is *fixed* for a given `L` — every A item has the same integration count. Arm B2's `ρ = j` (the corrupted hop index) varies per item — and at `L=2` specifically, the generator's own hop-selection draw (`hop_j = randrange(1,L)+1`) collapses to a single deterministic value, `hop_j=2` always (verified directly: 2,000/2,000 draws at `L=2`, all `ρ=2`; at `L=3`, `ρ` splits 972/1,028 between `2` and `3`). At the training config (`L=2`), this means arm A's integration count (`1`) and arm B2's (`2`) are *both perfectly constant and different* — a trivial linear separator exists in the count alone, no state content required. At `L=3`, half of B2's items now share A's count (`2`) exactly, so a count-based classifier would misclassify roughly half of them.
+
+**That mechanism predicts the exact observed pattern before any residualization is run:** perfect separation at the training config and at the band-transfer test (same `L=2`, so the same deterministic counts hold — predicts `combo2 raw ≈ 1.0000`, observed `1.0000`), degraded separation at the `L`-transfer test (new distribution with 50% count overlap — predicts a real drop, observed `0.6872`).
+
+**Residualizing state-probe score against `pos1_integration_count` (same OLS-residual, same bootstrap-CI treatment as P2's margin regression) confirms it directly:**
+
+| | raw AUROC | count-only AUROC | count-residualized AUROC [95% CI] |
+|---|---|---|---|
+| P1, combo1 (`L=2→3`) | 0.6872 | 0.2403 | `0.4711` `[0.4531, 0.4884]` |
+| P1, combo2 (`1021→256`) | 1.0000 | 0.0000 | `0.4930` `[0.4728, 0.5129]` |
+
+**Once the count shortcut is controlled for, P1's residual signal is at or below chance in both combos — the CI for combo1 doesn't even reach `0.5`.** (Combo2's `count_only_AUROC=0.0000` is not a bug: at `L=2`, higher count deterministically means arm B2, so count alone perfectly anti-predicts the "answerable" label — an AUROC of exactly `0` is the correct value for a perfect inverse separator, not an error.) There is no evidence, from this canary, that state at P1 encodes anything about dead-end status beyond a trivial hop-count readout that has nothing to do with the model's internal representation — the count is a property of *which items got sampled*, not of what the network learned.
+
+**Reported descriptively, not as a pass/fail criterion, per instruction — this does not retroactively touch any preregistered threshold, and P1 never had one.** What it does affect is how P2's residualized signal (finding 15, `0.645`/`0.714`, real and above chance in the same check) should be read: P2's signal survives an analogous control (margin) and P1's doesn't survive an analogous control (count) — of the two probe positions §5.1 preregistered, only P2 has shown anything, on this one canary checkpoint, that isn't explainable by a confound external to genuine state content. Whether P1 shows real signal on other seeds, other checkpoints, or a differently-constructed control remains open — this is one seed's result on one implementation of the count control, not a closed question.
+
+---
 
 **No falsification or confirmation verdict is drawn from this. One seed cannot carry one — §2.6's three-seeds-per-regime commitment exists precisely so no single run does, whether the result looks like a pass or a fail.** This canary's job was narrower and is done: confirm the pipeline produces real, stable, non-degenerate numbers (it does — train AUROC near-ceiling, sensible raw/margin-only/residualized ordering, a clean D-disqualifier pass, a CI properly sized to the sample) before spending the other five checkpoints' worth of compute on it.
 
