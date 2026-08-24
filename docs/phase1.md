@@ -378,6 +378,8 @@ B2 makes the timing matter. Preregister both:
 
 P2 must be shown to carry information **beyond** the current margin value — regress it out and re-probe. Otherwise the probe has rediscovered the retrieval statistic.
 
+**Regime 2 gets a second regress-out control, fixed here before any Regime 2 probe code is written: whether the pos2 retrieval landed on an END-flagged cache entry.** Finding 11 (`RESULTS.md`) measured Regime 2 checkpoints guessing END-flagged entries under a foreign cache at roughly double Regime 1's rate (6.9-7.9% vs 2.8-3.3%). END-flag identity is not a margin quantity — §5.1's existing margin regress-out passes it through untouched — so if Regime 2's P2 separation is partly riding on "did the model happen to land on something END-shaped" rather than on genuine answerability content, the margin-residualized number alone would not catch it, and would read as validated when it wasn't. Simplest version, per §8: the covariate is binary (`pos2` retrieval is/isn't an END-flagged entry), residualized the same way as margin (OLS, same bootstrap-CI treatment) — not a continuous "END-flag preference" score, which would need a definition this project hasn't built and doesn't need for a first control. Regime 1 does not get this control by default (its own END-guess rate is much closer to nominal, per finding 11), but nothing here prevents reporting it there too if it turns out informative.
+
 ### 5.2 Probe protocol
 
 Linear probe on frozen state, predicting answerable vs. not.
