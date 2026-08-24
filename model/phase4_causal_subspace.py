@@ -114,6 +114,28 @@ def _project_onto_basis(basis: torch.Tensor, delta_b: torch.Tensor) -> torch.Ten
     return proj_flat.view_as(delta_b)
 
 
+def _isotropic_perturb(delta_b: torch.Tensor, generator: torch.Generator) -> torch.Tensor:
+    """DESTRUCTIVE floor control. The causal-vs-random-subspace null
+    (preserved~93-100%, identical in 12/12 cells) is consistent with two
+    different stories: "direction doesn't matter at this rank" or "the
+    preservation metric can't detect destruction at this perturbation
+    scale at all." Nothing measured so far distinguishes them -- the
+    prior project's own experiment had this floor built in by accident
+    (isotropic perturbation destroyed ~38% of trajectories there);
+    replacing that arm with the better rank-matched random-subspace
+    control here lost it. This restores it: full-rank (not restricted to
+    any k-dimensional subspace), random direction across all D state
+    dimensions, matched in NORM to the natural (unconstrained) update --
+    same magnitude, maximally different direction. If this also
+    preserves ~100%, the metric has no dynamic range at this scale and
+    the causal-vs-random null is uninformative, not evidence about
+    direction."""
+    norm = delta_b.flatten().norm()
+    raw = torch.randn(delta_b.numel(), generator=generator, device=delta_b.device, dtype=delta_b.dtype)
+    direction = raw / raw.norm().clamp(min=1e-12)
+    return (direction * norm).view_as(delta_b)
+
+
 def _random_subspace_project(delta_b: torch.Tensor, k: int, generator: torch.Generator) -> torch.Tensor:
     """Matched-rank NEGATIVE CONTROL (§8: check a suspiciously clean
     number before trusting it -- same discipline as the phase4_count.py
@@ -207,18 +229,24 @@ def rollout_constrained(model, batch: dict, max_steps: int = MAX_STEPS,
         recurse_idx = torch.nonzero(is_recurse, as_tuple=False).flatten().tolist()
         for b in recurse_idx:
             delta_b = (unconstrained_new_state[b:b + 1] - state[b:b + 1]).detach()
-            # Always compute the causal subspace + its rank k -- the random
-            # control uses the same k for a fair matched-rank comparison,
-            # so mode="random" doesn't skip this, only discards the basis.
-            causal_proj, k, pr = _causal_subspace_project(
-                model, state[b:b + 1], cache_keys[b:b + 1], delta_b
-            )
-            if mode == "causal":
-                proj_delta = causal_proj
-            elif mode == "random":
-                proj_delta = _random_subspace_project(delta_b, k, generator)
+            if mode == "destructive":
+                # No rank matching needed -- full-rank by construction, matched
+                # only in norm. Skips the expensive Jacobian+SVD entirely.
+                proj_delta = _isotropic_perturb(delta_b, generator)
+                k, pr = -1, float("nan")
             else:
-                raise ValueError(f"unknown mode {mode!r}")
+                # causal/random both need the causal subspace's own rank k --
+                # random uses it for a fair matched-rank comparison, so it
+                # doesn't skip this, only discards the basis.
+                causal_proj, k, pr = _causal_subspace_project(
+                    model, state[b:b + 1], cache_keys[b:b + 1], delta_b
+                )
+                if mode == "causal":
+                    proj_delta = causal_proj
+                elif mode == "random":
+                    proj_delta = _random_subspace_project(delta_b, k, generator)
+                else:
+                    raise ValueError(f"unknown mode {mode!r}")
             new_state[b:b + 1] = state[b:b + 1] + proj_delta
             ks_used.append(k)
             prs_used.append(pr)
@@ -240,12 +268,15 @@ def report_cell(name: str, path: str, arm: str, L: int, n: int, device) -> dict:
     free = rollout_free(model, batch)
     causal = rollout_constrained(model, batch, mode="causal")
     random_ctrl = rollout_constrained(model, batch, mode="random", random_seed=0)
+    destructive = rollout_constrained(model, batch, mode="destructive", random_seed=0)
 
     preserved_causal = (free["outcome"] == causal["outcome"]).float().mean().item()
     preserved_random = (free["outcome"] == random_ctrl["outcome"]).float().mean().item()
+    preserved_destructive = (free["outcome"] == destructive["outcome"]).float().mean().item()
     free_exhaustion = free["exhausted"].float().mean().item()
     causal_exhaustion = causal["exhausted"].float().mean().item()
     random_exhaustion = random_ctrl["exhausted"].float().mean().item()
+    destructive_exhaustion = destructive["exhausted"].float().mean().item()
     n_recurse_events = len(causal["ks_used"])
     mean_k = sum(causal["ks_used"]) / n_recurse_events if n_recurse_events else float("nan")
     mean_pr = sum(causal["prs_used"]) / n_recurse_events if n_recurse_events else float("nan")
@@ -253,16 +284,18 @@ def report_cell(name: str, path: str, arm: str, L: int, n: int, device) -> dict:
     floor_relative = mean_pr - (floor_lo + floor_hi) / 2 if n_recurse_events else float("nan")
 
     print(f"  {name} arm={arm} L={L} n={n}: preserved_causal={preserved_causal:.4f}  "
-          f"preserved_random={preserved_random:.4f}  free_exhaustion={free_exhaustion:.4f}  "
-          f"causal_exhaustion={causal_exhaustion:.4f}  random_exhaustion={random_exhaustion:.4f}  "
+          f"preserved_random={preserved_random:.4f}  preserved_destructive={preserved_destructive:.4f}  "
+          f"free_exhaustion={free_exhaustion:.4f}  causal_exhaustion={causal_exhaustion:.4f}  "
+          f"random_exhaustion={random_exhaustion:.4f}  destructive_exhaustion={destructive_exhaustion:.4f}  "
           f"recurse_events={n_recurse_events}  mean_k={mean_k:.2f}  mean_causal_PR={mean_pr:.2f}  "
           f"floor_relative={floor_relative:+.2f}", flush=True)
 
     return {
         "checkpoint": name, "arm": arm, "L": L, "n": n,
         "preserved_causal": preserved_causal, "preserved_random": preserved_random,
+        "preserved_destructive": preserved_destructive,
         "free_exhaustion": free_exhaustion, "causal_exhaustion": causal_exhaustion,
-        "random_exhaustion": random_exhaustion,
+        "random_exhaustion": random_exhaustion, "destructive_exhaustion": destructive_exhaustion,
         "n_recurse_events": n_recurse_events, "mean_k": mean_k, "mean_causal_pr": mean_pr,
         "floor_relative": floor_relative,
     }
