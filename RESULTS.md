@@ -197,6 +197,8 @@ P1 raw: combo1 `0.6872`, combo2 `1.0000` — **see finding 16: this raw signal t
 
 **The 95% CI matters more than the point estimate here, and was computed before treating `0.6438` as meaningfully close to anything.** Bootstrap CI on combo1's residualized AUROC: `[0.6263, 0.6607]`, width ≈`±0.017` — `0.65` sits comfortably inside it. A gap this size, on one seed, is within ordinary sampling noise, not a signal — the same lesson `N_VAL` being raised 128→1,024 already established (finding 10): don't let a margin this thin drive an interpretation.
 
+**No falsification or confirmation verdict is drawn from this. One seed cannot carry one — §2.6's three-seeds-per-regime commitment exists precisely so no single run does, whether the result looks like a pass or a fail.** This canary's job was narrower and is done: confirm the pipeline produces real, stable, non-degenerate numbers (it does — train AUROC near-ceiling, sensible raw/margin-only/residualized ordering, a clean D-disqualifier pass, a CI properly sized to the sample) before spending the other five checkpoints' worth of compute on it.
+
 ---
 
 ### 16. P1's raw AUROC was almost entirely an integration-count shortcut, not encoded dead-end status (2026-08-24)
@@ -220,7 +222,20 @@ P1's raw numbers from finding 15 (`0.687` combo1, `1.000` combo2) looked, on the
 
 ---
 
-**No falsification or confirmation verdict is drawn from this. One seed cannot carry one — §2.6's three-seeds-per-regime commitment exists precisely so no single run does, whether the result looks like a pass or a fail.** This canary's job was narrower and is done: confirm the pipeline produces real, stable, non-degenerate numbers (it does — train AUROC near-ceiling, sensible raw/margin-only/residualized ordering, a clean D-disqualifier pass, a CI properly sized to the sample) before spending the other five checkpoints' worth of compute on it.
+### 17. The retrieval-difficulty axis is behaviorally live, not inert — margin compresses smoothly with n_hard (2026-08-24)
+
+Post-hoc diagnostic (§8, §3.1.6 precedent — informative, not a criterion; it cannot retroactively affect any recorded verdict, including §4.3's). `model/phase3_gap_diagnostic.py` measured the top1-minus-top2 retrieval margin on held-out arm A, teacher-forced, at `n_hard ∈ {1,2,4,8,16,32}` (fixed reference config: `n_distractors=1021`, `L=3`, `real_seed_r1_0`, `N=2048` items/setting, all steps pooled per setting):
+
+| `n_hard` | 1 | 2 | 4 | 8 | 16 | 32 |
+|---|---|---|---|---|---|---|
+| mean gap | 2.5405 | 2.3859 | 2.2401 | 2.1178 | 2.0280 | 1.9496 |
+| std | 0.5007 | 0.4320 | 0.3705 | 0.3111 | 0.2676 | 0.2358 |
+
+**Monotonic, smooth compression across the full range: mean gap drops `0.59` (from `2.54` to `1.95`, ~23% relative) as `n_hard` goes `1→32`, and variance shrinks in step (`std` `0.50→0.24`).** The axis is behaviorally live at these settings, not flat — the model's own retrieval confidence genuinely tracks how hard the generator made the lookup, harder settings don't just fail unpredictably, they fail with a *systematically smaller* margin.
+
+**Consequence, stated as instructed: the "confident near-miss" species of Q2 — a settled, wrong network, not merely an uncertain one — is not architecturally foreclosed at this task's settings.** Had gaps come back flat, arm B2 would have been carrying Q2's near-miss case essentially alone (the only arm that manufactures a genuine near-miss structurally, via the generator, rather than needing the model's own uncertainty to produce one). They didn't come back flat, so that specific concern doesn't apply here — though it says nothing about whether the *current* real seeds (all trained at the fixed `n_hard=4` point) actually sit anywhere near the compressed end of this range in practice.
+
+**Belongs next to the 256-band hard-negative check (`generator_tests/test_task_generator.py::test_per_hop_hard_negatives_survive_the_256_band`, `PREREG.md`'s cross-condition-combos row), and the two statements qualify each other.** That check confirmed exactly `n_hard=4` hard negatives at distance 1 survive both `n_distractors` bands — meaning the `L=2→3` and `1021→256` transfer combos aren't confounded by a difficulty *shift between bands*. This finding shows the difficulty axis itself is *not inert* — meaning a shift, if one existed, would have been detectable rather than silently absorbed into flat margins. The band check's "not confounded" claim is only as meaningful as this finding's "there's something here to be confounded with" — reported together so neither is read as stronger than it is on its own.
 
 ---
 

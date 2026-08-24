@@ -43,6 +43,10 @@ RESERVED_RANGES: dict[str, tuple[int, int]] = {
     # model/phase3_probe_corpus.py: PROBE_SEED_BASE + band*100 + L*10 + arm_offset,
     # band in {0,1}, L in CHAIN_LENGTHS, arm_offset in [0,4].
     "PHASE3_PROBE_CORPUS (§5.1-§5.2)": (810_000_000 + 0 * 100 + 1 * 10 + 0, 810_000_000 + 1 * 100 + 3 * 10 + 4),
+    # model/phase3_gap_diagnostic.py: GAP_SEED_BASE + n_hard_index, n_hard_index in [0,5]
+    # (n_hard in {1,2,4,8,16,32}). Post-hoc diagnostic, §8/§3.1.6 precedent -- not a
+    # preregistered criterion, but seed isolation discipline still applies.
+    "PHASE3_GAP_DIAGNOSTIC (§8 post-hoc)": (820_000_000, 820_000_005),
 }
 
 
