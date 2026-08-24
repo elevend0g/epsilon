@@ -1,0 +1,32 @@
+=== R1seed0 (R1): runs/real_seed_r1_0.pt ===
+  L=1  rho=0  P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000
+  L=2  rho=1  P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000
+  L=3  rho=2  P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000
+  POOLED (all L, n=3072): P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000  threshold=0.80  verdict=PASS
+=== R1seed1 (R1): runs/real_seed_r1_1.pt ===
+  L=1  rho=0  P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000
+  L=2  rho=1  P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000
+  L=3  rho=2  P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000
+  POOLED (all L, n=3072): P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000  threshold=0.80  verdict=PASS
+=== R1seed2 (R1): runs/real_seed_r1_2.pt ===
+  L=1  rho=0  P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000
+  L=2  rho=1  P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000
+  L=3  rho=2  P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000
+  POOLED (all L, n=3072): P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000  threshold=0.80  verdict=PASS
+=== R2seed0 (R2): runs/real_seed_r2_0.pt ===
+  L=1  rho=0  P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000
+  L=2  rho=1  P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000
+  L=3  rho=2  P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000
+  POOLED (all L, n=3072): P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000  threshold=0.80  verdict=PASS
+=== R2seed1 (R2): runs/real_seed_r2_1.pt ===
+  L=1  rho=0  P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000
+  L=2  rho=1  P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000
+  L=3  rho=2  P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000
+  POOLED (all L, n=3072): P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000  threshold=0.80  verdict=PASS
+=== R2seed2 (R2): runs/real_seed_r2_2.pt ===
+  L=1  rho=0  P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000
+  L=2  rho=1  P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000
+  L=3  rho=2  P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000
+  POOLED (all L, n=3072): P(m=rho)=1.0000  P(m>rho)=0.0000  P(m<rho)=0.0000  exhaustion=0.0000  acc=1.0000  threshold=0.80  verdict=PASS
+
+=== §6.2 overall: ALL PASS -- §6.1 may proceed ===

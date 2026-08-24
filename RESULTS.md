@@ -446,6 +446,37 @@ Three separate pieces of preregistered text, caught only at the moment of execut
 
 ---
 
+### 26. Phase 4 launched: §6.2's gate PASSES cleanly on all six checkpoints — `P(m=ρ)=1.0000`, pooled and per-`L`, no exceptions (2026-08-24)
+
+Built first, per explicit instruction, as a **gate on §6.1**, not a warm-up alongside it: §6.1's constrained-vs-free intervention modifies the recursion update rule, and measuring the integration-count distribution under that intervention would confound "does the gate integrate `ρ` times" with "does the intervention change how often it does." `model/phase4_count.py` runs the clean, unmodified model first, so §6.1 launches knowing in advance whether its own framing ("recursion steps between integrations") holds.
+
+**Method:** autoregressive, hard-gated (threshold `0.5`) rollout on held-out arm A, fixed step budget `MAX_STEPS=8` — §6.1's own formula, `4×(L_max−1)` at `L_max=3`, "one value, not a sweep," independently matching the value `pilot_train.py`'s own held-out accuracy check already used. A fresh seed stream (`COUNT_SEED_BASE=830_000_000`, registered in `model/seed_registry.py`) never used elsewhere in the project, `N=1024` items per `(checkpoint, L)` cell, all six checkpoints, `L∈{1,2,3}`, `n_distractors=1021`.
+
+**Result, all six checkpoints, pooled across `L` (`n=3072`/checkpoint) and per-`L`:**
+
+| checkpoint | P(m=ρ) | P(m>ρ) | P(m<ρ) | exhaustion | accuracy |
+|---|---|---|---|---|---|
+| R1seed0 | 1.0000 | 0.0000 | 0.0000 | 0.0000 | 1.0000 |
+| R1seed1 | 1.0000 | 0.0000 | 0.0000 | 0.0000 | 1.0000 |
+| R1seed2 | 1.0000 | 0.0000 | 0.0000 | 0.0000 | 1.0000 |
+| R2seed0 | 1.0000 | 0.0000 | 0.0000 | 0.0000 | 1.0000 |
+| R2seed1 | 1.0000 | 0.0000 | 0.0000 | 0.0000 | 1.0000 |
+| R2seed2 | 1.0000 | 0.0000 | 0.0000 | 0.0000 | 1.0000 |
+
+Identical at every individual `L` as well — `1.0000/0.0000/0.0000` at `L=1,2,3` for all six checkpoints (18,432 items total, zero `m≠ρ` items to log). **Verdict: PASS, clears the `≥0.80` preregistered threshold with no daylight — §6.1 may proceed on this premise.**
+
+**Sanity-checked, not taken at face value, given this project's history with too-clean numbers.** A smoke test at `N=64` on `real_seed_r1_0` showed `m` exactly `=ρ` for every single item at every `L` before the full run — checked against a direct concern (is this a code bug that forces `g_eff` to always be `1` regardless of the gate's actual decision, which would make `m=ρ` tautological given correct retrieval, not a real measurement) by inspecting raw `g_soft` values step-by-step on `L=3`: `t=0` (`min/mean/max = 0.985/0.9996/1.000`), `t=1` (`0.662/0.998/1.000`), `t=2`, the END-retrieval step, ranges down to `0.000` but is forced to `g_eff=0` structurally by the "END never opens the gate" rule regardless of `g_soft`. The gate's continuous output does vary — it is not pinned at exactly `1.0` — but on every required-integration step sampled, it stayed above the `0.5` hard threshold. `P(m=ρ)=1.0000` is a real, non-tautological measurement of a gate whose soft output happens to clear threshold on 100% of in-distribution arm-A required-integration steps sampled, not an artifact of the harness.
+
+**Also not surprising given what's already known, and that connection should be stated rather than left implicit:** §4.3 (finding 13) already established teacher-forced arm-A top-1 retrieval accuracy `=1.0000` across 294,912 pooled steps, and training explicitly penalizes `(gate_sum−ρ)²` (`model/task_model.py`). Given near-perfect per-step retrieval and a loss term directly pushing integration count to `ρ`, `P(m=ρ)≈1` on this in-distribution, uncorrupted arm is close to what those two already-established facts predict jointly — this measurement confirms the prediction rather than surfacing a new coincidence.
+
+**Consistent with finding 23's B2 terminal-step result, and worth stating explicitly since the user asked directly whether it is: yes, same mechanism, different arm.** Finding 23 found the gate opens on `~99.90-100%` of B2's *fake* terminal queries — evidence it doesn't discriminate on value-validity at the one step it's structurally supposed to refuse. Here, on arm A's genuine required-integration steps, the same gate is *also* open essentially everywhere sampled (`g_soft` means `0.95-1.00`, rarely approaching the `0.5` threshold even at its lowest observed value). The picture across both findings is a gate that behaves like "almost always open, except where a separate structural rule (`is_end` detection) forces it closed" rather than a gate making a close, fine-grained per-step call — §6.2's clean pass and finding 23's B2 result are two views of the same underlying behavior, not independent evidence.
+
+**Simplification flagged per §8, logged in `AMENDMENTS.md`:** the `P(m=ρ)≥0.80` pass/fail threshold is evaluated pooled across all three chain lengths into one number per checkpoint; §6.2's text conditions the *reported distribution* on `L` explicitly (satisfied — full per-`L` breakdown above) but does not say whether the threshold itself is per-`L` or pooled. Immaterial to the verdict here since every cell independently clears `1.0000`, but logged since a future checkpoint could plausibly PASS pooled while failing at one specific `L`.
+
+**What this does and does not establish.** This is a clean, informative gate result: §6.1 is not building its constrained-vs-free comparison on a broken premise, at least not one this measurement would have caught. It says nothing yet about whether the causal-subspace constraint actually changes recursion behavior, and nothing about `m>ρ`/`m<ρ` deviations, since none occurred in this sample — the §4.1 shuffled-cache follow-up for a possible synthesis interpretation was not run, because there was nothing to follow up (zero `m<ρ` items across 18,432).
+
+---
+
 ## Verdict against preregistered conditions
 
 **Phase 1 (competence gate) verdict: PASS on all six real seeds.** The full §2.6 commitment (2 regimes × 3 seeds, 614,400 total optimizer steps) has trained and every seed reached and held the §3.2 criterion (≥95% exact-match accuracy on arm A, held-out, at every `L ∈ {1,2,3}`, stable from `S*` through the terminal checkpoint). §3.3's rank verification passes for both regimes — query PR never approaches `rank=36` in any of the six seeds.

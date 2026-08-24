@@ -1,0 +1,259 @@
+{
+  "max_steps": 8,
+  "pass_threshold": 0.8,
+  "all_passed": true,
+  "results": [
+    {
+      "name": "R1seed0",
+      "checkpoint": "runs/real_seed_r1_0.pt",
+      "regime": "R1",
+      "per_L": {
+        "1": {
+          "n": 1024,
+          "rho": 0,
+          "P(m=rho)": 1.0,
+          "P(m>rho)": 0.0,
+          "P(m<rho)": 0.0,
+          "exhaustion_rate": 0.0,
+          "accuracy": 1.0
+        },
+        "2": {
+          "n": 1024,
+          "rho": 1,
+          "P(m=rho)": 1.0,
+          "P(m>rho)": 0.0,
+          "P(m<rho)": 0.0,
+          "exhaustion_rate": 0.0,
+          "accuracy": 1.0
+        },
+        "3": {
+          "n": 1024,
+          "rho": 2,
+          "P(m=rho)": 1.0,
+          "P(m>rho)": 0.0,
+          "P(m<rho)": 0.0,
+          "exhaustion_rate": 0.0,
+          "accuracy": 1.0
+        }
+      },
+      "pooled": {
+        "P(m=rho)": 1.0,
+        "P(m>rho)": 0.0,
+        "P(m<rho)": 0.0,
+        "exhaustion_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "passed": true
+    },
+    {
+      "name": "R1seed1",
+      "checkpoint": "runs/real_seed_r1_1.pt",
+      "regime": "R1",
+      "per_L": {
+        "1": {
+          "n": 1024,
+          "rho": 0,
+          "P(m=rho)": 1.0,
+          "P(m>rho)": 0.0,
+          "P(m<rho)": 0.0,
+          "exhaustion_rate": 0.0,
+          "accuracy": 1.0
+        },
+        "2": {
+          "n": 1024,
+          "rho": 1,
+          "P(m=rho)": 1.0,
+          "P(m>rho)": 0.0,
+          "P(m<rho)": 0.0,
+          "exhaustion_rate": 0.0,
+          "accuracy": 1.0
+        },
+        "3": {
+          "n": 1024,
+          "rho": 2,
+          "P(m=rho)": 1.0,
+          "P(m>rho)": 0.0,
+          "P(m<rho)": 0.0,
+          "exhaustion_rate": 0.0,
+          "accuracy": 1.0
+        }
+      },
+      "pooled": {
+        "P(m=rho)": 1.0,
+        "P(m>rho)": 0.0,
+        "P(m<rho)": 0.0,
+        "exhaustion_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "passed": true
+    },
+    {
+      "name": "R1seed2",
+      "checkpoint": "runs/real_seed_r1_2.pt",
+      "regime": "R1",
+      "per_L": {
+        "1": {
+          "n": 1024,
+          "rho": 0,
+          "P(m=rho)": 1.0,
+          "P(m>rho)": 0.0,
+          "P(m<rho)": 0.0,
+          "exhaustion_rate": 0.0,
+          "accuracy": 1.0
+        },
+        "2": {
+          "n": 1024,
+          "rho": 1,
+          "P(m=rho)": 1.0,
+          "P(m>rho)": 0.0,
+          "P(m<rho)": 0.0,
+          "exhaustion_rate": 0.0,
+          "accuracy": 1.0
+        },
+        "3": {
+          "n": 1024,
+          "rho": 2,
+          "P(m=rho)": 1.0,
+          "P(m>rho)": 0.0,
+          "P(m<rho)": 0.0,
+          "exhaustion_rate": 0.0,
+          "accuracy": 1.0
+        }
+      },
+      "pooled": {
+        "P(m=rho)": 1.0,
+        "P(m>rho)": 0.0,
+        "P(m<rho)": 0.0,
+        "exhaustion_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "passed": true
+    },
+    {
+      "name": "R2seed0",
+      "checkpoint": "runs/real_seed_r2_0.pt",
+      "regime": "R2",
+      "per_L": {
+        "1": {
+          "n": 1024,
+          "rho": 0,
+          "P(m=rho)": 1.0,
+          "P(m>rho)": 0.0,
+          "P(m<rho)": 0.0,
+          "exhaustion_rate": 0.0,
+          "accuracy": 1.0
+        },
+        "2": {
+          "n": 1024,
+          "rho": 1,
+          "P(m=rho)": 1.0,
+          "P(m>rho)": 0.0,
+          "P(m<rho)": 0.0,
+          "exhaustion_rate": 0.0,
+          "accuracy": 1.0
+        },
+        "3": {
+          "n": 1024,
+          "rho": 2,
+          "P(m=rho)": 1.0,
+          "P(m>rho)": 0.0,
+          "P(m<rho)": 0.0,
+          "exhaustion_rate": 0.0,
+          "accuracy": 1.0
+        }
+      },
+      "pooled": {
+        "P(m=rho)": 1.0,
+        "P(m>rho)": 0.0,
+        "P(m<rho)": 0.0,
+        "exhaustion_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "passed": true
+    },
+    {
+      "name": "R2seed1",
+      "checkpoint": "runs/real_seed_r2_1.pt",
+      "regime": "R2",
+      "per_L": {
+        "1": {
+          "n": 1024,
+          "rho": 0,
+          "P(m=rho)": 1.0,
+          "P(m>rho)": 0.0,
+          "P(m<rho)": 0.0,
+          "exhaustion_rate": 0.0,
+          "accuracy": 1.0
+        },
+        "2": {
+          "n": 1024,
+          "rho": 1,
+          "P(m=rho)": 1.0,
+          "P(m>rho)": 0.0,
+          "P(m<rho)": 0.0,
+          "exhaustion_rate": 0.0,
+          "accuracy": 1.0
+        },
+        "3": {
+          "n": 1024,
+          "rho": 2,
+          "P(m=rho)": 1.0,
+          "P(m>rho)": 0.0,
+          "P(m<rho)": 0.0,
+          "exhaustion_rate": 0.0,
+          "accuracy": 1.0
+        }
+      },
+      "pooled": {
+        "P(m=rho)": 1.0,
+        "P(m>rho)": 0.0,
+        "P(m<rho)": 0.0,
+        "exhaustion_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "passed": true
+    },
+    {
+      "name": "R2seed2",
+      "checkpoint": "runs/real_seed_r2_2.pt",
+      "regime": "R2",
+      "per_L": {
+        "1": {
+          "n": 1024,
+          "rho": 0,
+          "P(m=rho)": 1.0,
+          "P(m>rho)": 0.0,
+          "P(m<rho)": 0.0,
+          "exhaustion_rate": 0.0,
+          "accuracy": 1.0
+        },
+        "2": {
+          "n": 1024,
+          "rho": 1,
+          "P(m=rho)": 1.0,
+          "P(m>rho)": 0.0,
+          "P(m<rho)": 0.0,
+          "exhaustion_rate": 0.0,
+          "accuracy": 1.0
+        },
+        "3": {
+          "n": 1024,
+          "rho": 2,
+          "P(m=rho)": 1.0,
+          "P(m>rho)": 0.0,
+          "P(m<rho)": 0.0,
+          "exhaustion_rate": 0.0,
+          "accuracy": 1.0
+        }
+      },
+      "pooled": {
+        "P(m=rho)": 1.0,
+        "P(m>rho)": 0.0,
+        "P(m<rho)": 0.0,
+        "exhaustion_rate": 0.0,
+        "accuracy": 1.0
+      },
+      "passed": true
+    }
+  ]
+}

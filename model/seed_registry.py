@@ -18,6 +18,7 @@ from model.phase2_leakage import LEAKAGE_SEED_A, LEAKAGE_SEED_B
 from model.phase2_counterfactual import COUNTERFACTUAL_SEED
 from model.phase2_margin import MARGIN_SEED
 from model.phase2_margin_barm import BARM_SEED
+from model.phase4_count import COUNT_SEED_BASE
 
 MAX_L = max(CHAIN_LENGTHS)
 
@@ -47,6 +48,8 @@ RESERVED_RANGES: dict[str, tuple[int, int]] = {
     # (n_hard in {1,2,4,8,16,32}). Post-hoc diagnostic, §8/§3.1.6 precedent -- not a
     # preregistered criterion, but seed isolation discipline still applies.
     "PHASE3_GAP_DIAGNOSTIC (§8 post-hoc)": (820_000_000, 820_000_005),
+    # model/phase4_count.py: COUNT_SEED_BASE + L, L in CHAIN_LENGTHS.
+    "PHASE4_COUNT (§6.2)": (COUNT_SEED_BASE + 1, COUNT_SEED_BASE + MAX_L),
 }
 
 
