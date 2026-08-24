@@ -1,0 +1,105 @@
+=== R1seed0 (R1): runs/real_seed_r1_0.pt ===
+  arm=A   L=1  mean_open=0.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=A   L=2  mean_open=1.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=A   L=3  mean_open=2.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=B1  L=1  mean_open=0.682  mean_end_close=0.019  mean_recurse=7.2153  frac_items_any_recurse=0.9917  exhaustion=0.9814  <-- RECURSE FOUND
+  arm=B1  L=2  mean_open=7.828  mean_end_close=0.045  mean_recurse=0.0151  frac_items_any_recurse=0.0112  exhaustion=0.9551  <-- RECURSE FOUND
+  arm=B1  L=3  mean_open=7.815  mean_end_close=0.048  mean_recurse=0.0239  frac_items_any_recurse=0.0181  exhaustion=0.9521  <-- RECURSE FOUND
+  arm=B2  L=1  mean_open=7.746  mean_end_close=0.055  mean_recurse=0.0386  frac_items_any_recurse=0.0186  exhaustion=0.9448  <-- RECURSE FOUND
+  arm=B2  L=2  mean_open=7.802  mean_end_close=0.046  mean_recurse=0.0273  frac_items_any_recurse=0.0181  exhaustion=0.9541  <-- RECURSE FOUND
+  arm=B2  L=3  mean_open=7.811  mean_end_close=0.045  mean_recurse=0.0410  frac_items_any_recurse=0.0391  exhaustion=0.9551  <-- RECURSE FOUND
+  arm=C   L=1  mean_open=1.171  mean_end_close=0.024  mean_recurse=6.6865  frac_items_any_recurse=0.9360  exhaustion=0.9756  <-- RECURSE FOUND
+  arm=C   L=2  mean_open=1.213  mean_end_close=0.032  mean_recurse=6.6099  frac_items_any_recurse=0.9409  exhaustion=0.9678  <-- RECURSE FOUND
+  arm=C   L=3  mean_open=1.261  mean_end_close=0.026  mean_recurse=6.5864  frac_items_any_recurse=0.9404  exhaustion=0.9736  <-- RECURSE FOUND
+  arm=D   L=1  mean_open=0.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=D   L=2  mean_open=1.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=D   L=3  mean_open=2.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  TOTAL: 55796 recurse-steps across 30720 items (8016 items with >=1 recurse step, 0.2609)
+=== R1seed1 (R1): runs/real_seed_r1_1.pt ===
+  arm=A   L=1  mean_open=0.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=A   L=2  mean_open=1.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=A   L=3  mean_open=2.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=B1  L=1  mean_open=0.602  mean_end_close=0.018  mean_recurse=7.2944  frac_items_any_recurse=0.9937  exhaustion=0.9819  <-- RECURSE FOUND
+  arm=B1  L=2  mean_open=7.757  mean_end_close=0.056  mean_recurse=0.0303  frac_items_any_recurse=0.0234  exhaustion=0.9443  <-- RECURSE FOUND
+  arm=B1  L=3  mean_open=7.855  mean_end_close=0.036  mean_recurse=0.0171  frac_items_any_recurse=0.0161  exhaustion=0.9639  <-- RECURSE FOUND
+  arm=B2  L=1  mean_open=7.792  mean_end_close=0.045  mean_recurse=0.0254  frac_items_any_recurse=0.0205  exhaustion=0.9551  <-- RECURSE FOUND
+  arm=B2  L=2  mean_open=7.802  mean_end_close=0.052  mean_recurse=0.0200  frac_items_any_recurse=0.0156  exhaustion=0.9478  <-- RECURSE FOUND
+  arm=B2  L=3  mean_open=7.792  mean_end_close=0.044  mean_recurse=0.0581  frac_items_any_recurse=0.0537  exhaustion=0.9556  <-- RECURSE FOUND
+  arm=C   L=1  mean_open=0.983  mean_end_close=0.033  mean_recurse=6.8335  frac_items_any_recurse=0.9468  exhaustion=0.9673  <-- RECURSE FOUND
+  arm=C   L=2  mean_open=1.028  mean_end_close=0.024  mean_recurse=6.8115  frac_items_any_recurse=0.9478  exhaustion=0.9756  <-- RECURSE FOUND
+  arm=C   L=3  mean_open=1.194  mean_end_close=0.021  mean_recurse=6.6733  frac_items_any_recurse=0.9385  exhaustion=0.9785  <-- RECURSE FOUND
+  arm=D   L=1  mean_open=0.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=D   L=2  mean_open=1.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=D   L=3  mean_open=2.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  TOTAL: 56860 recurse-steps across 30720 items (8102 items with >=1 recurse step, 0.2637)
+=== R1seed2 (R1): runs/real_seed_r1_2.pt ===
+  arm=A   L=1  mean_open=0.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=A   L=2  mean_open=1.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=A   L=3  mean_open=2.000  mean_end_close=1.000  mean_recurse=0.0044  frac_items_any_recurse=0.0015  exhaustion=0.0005  <-- RECURSE FOUND
+  arm=B1  L=1  mean_open=0.713  mean_end_close=0.024  mean_recurse=7.1499  frac_items_any_recurse=0.9951  exhaustion=0.9761  <-- RECURSE FOUND
+  arm=B1  L=2  mean_open=7.806  mean_end_close=0.043  mean_recurse=0.0269  frac_items_any_recurse=0.0215  exhaustion=0.9570  <-- RECURSE FOUND
+  arm=B1  L=3  mean_open=7.840  mean_end_close=0.040  mean_recurse=0.0259  frac_items_any_recurse=0.0176  exhaustion=0.9600  <-- RECURSE FOUND
+  arm=B2  L=1  mean_open=7.771  mean_end_close=0.051  mean_recurse=0.0220  frac_items_any_recurse=0.0195  exhaustion=0.9487  <-- RECURSE FOUND
+  arm=B2  L=2  mean_open=7.837  mean_end_close=0.042  mean_recurse=0.0254  frac_items_any_recurse=0.0225  exhaustion=0.9585  <-- RECURSE FOUND
+  arm=B2  L=3  mean_open=7.784  mean_end_close=0.050  mean_recurse=0.0474  frac_items_any_recurse=0.0464  exhaustion=0.9502  <-- RECURSE FOUND
+  arm=C   L=1  mean_open=0.853  mean_end_close=0.028  mean_recurse=6.9839  frac_items_any_recurse=0.9497  exhaustion=0.9722  <-- RECURSE FOUND
+  arm=C   L=2  mean_open=0.843  mean_end_close=0.024  mean_recurse=7.0068  frac_items_any_recurse=0.9512  exhaustion=0.9756  <-- RECURSE FOUND
+  arm=C   L=3  mean_open=0.761  mean_end_close=0.024  mean_recurse=7.1064  frac_items_any_recurse=0.9595  exhaustion=0.9761  <-- RECURSE FOUND
+  arm=D   L=1  mean_open=0.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=D   L=2  mean_open=1.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=D   L=3  mean_open=2.000  mean_end_close=1.000  mean_recurse=0.0005  frac_items_any_recurse=0.0005  exhaustion=0.0000  <-- RECURSE FOUND
+  TOTAL: 58162 recurse-steps across 30720 items (8161 items with >=1 recurse step, 0.2657)
+=== R2seed0 (R2): runs/real_seed_r2_0.pt ===
+  arm=A   L=1  mean_open=0.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=A   L=2  mean_open=1.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=A   L=3  mean_open=2.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=B1  L=1  mean_open=7.743  mean_end_close=0.061  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.9395
+  arm=B1  L=2  mean_open=7.811  mean_end_close=0.050  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.9502
+  arm=B1  L=3  mean_open=7.850  mean_end_close=0.042  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.9580
+  arm=B2  L=1  mean_open=7.796  mean_end_close=0.052  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.9478
+  arm=B2  L=2  mean_open=7.850  mean_end_close=0.043  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.9565
+  arm=B2  L=3  mean_open=7.845  mean_end_close=0.044  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.9556
+  arm=C   L=1  mean_open=7.741  mean_end_close=0.056  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.9438
+  arm=C   L=2  mean_open=7.735  mean_end_close=0.054  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.9463
+  arm=C   L=3  mean_open=7.768  mean_end_close=0.052  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.9482
+  arm=D   L=1  mean_open=0.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=D   L=2  mean_open=1.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=D   L=3  mean_open=2.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  TOTAL: 0 recurse-steps across 30720 items (0 items with >=1 recurse step, 0.0000)
+=== R2seed1 (R2): runs/real_seed_r2_1.pt ===
+  arm=A   L=1  mean_open=0.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=A   L=2  mean_open=1.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=A   L=3  mean_open=2.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=B1  L=1  mean_open=7.732  mean_end_close=0.060  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.9399
+  arm=B1  L=2  mean_open=7.782  mean_end_close=0.056  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.9443
+  arm=B1  L=3  mean_open=7.853  mean_end_close=0.043  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.9565
+  arm=B2  L=1  mean_open=7.811  mean_end_close=0.053  mean_recurse=0.0005  frac_items_any_recurse=0.0005  exhaustion=0.9468  <-- RECURSE FOUND
+  arm=B2  L=2  mean_open=7.854  mean_end_close=0.043  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.9570
+  arm=B2  L=3  mean_open=7.845  mean_end_close=0.046  mean_recurse=0.0010  frac_items_any_recurse=0.0010  exhaustion=0.9536  <-- RECURSE FOUND
+  arm=C   L=1  mean_open=7.754  mean_end_close=0.053  mean_recurse=0.0015  frac_items_any_recurse=0.0015  exhaustion=0.9468  <-- RECURSE FOUND
+  arm=C   L=2  mean_open=7.697  mean_end_close=0.069  mean_recurse=0.0005  frac_items_any_recurse=0.0005  exhaustion=0.9312  <-- RECURSE FOUND
+  arm=C   L=3  mean_open=7.738  mean_end_close=0.061  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.9395
+  arm=D   L=1  mean_open=0.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=D   L=2  mean_open=1.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=D   L=3  mean_open=2.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  TOTAL: 7 recurse-steps across 30720 items (7 items with >=1 recurse step, 0.0002)
+=== R2seed2 (R2): runs/real_seed_r2_2.pt ===
+  arm=A   L=1  mean_open=0.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=A   L=2  mean_open=1.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=A   L=3  mean_open=2.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=B1  L=1  mean_open=7.750  mean_end_close=0.057  mean_recurse=0.0088  frac_items_any_recurse=0.0083  exhaustion=0.9434  <-- RECURSE FOUND
+  arm=B1  L=2  mean_open=7.820  mean_end_close=0.048  mean_recurse=0.0112  frac_items_any_recurse=0.0112  exhaustion=0.9517  <-- RECURSE FOUND
+  arm=B1  L=3  mean_open=7.832  mean_end_close=0.047  mean_recurse=0.0059  frac_items_any_recurse=0.0059  exhaustion=0.9531  <-- RECURSE FOUND
+  arm=B2  L=1  mean_open=7.804  mean_end_close=0.046  mean_recurse=0.0112  frac_items_any_recurse=0.0112  exhaustion=0.9541  <-- RECURSE FOUND
+  arm=B2  L=2  mean_open=7.864  mean_end_close=0.039  mean_recurse=0.0044  frac_items_any_recurse=0.0044  exhaustion=0.9609  <-- RECURSE FOUND
+  arm=B2  L=3  mean_open=7.816  mean_end_close=0.052  mean_recurse=0.0083  frac_items_any_recurse=0.0083  exhaustion=0.9482  <-- RECURSE FOUND
+  arm=C   L=1  mean_open=7.663  mean_end_close=0.078  mean_recurse=0.0078  frac_items_any_recurse=0.0078  exhaustion=0.9224  <-- RECURSE FOUND
+  arm=C   L=2  mean_open=7.686  mean_end_close=0.071  mean_recurse=0.0073  frac_items_any_recurse=0.0073  exhaustion=0.9287  <-- RECURSE FOUND
+  arm=C   L=3  mean_open=7.772  mean_end_close=0.053  mean_recurse=0.0083  frac_items_any_recurse=0.0083  exhaustion=0.9473  <-- RECURSE FOUND
+  arm=D   L=1  mean_open=0.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=D   L=2  mean_open=1.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  arm=D   L=3  mean_open=2.000  mean_end_close=1.000  mean_recurse=0.0000  frac_items_any_recurse=0.0000  exhaustion=0.0000
+  TOTAL: 150 recurse-steps across 30720 items (149 items with >=1 recurse step, 0.0049)
+
+=== §6.1 premise check, all six checkpoints, all five arms, all three L: 170975 genuine recurse-without-integrate steps across 184320 item-cells sampled ===
+=== VERDICT: recursion-without-integration DOES occur -- see per-cell breakdown for where. The narrow §6.1 reading has real steps to bite on in that scope. ===

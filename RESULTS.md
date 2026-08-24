@@ -477,6 +477,31 @@ Identical at every individual `L` as well — `1.0000/0.0000/0.0000` at `L=1,2,3
 
 ---
 
+### 27. §6.1's premise check: recursion-without-integration is real, but only in Regime 1, concentrated in two cells — and Regime 2 training appears to erase it almost entirely (2026-08-24)
+
+**Why this was run.** Finding 26 (§6.2) established `P(m=ρ)=1.0000` on held-out arm A — every trajectory takes exactly `ρ` integrations plus one forced-closed END step, zero recurse-without-integrate steps, ever. That result is about arm A specifically; §6.2 conditions on it, §6.1 does not name an arm. On direct challenge: is the vacuity global, or only true of arm A's always-present-key, always-high-margin queries? B1/B2/C's post-break queries are genuinely low-confidence by construction (the queried key, or B2's fake terminal, is absent from the cache) — nobody had checked whether the gate actually discriminates there. Post-hoc diagnostic, `model/phase4_recursion_diagnostic.py` (§8 status, not a preregistered criterion, matching `phase3_gap_diagnostic.py`'s precedent) — reuses Phase 3's existing, already-registered probe corpus (`model/phase3_probe.py::build_combo`), no new seed range. All five arms, all three chain lengths, `n_distractors=1021`, `N=2048`/cell, all six checkpoints, same `MAX_STEPS=8` budget §6.1 itself specifies.
+
+**Arm A/D: confirmed zero recursion on all six checkpoints, all three `L`** — consistent with finding 26, and now shown to extend to arm D (`ρ(D)=L−1`, same walk shape as A per §2.5).
+
+**Regime 1: recursion is real, reproducible across all three seeds, and sharply concentrated in two specific cells — not spread evenly across B1/B2/C.**
+
+| cell | mean recurse-steps/item | frac. items with ≥1 |
+|---|---|---|
+| B1, `L=1` | `7.15–7.29` | `99.2–99.5%` |
+| C, all `L` | `6.59–7.11` | `93.6–96.0%` |
+| B1, `L≥2` | `0.015–0.027` | `1.1–2.3%` |
+| B2, all `L` | `0.020–0.058` | `1.9–5.4%` |
+
+**The pattern tracks whether the state already carries a committed integration, not which arm.** B1 at `L=1` and arm C share a structural property nothing else in the table does: their break point is the item's *first* query (`ρ=j−1=0` for B1 at `L=1`; arm C's break is `ρ=0` by definition, per `docs/phase1.md` §1.4). On that still-fresh state, the gate recurses extensively when uncertain — closes, re-queries, closes again, for most of the 8-step budget, on 94-99% of items. The moment at least one real integration has already been committed (B1 at `L≥2`, B2 at any `L`, and trivially every step of arm A/D past the first), the gate becomes what finding 23 already showed at B2's specific terminal step: **near-unconditionally open, regardless of subsequent margin** — it now integrates the item's own low-confidence, sometimes actively wrong, retrievals almost every step, all the way to budget exhaustion (`94.5–96.4%` exhaustion in these cells) rather than ever recursing. Finding 23's "gate opens ~100% on B2's fake terminal" is not a B2-specific artifact — it is one instance of a broader Regime-1 pattern: once integration has started, the gate stops discriminating on confidence anywhere in this task, not just at B2's one designated dead end.
+
+**Regime 2 essentially erases this, including on the two cells where Regime 1 recurses almost universally.** `real_seed_r2_0`: **zero** recurse-steps across all 15 (arm × `L`) cells, `30,720` items sampled — B1 at `L=1` and arm C, Regime 1's heaviest recursion cells, both collapse to the same "sticky open, integrate to exhaustion" pattern Regime 1 only shows post-first-integration. `real_seed_r2_1`: `7` recurse-steps total (`0.02%` of items). `real_seed_r2_2`: `150` (`0.49%`). All three Regime 2 seeds converge on the same near-total collapse, not just one.
+
+**What this does and does not establish.** This is a description of measured gate *behavior* (soft/hard output as a function of state and query), not yet a mechanistic account of *why* Regime 2 training produces it — three candidate explanations were considered and none is confirmed here: Regime 2's count penalty is explicitly scoped to arms A/D only (`forward_train_regime2`, per §2.5, never applied to B1/B2/C), so it cannot be rewarding "always integrate" on those arms directly; Regime 2's retrieval loss is still computed over B1/B2/C's own valid prefix, which could implicitly reward confident-looking retrieval without ever training a mid-walk "stop" signal, since abstention is handled by a separate head reading final state, not by the per-step gate; or the effect could simply follow from more total gradient exposure across a more diverse arm mix. **Not resolved here, flagged as open.**
+
+**Consequence for §6.1, held for explicit review before any comparison code is written.** A causal-subspace-constrained-vs-free comparison needs real recurse-without-integrate events to have anything to measure. Given this diagnostic: arm A (§6.2) and arm D are confirmed vacuous; B2 and B1 at `L≥2` are close to vacuous (`1–5%` of items, only in Regime 1, zero-to-near-zero in Regime 2); **the only cells with substantial, reproducible recursion are Regime 1, arm C (all `L`) and Regime 1, B1 at `L=1`.** Scoping §6.1's actual measurement to those cells, now that this diagnostic's numbers are known, is exactly the kind of population choice §8 requires be made transparently and logged before it's built into comparison code — not decided silently as though it were the original plan. Held for review, not yet decided.
+
+---
+
 ## Verdict against preregistered conditions
 
 **Phase 1 (competence gate) verdict: PASS on all six real seeds.** The full §2.6 commitment (2 regimes × 3 seeds, 614,400 total optimizer steps) has trained and every seed reached and held the §3.2 criterion (≥95% exact-match accuracy on arm A, held-out, at every `L ∈ {1,2,3}`, stable from `S*` through the terminal checkpoint). §3.3's rank verification passes for both regimes — query PR never approaches `rank=36` in any of the six seeds.
