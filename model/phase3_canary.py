@@ -76,7 +76,32 @@ def report_transfer(name: str, train_pos: dict, test_pos: dict, position: str,
     return result
 
 
-def run_canary(checkpoint: str, regime_label: str) -> dict:
+def report_abstain_head(name: str, model, test_pos: dict, regress: list[tuple[str, str]]) -> dict:
+    """§2.4: 'Regime 2 tells you whether a trained abstention signal is
+    real or a surface correlate.' The frozen-state probe answers this for
+    state; the trained head is a separate object and needs its own check
+    against the same three confounds. Score = -abstain_head(pos2), negated
+    so that high score means 'predicted answerable' -- matching the frozen-
+    state probe's convention (label=True for A/D) so the numbers sit in
+    the same table without a sign flip to remember."""
+    device = next(model.abstain_head.parameters()).device
+    pos2 = test_pos["pos2"].to(device)
+    with torch.no_grad():
+        raw_logit = model.abstain_head(pos2).squeeze(-1)
+    score = (-raw_logit).cpu()
+    test_y = test_pos["label"]
+
+    raw_auroc = auroc(score, test_y)
+    covs = [test_pos[k] for k, _ in regress]
+    joint_resid = residualize_multi(score, covs)
+    joint_auroc, joint_lo, joint_hi = bootstrap_auroc_ci(joint_resid, test_y)
+    joint_label = "+".join(lbl for _, lbl in regress)
+    print(f"{name} [abstain_head]: raw_AUROC={raw_auroc:.4f}  "
+          f"JOINT[{joint_label}]_resid={joint_auroc:.4f}[{joint_lo:.3f},{joint_hi:.3f}]", flush=True)
+    return {"raw_auroc": raw_auroc, "joint_residual": {"resid_auroc": joint_auroc, "resid_ci": (joint_lo, joint_hi)}}
+
+
+def run_canary(checkpoint: str, regime_label: str, report_abstain: bool = False) -> dict:
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = load_model(checkpoint, device)
     print(f"=== {regime_label}: {checkpoint} ===", flush=True)
@@ -115,6 +140,12 @@ def run_canary(checkpoint: str, regime_label: str) -> dict:
     p2_L3 = report_transfer(f"{regime_label} combo1(L=2->3)", train, test_L3, "pos2", P2_COVARIATES)
     p2_256 = report_transfer(f"{regime_label} combo2(1021->256)", train, test_256, "pos2", P2_COVARIATES)
 
+    abstain_L3 = abstain_256 = None
+    if report_abstain:
+        print("--- Abstain head (§2.4: real signal or surface correlate? -- same 3 controls) ---", flush=True)
+        abstain_L3 = report_abstain_head(f"{regime_label} combo1(L=2->3)", model, test_L3, P2_COVARIATES)
+        abstain_256 = report_abstain_head(f"{regime_label} combo2(1021->256)", model, test_256, P2_COVARIATES)
+
     print("--- P1 (count only -- no well-defined margin/endflag at this position) ---", flush=True)
     p1_L3 = report_transfer(f"{regime_label} combo1(L=2->3)", train, test_L3, "pos1", P1_COVARIATES)
     p1_256 = report_transfer(f"{regime_label} combo2(1021->256)", train, test_256, "pos1", P1_COVARIATES)
@@ -124,10 +155,11 @@ def run_canary(checkpoint: str, regime_label: str) -> dict:
     d_frac = (torch.sigmoid(d_score) > 0.5).float().mean().item()
     print(f"--- Arm D disqualifier: predicted 'answerable' on {d_frac:.4f} of D items ---", flush=True)
 
-    return {"p2_L3": p2_L3, "p2_256": p2_256, "p1_L3": p1_L3, "p1_256": p1_256, "d_frac": d_frac}
+    return {"p2_L3": p2_L3, "p2_256": p2_256, "p1_L3": p1_L3, "p1_256": p1_256, "d_frac": d_frac,
+            "abstain_L3": abstain_L3, "abstain_256": abstain_256}
 
 
 if __name__ == "__main__":
     r1 = run_canary("runs/real_seed_r1_0.pt", "R1")
     print(flush=True)
-    r2 = run_canary("runs/real_seed_r2_0.pt", "R2")
+    r2 = run_canary("runs/real_seed_r2_0.pt", "R2", report_abstain=True)
