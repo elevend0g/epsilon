@@ -23,6 +23,8 @@ END-flag identity exists at pos1 itself -- see model/phase3_probe.py).
 
 from __future__ import annotations
 
+import json
+
 import torch
 
 from model.phase3_probe import (
@@ -155,11 +157,31 @@ def run_canary(checkpoint: str, regime_label: str, report_abstain: bool = False)
     d_frac = (torch.sigmoid(d_score) > 0.5).float().mean().item()
     print(f"--- Arm D disqualifier: predicted 'answerable' on {d_frac:.4f} of D items ---", flush=True)
 
-    return {"p2_L3": p2_L3, "p2_256": p2_256, "p1_L3": p1_L3, "p1_256": p1_256, "d_frac": d_frac,
-            "abstain_L3": abstain_L3, "abstain_256": abstain_256}
+    result = {"p2_L3": p2_L3, "p2_256": p2_256, "p1_L3": p1_L3, "p1_256": p1_256, "d_frac": d_frac,
+              "abstain_L3": abstain_L3, "abstain_256": abstain_256}
+
+    def strip(d):
+        if d is None:
+            return None
+        return {k: v for k, v in d.items() if k != "probe"}
+
+    out_path = f"runs/phase3_canary_{regime_label.lower()}_result.json"
+    with open(out_path, "w") as f:
+        json.dump({"checkpoint": checkpoint, "regime_label": regime_label,
+                    "p2_L3": strip(p2_L3), "p2_256": strip(p2_256),
+                    "p1_L3": strip(p1_L3), "p1_256": strip(p1_256),
+                    "abstain_L3": abstain_L3, "abstain_256": abstain_256,
+                    "d_frac": d_frac}, f, indent=2)
+    print(f"wrote {out_path}", flush=True)
+
+    return result
 
 
 if __name__ == "__main__":
-    r1 = run_canary("runs/real_seed_r1_0.pt", "R1")
-    print(flush=True)
-    r2 = run_canary("runs/real_seed_r2_0.pt", "R2", report_abstain=True)
+    import sys
+    if len(sys.argv) >= 3:
+        run_canary(sys.argv[1], sys.argv[2], report_abstain=(sys.argv[2].startswith("R2")))
+    else:
+        r1 = run_canary("runs/real_seed_r1_0.pt", "R1")
+        print(flush=True)
+        r2 = run_canary("runs/real_seed_r2_0.pt", "R2", report_abstain=True)

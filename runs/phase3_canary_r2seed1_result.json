@@ -1,0 +1,129 @@
+{
+  "checkpoint": "runs/real_seed_r2_1.pt",
+  "regime_label": "R2seed1",
+  "p2_L3": {
+    "train_auroc": 0.9999947547912598,
+    "raw_auroc": 0.9978997707366943,
+    "residuals": {
+      "margin": {
+        "resid_auroc": 0.7006902694702148,
+        "resid_ci": [
+          0.6841917634010315,
+          0.7166839838027954
+        ],
+        "cov_only_auroc": 0.9922223091125488
+      },
+      "endflag": {
+        "resid_auroc": 0.496274471282959,
+        "resid_ci": [
+          0.4774390757083893,
+          0.5153785943984985
+        ],
+        "cov_only_auroc": 0.9937856197357178
+      },
+      "count": {
+        "resid_auroc": 0.6423783302307129,
+        "resid_ci": [
+          0.6248373985290527,
+          0.6600388884544373
+        ],
+        "cov_only_auroc": 0.0015759468078613281
+      }
+    },
+    "joint_residual": {
+      "resid_auroc": 0.4926941394805908,
+      "resid_ci": [
+        0.47454833984375,
+        0.5111432075500488
+      ],
+      "label": "margin+endflag+count"
+    }
+  },
+  "p2_256": {
+    "train_auroc": 0.9999949932098389,
+    "raw_auroc": 0.9987778663635254,
+    "residuals": {
+      "margin": {
+        "resid_auroc": 0.7458913326263428,
+        "resid_ci": [
+          0.7304460406303406,
+          0.7610680460929871
+        ],
+        "cov_only_auroc": 0.9735720157623291
+      },
+      "endflag": {
+        "resid_auroc": 0.5268919467926025,
+        "resid_ci": [
+          0.5081200003623962,
+          0.5460497140884399
+        ],
+        "cov_only_auroc": 0.9809079170227051
+      },
+      "count": {
+        "resid_auroc": 0.4771909713745117,
+        "resid_ci": [
+          0.458534836769104,
+          0.496852308511734
+        ],
+        "cov_only_auroc": 0.0
+      }
+    },
+    "joint_residual": {
+      "resid_auroc": 0.49407410621643066,
+      "resid_ci": [
+        0.47560539841651917,
+        0.513383686542511
+      ],
+      "label": "margin+endflag+count"
+    }
+  },
+  "p1_L3": {
+    "train_auroc": 1.0,
+    "raw_auroc": 0.7460510730743408,
+    "residuals": {
+      "count": {
+        "resid_auroc": 0.49242091178894043,
+        "resid_ci": [
+          0.4741840958595276,
+          0.5101693272590637
+        ],
+        "cov_only_auroc": 0.23563027381896973
+      }
+    }
+  },
+  "p1_256": {
+    "train_auroc": 1.0,
+    "raw_auroc": 1.0,
+    "residuals": {
+      "count": {
+        "resid_auroc": 0.4760243892669678,
+        "resid_ci": [
+          0.45667126774787903,
+          0.49619585275650024
+        ],
+        "cov_only_auroc": 0.0
+      }
+    }
+  },
+  "abstain_L3": {
+    "raw_auroc": 0.992924690246582,
+    "joint_residual": {
+      "resid_auroc": 0.4861564636230469,
+      "resid_ci": [
+        0.4652251601219177,
+        0.5068084597587585
+      ]
+    }
+  },
+  "abstain_256": {
+    "raw_auroc": 0.9647367000579834,
+    "joint_residual": {
+      "resid_auroc": 0.48998355865478516,
+      "resid_ci": [
+        0.467874675989151,
+        0.5113143920898438
+      ]
+    }
+  },
+  "d_frac": 1.0
+}
