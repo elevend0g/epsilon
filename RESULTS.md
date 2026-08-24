@@ -502,6 +502,37 @@ Identical at every individual `L` as well — `1.0000/0.0000/0.0000` at `L=1,2,3
 
 ---
 
+### 28. §6.1, measured: the causal subspace preserves trajectories at ~93-100%, but so does an equal-rank random subspace — no evidence the specific directions matter, not just their rank (2026-08-24)
+
+**§6.1's own instruction, honored: this is an untested hypothesis, reported as such regardless of outcome.** Scope fixed in `AMENDMENTS.md` #7 (Regime 1, arm C at all `L`, Regime 1 B1 at `L=1` — the only cells finding 27 confirmed contain real recurse-without-integrate events) and operationalization fixed in `AMENDMENTS.md` #8 (per-item, per-step causal subspace via `model/geometry.py`'s exact causal-PR object, rank `k=⌈causal PR⌉`, applied only on RECURSE steps), both written before `model/phase4_causal_subspace.py` existed.
+
+**A matched-rank random-subspace negative control was added, also before the full run, after a small pilot (`N=4-8`) came back suspiciously clean (`preserved≈1.0` almost everywhere) — the same "check before trusting a clean number" reflex used on finding 26's gate values.** Same rank `k` as the causal subspace at each exact step (computed identically, from the same per-item causal PR — a fair, rank-matched comparison, not "any random rank"), but a random orthonormal basis instead of the causal Jacobian's own top-`k` singular directions.
+
+**All six seed/cell combinations reported below (n=32/cell, `MAX_STEPS=8`):**
+
+| checkpoint | cell | preserved (causal) | preserved (random) | recurse events | mean `k` | mean causal PR (floor-relative) |
+|---|---|---|---|---|---|---|
+| R1seed0 | C, L=1 | 1.0000 | 1.0000 | 248 | 26.0 | 25.33 (+9.33) |
+| R1seed0 | C, L=2 | 0.8750 | 0.8750 | 256 | 26.0 | 25.34 (+9.34) |
+| R1seed0 | C, L=3 | 1.0000 | 1.0000 | 232 | 26.0 | 25.35 (+9.35) |
+| R1seed0 | B1, L=1 | 1.0000 | 1.0000 | 256 | 26.0 | 25.34 (+9.34) |
+| R1seed1 | C, L=1 | 0.9688 | 0.9688 | 208 | 26.0 | 25.33 (+9.33) |
+| R1seed1 | C, L=2 | 1.0000 | 1.0000 | 232 | 26.0 | 25.34 (+9.34) |
+| R1seed1 | C, L=3 | 1.0000 | 1.0000 | 232 | 26.0 | 25.36 (+9.36) |
+| R1seed1 | B1, L=1 | 0.9375 | 0.9375 | 256 | 26.0 | 25.35 (+9.35) |
+| R1seed2 | C, L=1 | 1.0000 | 1.0000 | 248 | 26.0 | 25.33 (+9.33) |
+| R1seed2 | C, L=2 | 1.0000 | 1.0000 | 240 | 26.0 | 25.34 (+9.34) |
+| R1seed2 | C, L=3 | 0.9375 | 0.9375 | 240 | 26.0 | 25.37 (+9.37) |
+| R1seed2 | B1, L=1 | 0.9688 | 0.9688 | 256 | 26.0 | 25.35 (+9.35) |
+
+**Causal and random match exactly in all twelve cells — not close, identical to four decimal places every time, including the exhaustion-rate sub-metric (not shown, also exact-matched throughout).** Rank stayed essentially fixed at `k=26` throughout (causal PR ≈`25.3-25.4`, a tight cluster consistent with finding 10's cross-seed PR stability) — floor-relative (`+9.3` to `+9.4` over the untrained baseline midpoint, `RESULTS.md` finding 10) reported per §6.1's own disclosure requirement, though at a different position (RECURSE steps in B1/C) than finding 10's original arm-A terminal-step measurement — flagged, not treated as position-matched.
+
+**Reading this plainly: at the rank actually measured (`k≈26` of `512`, ≈5% of state dimensions), constraining a recursion update to the item's own causal subspace preserves the eventual trajectory outcome (same cache index reached, or both exhaust) at `93.75-100%` — but constraining it to an equally-sized *random* subspace preserves outcomes at the identical rate.** This is a real, twelve-for-twelve reproduced null on the specific claim: no evidence surfaced that the causal subspace's particular directions matter, as opposed to simply reducing the update to *some* `k`-dimensional slice, of any orientation, at this rank. **The motivating comparison from the prior project (~98% preserved under causal-subspace perturbation vs. ~38% under isotropic noise) is not replicated here as evidence for direction-specificity, because that comparison didn't hold rank fixed — full isotropic noise and a rank-26 causal projection differ in magnitude as well as direction.** This measurement controls for that confound directly and still finds no gap.
+
+**What this does and doesn't rule out.** It does not test whether a *smaller* `k` would show a real causal-vs-random gap — at `~5%` of state dimensions there may simply be enough room that almost any subspace captures the outcome-relevant component of a small, low-effective-rank update; a much tighter rank budget is untested here. It does not test other arms, other regimes, or other ranks. It is a clean, honest null on exactly the comparison §6.1 as scoped and operationalized asks for, on the only population where the comparison is non-vacuous (findings 26, 27) — reported as such, not reasoned around.
+
+---
+
 ## Verdict against preregistered conditions
 
 **Phase 1 (competence gate) verdict: PASS on all six real seeds.** The full §2.6 commitment (2 regimes × 3 seeds, 614,400 total optimizer steps) has trained and every seed reached and held the §3.2 criterion (≥95% exact-match accuracy on arm A, held-out, at every `L ∈ {1,2,3}`, stable from `S*` through the terminal checkpoint). §3.3's rank verification passes for both regimes — query PR never approaches `rank=36` in any of the six seeds.

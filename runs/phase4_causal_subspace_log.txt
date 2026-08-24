@@ -1,0 +1,15 @@
+=== R1seed0: runs/real_seed_r1_0.pt ===
+  R1seed0 arm=C L=1 n=32: preserved_causal=1.0000  preserved_random=1.0000  free_exhaustion=1.0000  causal_exhaustion=1.0000  random_exhaustion=1.0000  recurse_events=248  mean_k=26.00  mean_causal_PR=25.33  floor_relative=+9.33
+  R1seed0 arm=C L=2 n=32: preserved_causal=0.8750  preserved_random=0.8750  free_exhaustion=0.8750  causal_exhaustion=1.0000  random_exhaustion=1.0000  recurse_events=256  mean_k=26.00  mean_causal_PR=25.34  floor_relative=+9.34
+  R1seed0 arm=C L=3 n=32: preserved_causal=1.0000  preserved_random=1.0000  free_exhaustion=1.0000  causal_exhaustion=1.0000  random_exhaustion=1.0000  recurse_events=232  mean_k=26.00  mean_causal_PR=25.35  floor_relative=+9.35
+  R1seed0 arm=B1 L=1 n=32: preserved_causal=1.0000  preserved_random=1.0000  free_exhaustion=1.0000  causal_exhaustion=1.0000  random_exhaustion=1.0000  recurse_events=256  mean_k=26.00  mean_causal_PR=25.34  floor_relative=+9.34
+=== R1seed1: runs/real_seed_r1_1.pt ===
+  R1seed1 arm=C L=1 n=32: preserved_causal=0.9688  preserved_random=0.9688  free_exhaustion=0.9375  causal_exhaustion=0.9688  random_exhaustion=0.9688  recurse_events=208  mean_k=26.00  mean_causal_PR=25.33  floor_relative=+9.33
+  R1seed1 arm=C L=2 n=32: preserved_causal=1.0000  preserved_random=1.0000  free_exhaustion=0.9688  causal_exhaustion=0.9688  random_exhaustion=0.9688  recurse_events=232  mean_k=26.00  mean_causal_PR=25.34  floor_relative=+9.34
+  R1seed1 arm=C L=3 n=32: preserved_causal=1.0000  preserved_random=1.0000  free_exhaustion=1.0000  causal_exhaustion=1.0000  random_exhaustion=1.0000  recurse_events=232  mean_k=26.00  mean_causal_PR=25.36  floor_relative=+9.36
+  R1seed1 arm=B1 L=1 n=32: preserved_causal=0.9375  preserved_random=0.9375  free_exhaustion=0.9375  causal_exhaustion=1.0000  random_exhaustion=1.0000  recurse_events=256  mean_k=26.00  mean_causal_PR=25.35  floor_relative=+9.35
+=== R1seed2: runs/real_seed_r1_2.pt ===
+  R1seed2 arm=C L=1 n=32: preserved_causal=1.0000  preserved_random=1.0000  free_exhaustion=1.0000  causal_exhaustion=1.0000  random_exhaustion=1.0000  recurse_events=248  mean_k=26.00  mean_causal_PR=25.33  floor_relative=+9.33
+  R1seed2 arm=C L=2 n=32: preserved_causal=1.0000  preserved_random=1.0000  free_exhaustion=1.0000  causal_exhaustion=1.0000  random_exhaustion=1.0000  recurse_events=240  mean_k=26.00  mean_causal_PR=25.34  floor_relative=+9.34
+  R1seed2 arm=C L=3 n=32: preserved_causal=0.9375  preserved_random=0.9375  free_exhaustion=0.9062  causal_exhaustion=0.9688  random_exhaustion=0.9688  recurse_events=240  mean_k=26.00  mean_causal_PR=25.37  floor_relative=+9.37
+  R1seed2 arm=B1 L=1 n=32: preserved_causal=0.9688  preserved_random=0.9688  free_exhaustion=0.9688  causal_exhaustion=1.0000  random_exhaustion=1.0000  recurse_events=256  mean_k=26.00  mean_causal_PR=25.35  floor_relative=+9.35
