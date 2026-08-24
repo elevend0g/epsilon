@@ -127,13 +127,20 @@ def capture_pos1_pos2(model, batch: dict, arm: str) -> dict:
         1, top1_2.view(-1, 1, 1).expand(-1, 1, cache_values.shape[-1])
     ).squeeze(1)
     pos2_state = model.ssm.step(pos1_state, g2_eff.unsqueeze(-1) * model.value_proj(retrieved_value2))
+    pos2_integration_count = pos1_integration_count + g2_eff  # arm A's is deterministically == pos1's
+                                                                # (END forces g2_eff=0); B2's may or may not
+                                                                # increment depending on whether the gate wrongly
+                                                                # fires on the dead-end query -- itself a possible
+                                                                # confound (§2.5's rho asymmetry, not just at P1)
 
     return {
         "pos1": pos1_state.flatten(1).cpu(),
         "pos2": pos2_state.flatten(1).cpu(),
         "pos2_margin": margin2.cpu(),
         "pos1_integration_count": pos1_integration_count.cpu(),
-        "pos2_is_end": is_end_2.cpu(),  # for the §5.1 Regime-2 END-preference control (finding 11)
+        "pos2_integration_count": pos2_integration_count.cpu(),
+        "pos2_is_end": is_end_2.cpu(),  # structural: arm A's pos2 is definitionally its own correct
+                                         # END-retrieval, not a Regime-2-specific artifact (see finding 19)
         "label": torch.full((pos1_state.shape[0],), arm in ANSWERABLE_ARMS, dtype=torch.bool),
     }
 
@@ -210,4 +217,18 @@ def residualize(score: torch.Tensor, margin: torch.Tensor) -> torch.Tensor:
     s = score - score.mean()
     coef = (m * s).sum() / (m * m).sum().clamp(min=1e-9)
     predicted = score.mean() + coef * (margin - margin.mean())
+    return score - predicted
+
+
+def residualize_multi(score: torch.Tensor, covariates: list[torch.Tensor]) -> torch.Tensor:
+    """OLS residual of score ~ covariates, jointly (closed-form least
+    squares via the normal equations) -- not each covariate regressed out
+    separately in sequence. Used for the P2 three-way control (margin,
+    END-flag identity, integration count): the question is whether any
+    signal survives once all three known structural confounds are removed
+    at once, not just each one in isolation."""
+    n = score.shape[0]
+    X = torch.stack([c.float() for c in covariates] + [torch.ones(n)], dim=1)  # design matrix, +1 for intercept
+    beta = torch.linalg.lstsq(X, score.unsqueeze(1)).solution.squeeze(1)
+    predicted = X @ beta
     return score - predicted
