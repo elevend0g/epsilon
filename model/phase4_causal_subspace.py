@@ -261,6 +261,23 @@ def rollout_constrained(model, batch: dict, max_steps: int = MAX_STEPS,
     return {"outcome": outcome.cpu(), "exhausted": (~done).cpu(), "ks_used": ks_used, "prs_used": prs_used}
 
 
+def _clopper_pearson_upper(k: int, n: int, alpha: float = 0.05) -> float:
+    """One-sided upper confidence bound on a binomial proportion given k
+    successes in n trials. Exact closed form for k=0 (the expected case
+    here, given the N=32 pass found zero discordant pairs): 1 -
+    alpha**(1/n). For k>0, a normal approximation with continuity
+    correction (no scipy in this environment) -- fine for the modest
+    correction this needs; flagged as approximate in that case."""
+    if n == 0:
+        return float("nan")
+    if k == 0:
+        return 1.0 - alpha ** (1.0 / n)
+    p = k / n
+    z = 1.645  # one-sided 95%
+    se = math.sqrt(p * (1 - p) / n)
+    return min(1.0, p + z * se + 0.5 / n)
+
+
 def report_cell(name: str, path: str, arm: str, L: int, n: int, device) -> dict:
     model = load_model(path, device)
     batch = build_combo(N_DISTRACTORS_REF, L, arm, n=n, device=device)
@@ -283,12 +300,22 @@ def report_cell(name: str, path: str, arm: str, L: int, n: int, device) -> dict:
     floor_lo, floor_hi = UNTRAINED_CAUSAL_PR_FLOOR
     floor_relative = mean_pr - (floor_lo + floor_hi) / 2 if n_recurse_events else float("nan")
 
+    # Direct pairwise (per-item) discordance between causal and random --
+    # not present in the N=32 pass, which only compared aggregate rates.
+    # Two conditions can match on the rate while disagreeing on which
+    # items; this checks that directly.
+    discordant = (causal["outcome"] != random_ctrl["outcome"])
+    n_discordant = int(discordant.sum().item())
+    discordance_rate = n_discordant / n
+    discordance_upper95 = _clopper_pearson_upper(n_discordant, n)
+
     print(f"  {name} arm={arm} L={L} n={n}: preserved_causal={preserved_causal:.4f}  "
           f"preserved_random={preserved_random:.4f}  preserved_destructive={preserved_destructive:.4f}  "
           f"free_exhaustion={free_exhaustion:.4f}  causal_exhaustion={causal_exhaustion:.4f}  "
           f"random_exhaustion={random_exhaustion:.4f}  destructive_exhaustion={destructive_exhaustion:.4f}  "
           f"recurse_events={n_recurse_events}  mean_k={mean_k:.2f}  mean_causal_PR={mean_pr:.2f}  "
-          f"floor_relative={floor_relative:+.2f}", flush=True)
+          f"floor_relative={floor_relative:+.2f}  causal_vs_random_discordant={n_discordant}/{n}  "
+          f"discordance_upper95={discordance_upper95:.4f}", flush=True)
 
     return {
         "checkpoint": name, "arm": arm, "L": L, "n": n,
@@ -298,6 +325,8 @@ def report_cell(name: str, path: str, arm: str, L: int, n: int, device) -> dict:
         "random_exhaustion": random_exhaustion, "destructive_exhaustion": destructive_exhaustion,
         "n_recurse_events": n_recurse_events, "mean_k": mean_k, "mean_causal_pr": mean_pr,
         "floor_relative": floor_relative,
+        "n_discordant": n_discordant, "discordance_rate": discordance_rate,
+        "discordance_upper95": discordance_upper95,
     }
 
 
